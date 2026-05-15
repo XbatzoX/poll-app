@@ -1,0 +1,43 @@
+@use '../abstracts/variables' as var;
+
+@each $name, $size in var.$sizes{
+    .padding-#{$name}{
+        padding: $size;
+    }
+
+    .padding-left-#{$name}{
+        padding-left: $size;
+    }
+
+    .padding-top-#{$name}{
+        padding-top: $size;
+    }
+
+    .padding-right-#{$name}{
+        padding-right: $size;
+    }
+
+    .padding-bottom-#{$name}{
+        padding-bottom: $size;
+    }
+
+    .margin-#{$name}{
+        margin: $size;
+    }
+
+    .margin-left-#{$name}{
+        margin-left: $size;
+    }
+
+    .margin-top-#{$name}{
+        margin-top: $size;
+    }
+
+    .margin-right-#{$name}{
+        margin-right: $size;
+    }
+
+    .margin-bottom-#{$name}{
+        margin-bottom: $size;
+    }
+}

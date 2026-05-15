@@ -1,7 +1,18 @@
 @use 'abstracts/variables' as var;
+@use 'abstracts/mixin' as mx;
 @use 'sass:map';
 
 article{
     min-height: 100vh;
     background-color: map.get(var.$colors, dashboard-bg);
+}
+
+.mainPageContainer{
+    max-width: 1920px;
+    margin: 0 auto;
+
+    &__logoLine{
+        width: 100%;
+        @include mx.flex-start(); 
+    }
 }

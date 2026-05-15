@@ -1,3 +1,27 @@
 $colors:(
-    dashboard-bg: #35273a
+    dashboard-bg: #35273a,
+    font-orange: #FFB770,
+);
+
+$sizes:(
+    zero: 0px,
+    ss : 4px,
+    s: 8px,
+    xs: 12px,
+    m: 16px,
+    xm: 20px,
+    l: 24px,
+    xl: 32px,
+    xxl: 48px,
+    ultra: 64px
+);
+
+$normSizes:(
+    s: 10px,
+    m: 15px,
+    l: 20px,
+    xl : 30px,
+    xxl: 40px,
+    xxlPlus: 60px,
+    ultra: 100px
 );
