@@ -4,10 +4,18 @@
 
 .captionSection{
     width: 100%;
+    height: 520px;
+    @include mx.flex-start(row);
+    gap: map.get(var.$sizes, xl);
 
     &__leftContent{
-        @include mx.flex-start();
-        gap: map.get(var.$sizes, xm);
+        // @include mx.flex-start();
+        // gap: map.get(var.$sizes, xm);
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
     }
 
     &__captionBox{
@@ -17,6 +25,7 @@
             font-family: 'MyNerkoOne';
             font-size: map.get(var.$normSizes, ultra);
             color: map.get(var.$colors, font-orange);
+            line-height: 0.9;
         }
     }
 

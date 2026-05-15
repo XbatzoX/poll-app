@@ -1,3 +1,20 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixin' as mx;
+@use 'sass:map';
+
 .btn{
-    color: red;
+    font-family: 'MyNokora';
+
+    &:hover{
+        cursor: pointer;
+    }
+
+    &--primary{
+        font-size: map.get(var.$sizes, xm);
+        font-weight: 700;
+        padding: map.get(var.$sizes, xs) map.get(var.$sizes, m);
+        background-color: map.get(var.$colors, button-bg-survey);
+        border: none;
+        border-radius: map.get(var.$normSizes, s);
+    }
 }
