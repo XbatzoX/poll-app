@@ -1,0 +1,29 @@
+@use 'abstracts/variables' as var;
+@use 'abstracts/mixin' as mx;
+@use 'sass:map';
+
+.captionSection{
+    width: 100%;
+
+    &__leftContent{
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, xm);
+    }
+
+    &__captionBox{
+        @include mx.flex-start();
+
+        &__text{
+            font-family: 'MyNerkoOne';
+            font-size: map.get(var.$normSizes, ultra);
+            color: map.get(var.$colors, font-orange);
+        }
+    }
+
+    &__description{
+        font-family: 'MyMulish';
+        font-size: map.get(var.$sizes, l);
+        font-weight: 600;
+        color: white;
+    }
+}
