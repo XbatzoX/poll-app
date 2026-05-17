@@ -35,4 +35,70 @@
         font-weight: 600;
         color: white;
     }
+
+    &__rightContent{
+        min-width: 520px;
+        height: 520px;
+        position: relative;
+        z-index: 10;
+
+        &__imgIndexPhone{
+            z-index: 2;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        &__imgIndexCheck{
+            z-index: 1;
+            position: absolute;
+            top: 65%;
+            right: 15%;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+
+        &__imgIndexQuestion{
+            z-index: 3;
+            position: absolute;
+            top: 0%;
+            right: 10%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        &__imgIndexStar{
+            z-index: 3;
+            position: absolute;
+            left: 16%;
+            bottom: 4%;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+
+        &__imgIndexBubble{
+            z-index: 3;
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            transform: scale(0.7);
+            transition: transform 0.3s ease;
+        }
+
+        &:hover &__imgIndexCheck{
+            transform: scale(1) translateX(55px) translateY(20px);
+        }
+
+        &:hover &__imgIndexQuestion{
+            transform: translateX(-5px) translateY(-5px) rotate(-8deg);
+        }
+
+        &:hover &__imgIndexStar{
+            transform: scale(0.9) translateX(-10px) translateY(10px);
+        }
+
+        &:hover &__imgIndexBubble{
+            transform: scale(1) translateX(-5px) rotate(-5deg);
+        }
+    }
 }
