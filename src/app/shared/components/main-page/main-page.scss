@@ -13,6 +13,7 @@ article{
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: map.get(var.$sizes, xxl);
 
     &__logoLine{

@@ -1,0 +1,16 @@
+@use 'abstracts/variables' as var;
+@use 'abstracts/mixin' as mx;
+@use 'sass:map';
+
+.mainSurveysContainer{
+    width: 1300px;
+    @include mx.flex-center();
+
+    &__caption{
+        text-align: center;
+        font-family: 'MyNerkoOne';
+        font-size: map.get(var.$sizes, xUltra);
+        font-weight: 400;
+        color: map.get(var.$colors, font-orange);
+    }
+}

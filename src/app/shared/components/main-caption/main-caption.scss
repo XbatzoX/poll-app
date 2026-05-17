@@ -9,8 +9,6 @@
     gap: map.get(var.$sizes, xl);
 
     &__leftContent{
-        // @include mx.flex-start();
-        // gap: map.get(var.$sizes, xm);
         height: 90%;
         display: flex;
         flex-direction: column;
