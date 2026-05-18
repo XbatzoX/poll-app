@@ -7,14 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './create-survey-form.scss',
 })
 export class CreateSurveyForm {
-  isHovered: boolean;
+  isHoveredId: string;
 
   constructor(){
-    this.isHovered = false;
+    this.isHoveredId = '';
   }
 
-  changeDeleteIcon():string{
-    if(this.isHovered){
+  changeDeleteIcon(id:string):string{
+    if(this.isHoveredId == id){
       return 'assets/icons/delete_hover.svg';
     }else{
       return 'assets/icons/Delete.svg';

@@ -2,8 +2,6 @@
 @use 'abstracts/mixin' as mx;
 @use 'sass:map';
 
-
-
 .createSurveyForm{
     width: 100%;
     padding: map.get(var.$normSizes, xxl) map.get(var.$sizes, xl);
@@ -16,6 +14,8 @@
 
 .surveyForm{
     @include mx.flex-start();
+    font-family: 'MyMulish';
+    caret-color: map.get(var.$colors, dashboard-bg);
 
     &__pair{
         @include mx.flex-start();
@@ -26,14 +26,75 @@
         margin: 0;
         padding: 0;
     }
+
+    &__label{
+        font-size: map.get(var.$sizes, xm);
+        font-weight: 700;
+        color: map.get(var.$colors, btn-white);
+
+        &--optional{
+            font-weight: 400;
+        }
+    }
+
+    &__inputField{
+        outline: none;
+        border: none;
+        flex: 1;
+        font-size: map.get(var.$sizes, m);
+        font-weight: 400;
+        color: map.get(var.$colors, dashboard-bg);
+        background-color: map.get(var.$colors, btn-white);
+        padding: 7px 13px;
+        border-top-left-radius: map.get(var.$normSizes, ss);
+        border-top-right-radius: map.get(var.$normSizes, l);
+        border-bottom-left-radius: map.get(var.$normSizes, ss);
+        border-bottom-right-radius: map.get(var.$normSizes, ss);
+
+        &:focus{
+            background-color: map.get(var.$colors, input-focus);
+        }
+    }
+
+    // &__inputDate{
+    //     outline: none;
+    //     border: none;
+    //     appearance: none;
+    //     -webkit-appearance: none;
+    //     font: inherit;
+    //     color: inherit;
+
+    //     &::-webkit-calendar-picker-indicator {
+    //         opacity: 0;
+    //         position: absolute;
+    //         width: 100%;
+    //         height: 100%;
+    //         cursor: pointer;
+    //     }
+    // }
 }
 
 .inputBox{
-    @include mx.flex-center(row);
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
     gap: map.get(var.$sizes, s);
 }
 
 .deleteBtn{
     all: unset;
+    padding-top: 4px;
     cursor: pointer;
+}
+
+.dateContainer{
+    @include mx.flex-start(row);
+    gap: map.get(var.$sizes, m);
+}
+
+.hiddenDateInput{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
 }
