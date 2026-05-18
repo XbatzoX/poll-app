@@ -5,16 +5,53 @@
 .btn{
     font-family: 'MyNokora';
 
-    &:hover{
-        cursor: pointer;
-    }
-
     &--primary{
+        @include mx.flex-center(row);
+        gap: map.get(var.$sizes, xs);
         font-size: map.get(var.$sizes, xm);
         font-weight: 700;
         padding: map.get(var.$sizes, xs) map.get(var.$sizes, m);
         background-color: map.get(var.$colors, button-bg-survey);
         border: none;
         border-radius: map.get(var.$normSizes, s);
+        position: relative;
+        transition: padding-right 0.3s ease, background-color 0.3s ease;
+
+        &__iconAdd{
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.1s ease, transform 0.3s ease;
+            position: absolute;
+            right: map.get(var.$sizes, m);
+        }
+
+        &__iconCheck{
+            opacity: 0;
+            // transform: translateX(-10px);
+            // transition: opacity 0.3s ease, transform 0.3s ease;
+            position: absolute;
+            right: map.get(var.$sizes, m);
+        }
+    }
+
+    &:hover{
+        cursor: pointer;
+        background-color: map.get(var.$colors, font-orange);
+        padding-right: 50px;
+
+        .btn--primary__iconAdd{
+            opacity: 1;
+            transform: translateX(0px);
+        }
+    }
+
+    &:active{
+        .btn--primary__iconAdd{
+            opacity: 0;
+        }
+
+        .btn--primary__iconCheck{
+            opacity: 1;
+        }
     }
 }
