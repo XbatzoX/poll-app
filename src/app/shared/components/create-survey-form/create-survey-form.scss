@@ -1,0 +1,39 @@
+@use 'abstracts/variables' as var;
+@use 'abstracts/mixin' as mx;
+@use 'sass:map';
+
+
+
+.createSurveyForm{
+    width: 100%;
+    padding: map.get(var.$normSizes, xxl) map.get(var.$sizes, xl);
+    background-color: map.get(var.$colors, survey-bg);
+    border-top-left-radius: map.get(var.$sizes, ss);
+    border-top-right-radius: map.get(var.$normSizes, sUltra);
+    border-bottom-left-radius: map.get(var.$sizes, ss);
+    border-bottom-right-radius: map.get(var.$sizes, ss);
+}
+
+.surveyForm{
+    @include mx.flex-start();
+
+    &__pair{
+        @include mx.flex-start();
+    }
+
+    &__fieldset{
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.inputBox{
+    @include mx.flex-center(row);
+    gap: map.get(var.$sizes, s);
+}
+
+.deleteBtn{
+    all: unset;
+    cursor: pointer;
+}

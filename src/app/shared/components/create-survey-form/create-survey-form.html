@@ -1,1 +1,21 @@
-<p>create-survey-form works!</p>
+<section class="createSurveyForm">
+    <form class="surveyForm">
+        <fieldset class="surveyForm__fieldset">
+            <div class="surveyForm__pair">
+                <label for="survey-name">Survey name</label>
+                <div class="inputBox">
+                    <input type="text" id="survey-name">
+                    <button class="deleteBtn" (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+                        <img [src]="changeDeleteIcon()" alt="delte icon as trash bin">
+                    </button>
+                </div>
+            </div>
+            <div class="dateContainer">
+                <label for="end-date">Set end date</label>
+                <input type="text" id="end-date">
+                <label for="category">Choose category</label>
+                <input type="text" id="category">
+            </div>  
+        </fieldset>
+    </form>
+</section>
