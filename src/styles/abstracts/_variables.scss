@@ -1,7 +1,9 @@
 $colors:(
     dashboard-bg: #35273a,
+    survey-bg: #43334a,
     font-orange: #FFB770,
-    button-bg-survey: #FFCFA1
+    button-bg-survey: #FFCFA1,
+    btn-white: #FEFDFF
 );
 
 $sizes:(
@@ -14,11 +16,13 @@ $sizes:(
     l: 24px,
     xl: 32px,
     xxl: 48px,
+    sUltra:56px,
     ultra: 64px,
     xUltra: 72px
 );
 
 $normSizes:(
+    ss:5px,
     s: 10px,
     m: 15px,
     l: 20px,

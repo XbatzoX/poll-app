@@ -27,31 +27,43 @@
 
         &__iconCheck{
             opacity: 0;
-            // transform: translateX(-10px);
-            // transition: opacity 0.3s ease, transform 0.3s ease;
             position: absolute;
             right: map.get(var.$sizes, m);
         }
-    }
 
-    &:hover{
-        cursor: pointer;
-        background-color: map.get(var.$colors, font-orange);
-        padding-right: 50px;
+        &:hover{
+            cursor: pointer;
+            background-color: map.get(var.$colors, font-orange);
+            padding-right: 50px;
 
-        .btn--primary__iconAdd{
-            opacity: 1;
-            transform: translateX(0px);
+            .btn--primary__iconAdd{
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+
+        &:active{
+            .btn--primary__iconAdd{
+                opacity: 0;
+            }
+
+            .btn--primary__iconCheck{
+                opacity: 1;
+            }
         }
     }
 
-    &:active{
-        .btn--primary__iconAdd{
-            opacity: 0;
-        }
+    &--secondary{
+        @include mx.flex-center(row);
+        gap: map.get(var.$sizes, m);
+        padding: map.get(var.$sizes, s) map.get(var.$sizes, xs);
+        background-color: rgba(255, 183, 112, 0.3);
+        border: unset;
+        border-radius: map.get(var.$normSizes, s);
 
-        .btn--primary__iconCheck{
-            opacity: 1;
+        &:hover{
+            cursor: pointer;
+            background-color: rgba(255, 183, 112, 0.6);
         }
     }
 }
