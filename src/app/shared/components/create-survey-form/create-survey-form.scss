@@ -19,12 +19,14 @@
 
     &__pair{
         @include mx.flex-start();
+        width: 100%;
     }
 
     &__label{
         font-size: map.get(var.$sizes, xm);
         font-weight: 700;
         color: map.get(var.$colors, btn-white);
+        white-space: nowrap;
         
         &--optional{
             font-weight: 400;
@@ -35,6 +37,8 @@
         border: none;
         margin: 0;
         padding: 0;
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, s);
     }
 
     &__inputField{
@@ -87,29 +91,48 @@
     gap: map.get(var.$sizes, m);
     position: relative;
     cursor: pointer;
+    padding-right: map.get(var.$sizes, xxl);
+    padding-top: map.get(var.$sizes, ss);
+    padding-bottom: map.get(var.$sizes, ss);
+    padding-left: map.get(var.$sizes, ss);
 
     &__Btn{
         all: unset;
         position: absolute;
-        top: 0;
-        right: 0;
+        top: map.get(var.$sizes, ss);
+        right: 2px;
         pointer-events: none;
     }
 
     &__dropdownList{
-        width: 110%;
+        width: 100%;
         position: absolute;
-        top: 150%;
+        top: 130%;
         background-color: map.get(var.$colors, btn-white);
         font-size: map.get(var.$sizes, sm);
         border-radius: 6px;
+
+        &__item{
+            padding: map.get(var.$sizes, ss);
+            border-radius: map.get(var.$normSizes, ss);
+
+            &:hover{
+                background-color: map.get(var.$colors, list-hover);
+            }
+        }
     }
 
     &:hover{
-        
+        background-color: rgba(255,255,255, 0.3);
+        border-radius: map.get(var.$normSizes, ss);
     }
 }
 
 .labelPointer{
     cursor: pointer;
+}
+
+.is-open{
+    background-color: rgba(255,255,255, 0.3);
+    border-radius: map.get(var.$normSizes, ss);
 }
