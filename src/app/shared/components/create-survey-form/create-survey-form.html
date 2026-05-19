@@ -21,13 +21,21 @@
                     </div>
                     <input type="date" #dateInput class="hiddenDateInput">
                 </div>
-                <div class="surveyForm__categoryPair">
-                    <label class="surveyForm__label" for="category">Choose category</label>
-                    <select name="category" [ngModel]="selectedCategory()" (ngModelChange)="onChange($event)">
-                        @for (item of categoryList; track item) {
-                            <option [value]="item">{{item}}</option>
-                        }
-                    </select>
+                <div class="categoryPair padding-right-xl" [class.is-open]="isOpen()" (click)="toggleDropdown()"
+                    (mouseenter)="isHoveredArrow = true" (mouseleave)="isHoveredArrow = false">
+                    <label class="surveyForm__label labelPointer">Choose category</label>
+                    <button class="categoryPair__Btn">
+                        <img [src]="selectArrowPath()" alt="drop down arrow icon">
+                    </button>
+                    @if(isOpen()){
+                        <div class="categoryPair__dropdownList padding-s" name="category">  
+                            @for (item of categoryList; track item) {
+                                <div class="categoryPair__dropdownList__item padding-bottom-ss padding-top-ss" (click)="selectCategory(item, $event)">
+                                        {{item}}
+                                </div> 
+                            }
+                        </div>
+                    }
                 </div>
             </div>  
         </fieldset>

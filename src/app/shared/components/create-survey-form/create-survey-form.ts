@@ -9,18 +9,31 @@ import { FormsModule } from '@angular/forms';
 })
 export class CreateSurveyForm {
   isHoveredId: string;
+  isHoveredArrow: boolean;
   categoryList = ['Team Activities', 'Health & Wellness', 'Gaming & Entertainment',
     'Education & Learning', 'Lifestyle & Preferences', 'Technology & Innovation'
   ];
   
   constructor(){
     this.isHoveredId = '';
+    this.isHoveredArrow = false;
   }
 
   selectedCategory = signal('');
+  isOpen = signal(false);
 
-  onChange(category:string){
-    this.selectedCategory.set(category);
+  selectCategory(value:string, event: MouseEvent){
+    event.stopPropagation();
+    this.selectedCategory.set(value);
+    this.isOpen.set(false);
+  }
+
+  toggleDropdown(){
+    if(this.isOpen()){
+      this.isOpen.set(false);
+    }else{
+      this.isOpen.set(true);
+    }
   }
 
   changeDeleteIcon(id:string):string{
@@ -29,5 +42,13 @@ export class CreateSurveyForm {
     }else{
       return 'assets/icons/Delete.svg';
     }
+  }
+
+  selectArrowPath():string{
+    let path = '';
+    if(this.isHoveredArrow && !this.isOpen()){path = 'assets/icons/arrow_drop_down_orange.svg';}
+    if(!this.isHoveredArrow && !this.isOpen()){path = 'assets/icons/arrow_drop_down_white.svg';}
+    if(this.isOpen()){path = 'assets/icons/arrow_up_orange.svg';}
+    return path;
   }
 }
