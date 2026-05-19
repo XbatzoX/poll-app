@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -21,6 +21,7 @@ export class CreateSurveyForm {
 
   selectedCategory = signal('');
   isOpen = signal(false);
+  dropDownBox = viewChild<ElementRef>('dropdownRef');
 
   selectCategory(value:string, event: MouseEvent){
     event.stopPropagation();
@@ -50,5 +51,14 @@ export class CreateSurveyForm {
     if(!this.isHoveredArrow && !this.isOpen()){path = 'assets/icons/arrow_drop_down_white.svg';}
     if(this.isOpen()){path = 'assets/icons/arrow_up_orange.svg';}
     return path;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent){
+    const dropDownEl = this.dropDownBox()?.nativeElement;
+    if(dropDownEl){
+      const clickedInsideDropdown = dropDownEl.contains(event.target);
+      if(!clickedInsideDropdown){this.isOpen.set(false);}
+    }
   }
 }

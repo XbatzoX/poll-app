@@ -10,4 +10,8 @@ import { CreateSurveyForm } from '../create-survey-form/create-survey-form';
 })
 export class CreateSurvey {
   router = inject(Router);
+
+  cancelDraft(){
+    this.router.navigate(['']);
+  }
 }
