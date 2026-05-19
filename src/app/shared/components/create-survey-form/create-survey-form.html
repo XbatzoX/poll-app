@@ -30,7 +30,7 @@
                     @if(isOpen()){
                         <div class="categoryPair__dropdownList padding-s" name="category">  
                             @for (item of categoryList; track item) {
-                                <div class="categoryPair__dropdownList__item padding-bottom-ss padding-top-ss" (click)="selectCategory(item, $event)">
+                                <div class="categoryPair__dropdownList__item" (click)="selectCategory(item, $event)">
                                         {{item}}
                                 </div> 
                             }
