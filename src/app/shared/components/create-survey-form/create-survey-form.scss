@@ -21,6 +21,11 @@
         @include mx.flex-start();
     }
 
+    &__categoryPair{
+        display: flex;
+        gap: map.get(var.$sizes, m);
+    }
+
     &__fieldset{
         border: none;
         margin: 0;

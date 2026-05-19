@@ -21,8 +21,14 @@
                     </div>
                     <input type="date" #dateInput class="hiddenDateInput">
                 </div>
-                <label for="category">Choose category</label>
-                <input type="text" id="category">
+                <div class="surveyForm__categoryPair">
+                    <label class="surveyForm__label" for="category">Choose category</label>
+                    <select name="category" [ngModel]="selectedCategory()" (ngModelChange)="onChange($event)">
+                        @for (item of categoryList; track item) {
+                            <option [value]="item">{{item}}</option>
+                        }
+                    </select>
+                </div>
             </div>  
         </fieldset>
     </form>
