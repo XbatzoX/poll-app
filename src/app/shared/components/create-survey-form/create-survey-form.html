@@ -1,43 +1,58 @@
 <section class="createSurveyForm">
     <form class="surveyForm">
-        <fieldset class="surveyForm__fieldset">
-            <div class="surveyForm__pair">
-                <label class="surveyForm__label" for="survey-name">Survey name</label>
-                <div class="inputBox">
-                    <input type="text" id="survey-name" class="surveyForm__inputField">
-                    <button class="deleteBtn" (mouseenter)="isHoveredId = 'survey-name'" (mouseleave)="isHoveredId = ''">
-                        <img [src]="changeDeleteIcon('survey-name')" alt="delte icon as trash bin">
-                    </button>
-                </div>
-            </div>
-            <div class="dateContainer">
+        <div class="surveyForm__nameDescriptionContainer">
+            <fieldset class="surveyForm__fieldset">
                 <div class="surveyForm__pair">
-                    <label class="surveyForm__label" for="end-date">Set end date <span class="surveyForm__label--optional">(optional)</span></label>
+                    <label class="surveyForm__label" for="survey-name">Survey name</label>
                     <div class="inputBox">
-                        <input type="text" id="end-date" class="surveyForm__inputField" (click)="dateInput.showPicker()">
-                        <button class="deleteBtn" (mouseenter)="isHoveredId = 'end-date'" (mouseleave)="isHoveredId = ''">
-                            <img [src]="changeDeleteIcon('end-date')" alt="delte icon as trash bin">
+                        <input type="text" id="survey-name" class="surveyForm__inputField">
+                        <button class="deleteBtn" (mouseenter)="isHoveredId = 'survey-name'" (mouseleave)="isHoveredId = ''">
+                            <img [src]="changeDeleteIcon('survey-name')" alt="delte icon as trash bin">
                         </button>
                     </div>
-                    <input type="date" #dateInput class="hiddenDateInput">
                 </div>
-                <div #dropdownRef class="categoryPair" [class.is-open]="isOpen()" (click)="toggleDropdown()"
-                    (mouseenter)="isHoveredArrow = true" (mouseleave)="isHoveredArrow = false">
-                    <label class="surveyForm__label labelPointer">Choose category</label>
-                    <button class="categoryPair__Btn">
-                        <img [src]="selectArrowPath()" alt="drop down arrow icon">
-                    </button>
-                    @if(isOpen()){
-                        <div class="categoryPair__dropdownList padding-s" name="category">  
-                            @for (item of categoryList; track item) {
-                                <div class="categoryPair__dropdownList__item" (click)="selectCategory(item, $event)">
-                                        {{item}}
-                                </div> 
-                            }
+                <div class="dateContainer">
+                    <div class="surveyForm__pair">
+                        <label class="surveyForm__label" for="end-date">Set end date <span class="surveyForm__label--optional">(optional)</span></label>
+                        <div class="inputBox">
+                            <input type="text" id="end-date" class="surveyForm__inputField" (click)="dateInput.showPicker()">
+                            <button class="deleteBtn" (mouseenter)="isHoveredId = 'end-date'" (mouseleave)="isHoveredId = ''">
+                                <img [src]="changeDeleteIcon('end-date')" alt="delte icon as trash bin">
+                            </button>
                         </div>
-                    }
+                        <input type="date" #dateInput class="hiddenDateInput">
+                    </div>
+                    <div #dropdownRef class="categoryPair" [class.is-open]="isOpen()" (click)="toggleDropdown()"
+                    (mouseenter)="isHoveredArrow = true" (mouseleave)="isHoveredArrow = false">
+                        <label class="surveyForm__label labelPointer">Choose category</label>
+                        <button class="categoryPair__Btn">
+                            <img [src]="selectArrowPath()" alt="drop down arrow icon">
+                        </button>
+                        @if(isOpen()){
+                            <div class="categoryPair__dropdownList padding-s" name="category">  
+                                @for (item of categoryList; track item) {
+                                    <div class="categoryPair__dropdownList__item" (click)="selectCategory(item, $event)">
+                                        {{item}}
+                                    </div> 
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>  
+            </fieldset>
+            <fieldset class="surveyForm__fieldsetDescription">
+                <div class="surveyForm__pairDescription">
+                    <label class="surveyForm__label" for="end-date">Describing text <span class="surveyForm__label--optional">(optional)</span></label>
+                    <div class="inputBoxDescription maxHeight">
+                        <textarea name="description" id="description-text" class="surveyForm__inputField"></textarea>
+                        <div class="inputBoxDescription__btnContainer">
+                            <button class="deleteBtn" (mouseenter)="isHoveredId = 'description-text'" (mouseleave)="isHoveredId = ''">
+                                <img [src]="changeDeleteIcon('description-text')" alt="delte icon as trash bin">
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>  
-        </fieldset>
+            </fieldset>
+        </div>
     </form>
 </section>

@@ -17,9 +17,24 @@
     font-family: 'MyMulish';
     caret-color: map.get(var.$colors, dashboard-bg);
 
+    &__nameDescriptionContainer{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        gap: map.get(var.$sizes, xxl);
+    }
+
     &__pair{
         @include mx.flex-start();
         width: 100%;
+    }
+
+    &__pairDescription{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
     }
 
     &__label{
@@ -39,6 +54,17 @@
         padding: 0;
         @include mx.flex-start();
         gap: map.get(var.$sizes, s);
+        width: 45%;
+    }
+
+    &__fieldsetDescription{
+        border: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: map.get(var.$sizes, s);
+        width: 45%;
     }
 
     &__inputField{
@@ -66,6 +92,14 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    gap: map.get(var.$sizes, s);
+}
+
+.inputBoxDescription{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: stretch;
     gap: map.get(var.$sizes, s);
 }
 
@@ -135,4 +169,12 @@
 .is-open{
     background-color: rgba(255,255,255, 0.3);
     border-radius: map.get(var.$normSizes, ss);
+}
+
+.maxHeight{
+    height: 100%;
+}
+
+textarea{
+    resize: none;
 }
