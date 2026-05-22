@@ -16,6 +16,7 @@
     @include mx.flex-start();
     font-family: 'MyMulish';
     caret-color: map.get(var.$colors, dashboard-bg);
+    gap: map.get(var.$sizes, xxl);
 
     &__nameDescriptionContainer{
         width: 100%;
@@ -171,10 +172,57 @@
     border-radius: map.get(var.$normSizes, ss);
 }
 
-.maxHeight{
-    height: 100%;
-}
-
 textarea{
     resize: none;
+}
+
+.questionContainer{
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    width: 40%;
+
+     &__fieldset{
+        border: none;
+        margin: 0;
+        padding: 0;
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, s);
+        width: 100%;
+    }
+
+    &__questionBox{
+        width: 100%;
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, s);
+    }
+
+    &__labelBox{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__text{
+            font-size: map.get(var.$sizes, xm);
+            font-weight: 700;
+            color: map.get(var.$colors, btn-white);
+        }
+
+        &__checkField{
+            @include mx.flex-center(row);
+            gap: map.get(var.$sizes, ss);
+
+            &__text{
+                font-size: map.get(var.$sizes, xs);
+                font-weight: 400;
+                color: map.get(var.$colors, btn-white);
+            }
+        }
+    }
+
+    &__answerBox{
+        width: 100%;
+        @include mx.flex-start();
+    }
 }

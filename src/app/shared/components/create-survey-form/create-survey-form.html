@@ -1,6 +1,6 @@
 <section class="createSurveyForm">
     <form class="surveyForm">
-        <div class="surveyForm__nameDescriptionContainer">
+        <section class="surveyForm__nameDescriptionContainer">
             <fieldset class="surveyForm__fieldset">
                 <div class="surveyForm__pair">
                     <label class="surveyForm__label" for="survey-name">Survey name</label>
@@ -53,6 +53,31 @@
                     </div>
                 </div>
             </fieldset>
-        </div>
+        </section>
+        <section class="questionContainer">
+            <fieldset class="questionContainer__fieldset">
+                <div class="questionContainer__questionBox">
+                    <div class="questionContainer__labelBox">
+                        <label for="question" class="surveyForm__label">1. Question</label>
+                        <button class="deleteBtn" (mouseenter)="isHoveredId = 'question'" (mouseleave)="isHoveredId = ''">
+                            <img [src]="changeDeleteIcon('question')" alt="delte icon as trash bin">
+                        </button>
+                    </div>
+                    <input type="text" id="question" class="surveyForm__inputField maxWidth">
+                </div>
+                <div class="questionContainer__answerBox">
+                    <div class="questionContainer__labelBox">
+                        <span class="questionContainer__labelBox__text padding-bottom-ss">Answers</span>
+                        <div class="questionContainer__labelBox__checkField">
+                            <div class="checkboxMultiple">
+                                <img src="assets/icons/checkbox_white.svg" alt="checkbox icon">
+                            </div>
+                            <span class="questionContainer__labelBox__checkField__text padding-bottom-ss">Allow multiple answers.</span>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </section>
     </form>
 </section>
