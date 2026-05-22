@@ -226,3 +226,12 @@ textarea{
         @include mx.flex-start();
     }
 }
+
+.checkboxMultiple{
+    @include mx.flex-center(row);
+
+    &:hover{
+        cursor: pointer;
+        background-color: rgba(255,255,255, 0.3);
+    }
+}
