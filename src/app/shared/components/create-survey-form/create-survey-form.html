@@ -70,11 +70,30 @@
                         <span class="questionContainer__labelBox__text">Answers</span>
                         <div class="questionContainer__labelBox__checkField">
                             <div class="checkboxMultiple">
-                                <img src="assets/icons/checkbox_white.svg" alt="checkbox icon">
+                                <img src="assets/icons/white_checkbox.svg" alt="checkbox icon">
                             </div>
                             <span class="questionContainer__labelBox__checkField__text">Allow multiple answers.</span>
                         </div>
-
+                    </div>
+                    <div class="answersContainer">
+                        <div class="answersContainer__answerRow">
+                            <label class="surveyForm__label" for="survey-name">A.</label>
+                            <div class="inputBox">
+                                <input type="text" id="1_anwser" class="surveyForm__inputField">
+                                <button class="deleteBtn" (mouseenter)="isHoveredId = '1_answer'" (mouseleave)="isHoveredId = ''">
+                                    <img [src]="changeDeleteIcon('1_answer')" alt="delte icon as trash bin">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="answersContainer__answerRow">
+                            <label class="surveyForm__label" for="survey-name">B.</label>
+                            <div class="inputBox">
+                                <input type="text" id="2_anwser" class="surveyForm__inputField">
+                                <button class="deleteBtn" (mouseenter)="isHoveredId = '2_answer'" (mouseleave)="isHoveredId = ''">
+                                    <img [src]="changeDeleteIcon('2_answer')" alt="delte icon as trash bin">
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </fieldset>

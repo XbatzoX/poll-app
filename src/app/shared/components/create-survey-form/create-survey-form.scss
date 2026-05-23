@@ -187,7 +187,7 @@ textarea{
         margin: 0;
         padding: 0;
         @include mx.flex-start();
-        gap: map.get(var.$sizes, s);
+        gap: map.get(var.$sizes, m);
         width: 100%;
     }
 
@@ -224,6 +224,7 @@ textarea{
     &__answerBox{
         width: 100%;
         @include mx.flex-start();
+        gap: map.get(var.$sizes, s);
     }
 }
 
@@ -233,5 +234,18 @@ textarea{
     &:hover{
         cursor: pointer;
         background-color: rgba(255,255,255, 0.3);
+    }
+}
+
+.answersContainer{
+    width: 100%;
+    @include mx.flex-start();
+    gap: map.get(var.$sizes, ss);
+
+    &__answerRow{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: map.get(var.$sizes, s);
     }
 }
