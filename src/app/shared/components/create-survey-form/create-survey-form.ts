@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { NewSurvey } from '../../interfaces/new-survey';
 
 @Component({
   selector: 'app-create-survey-form',
@@ -17,6 +18,17 @@ export class CreateSurveyForm {
   letterList = ['C', 'D', 'E', 'F'];
   actualList:string[] = [];
   addAnswerInfo:string;
+  questionList:NewSurvey[] = [
+    {
+      "name":'',
+      "endDate": new Date(),
+      "category":'',
+      "description":'',
+      "question":'',
+      "isMultiple":false,
+      "answers":['']
+    }
+  ];
   
   constructor(){
     this.isHoveredId = '';

@@ -55,15 +55,16 @@
             </fieldset>
         </section>
         <section class="questionContainer">
-            <fieldset class="questionContainer__fieldset">
+           @for(item of questionList; track item; let i = $index){
+             <fieldset class="questionContainer__fieldset">
                 <div class="questionContainer__questionBox">
                     <div class="questionContainer__labelBox">
-                        <label for="1_question" class="surveyForm__label">1. Question</label>
-                        <button class="deleteBtn" (mouseenter)="isHoveredId = '1_question'" (mouseleave)="isHoveredId = ''">
-                            <img [src]="changeDeleteIcon('1_question')" alt="delte icon as trash bin">
+                        <label [for]="(i + 1) + '_question'" class="surveyForm__label">{{i + 1}}. Question</label>
+                        <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + '_question'" (mouseleave)="isHoveredId = ''">
+                            <img [src]="changeDeleteIcon((i + 1) + '_question')" alt="delte icon as trash bin">
                         </button>
                     </div>
-                    <input type="text" id="1_question" class="surveyForm__inputField maxWidth">
+                    <input type="text" [id]="(i + 1) + '_question'" class="surveyForm__inputField maxWidth">
                 </div>
                 <div class="questionContainer__answerBox">
                     <div class="questionContainer__labelBox">
@@ -120,6 +121,7 @@
                     </div>
                 </div>
             </fieldset>
+           }
             <div class="addQuestionBtnContainer">
                 <button class="btn btn--secondary">
                     <span class="addQuestionBtnContainer__btnText">Add next question</span>

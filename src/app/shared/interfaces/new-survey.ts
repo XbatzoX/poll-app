@@ -1,4 +1,4 @@
-export interface NewServey {
+export interface NewSurvey {
     name:string;
     endDate:Date;
     category:string;
