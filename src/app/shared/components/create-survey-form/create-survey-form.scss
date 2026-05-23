@@ -249,3 +249,42 @@ textarea{
         gap: map.get(var.$sizes, s);
     }
 }
+
+.addQuestionBtn{
+    all: unset;
+    @include mx.flex-start();
+
+    &:hover{
+        cursor: pointer;
+    }
+
+    &__textBox{
+        display: flex;
+        align-items: center;
+        gap: map.get(var.$sizes, s);
+
+        &__text{
+            font-family: 'MyNokora';
+            font-size: map.get(var.$sizes, m);
+            font-weight: 700;
+            color: map.get(var.$colors, btn-white);
+        }
+    }
+
+    &__line{
+        width: 100%;
+        border-top: 2px solid map.get(var.$colors, btn-white);
+    }
+}
+
+.addAnswerInfoContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &__infoText{
+        font-size: map.get(var.$sizes, xs);
+        font-weight: 400;
+        color: map.get(var.$colors, btn-white);
+    }
+}

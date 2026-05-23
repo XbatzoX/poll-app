@@ -13,15 +13,22 @@ export class CreateSurveyForm {
   categoryList = ['Team Activities', 'Health & Wellness', 'Gaming & Entertainment',
     'Education & Learning', 'Lifestyle & Preferences', 'Technology & Innovation'
   ];
+  amountAnswers: number;
+  letterList = ['C', 'D', 'E', 'F'];
+  actualList:string[] = [];
+  addAnswerInfo:string;
   
   constructor(){
     this.isHoveredId = '';
     this.isHoveredArrow = false;
+    this.amountAnswers = 0;
+    this.addAnswerInfo = '';
   }
 
   selectedCategory = signal('');
   isOpen = signal(false);
   dropDownBox = viewChild<ElementRef>('dropdownRef');
+  isNewAnswerAvailable = signal(false);
 
   selectCategory(value:string, event: MouseEvent){
     event.stopPropagation();
@@ -59,6 +66,15 @@ export class CreateSurveyForm {
     if(dropDownEl){
       const clickedInsideDropdown = dropDownEl.contains(event.target);
       if(!clickedInsideDropdown){this.isOpen.set(false);}
+    }
+  }
+
+  addAnswer(){
+    if(this.amountAnswers < 4){
+      this.actualList.push(this.letterList[this.amountAnswers]);
+      this.amountAnswers++;
+      this.isNewAnswerAvailable.set(true);
+      this.addAnswerInfo = 'you can add up to 6 answer fields'
     }
   }
 }
