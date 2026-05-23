@@ -178,9 +178,10 @@ textarea{
 
 .questionContainer{
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
+    align-items: start;
     flex-wrap: wrap;
-    width: 40%;
+    width: 100%;
 
      &__fieldset{
         border: none;
@@ -188,7 +189,7 @@ textarea{
         padding: 0;
         @include mx.flex-start();
         gap: map.get(var.$sizes, m);
-        width: 100%;
+        width: 40%;
     }
 
     &__questionBox{
@@ -285,6 +286,18 @@ textarea{
     &__infoText{
         font-size: map.get(var.$sizes, xs);
         font-weight: 400;
+        color: map.get(var.$colors, btn-white);
+    }
+}
+
+.addQuestionBtnContainer{
+    width: 45%;
+    display: flex;
+    justify-content: start;
+
+    &__btnText{
+        font-size: map.get(var.$sizes, m);
+        font-weight: 700;
         color: map.get(var.$colors, btn-white);
     }
 }
