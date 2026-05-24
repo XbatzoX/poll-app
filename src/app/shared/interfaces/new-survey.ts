@@ -3,7 +3,11 @@ export interface NewSurvey {
     endDate:Date;
     category:string;
     description:string;
-    question:string;
+    questions:QuestionAnswers[];
+}
+
+export interface QuestionAnswers {
+    question: string;
     isMultiple:boolean;
     answers:string[];
 }
@@ -13,7 +17,5 @@ export const dummyQuestionObj:NewSurvey = {
     "endDate": new Date(),
     "category":'',
     "description":'',
-    "question":'',
-    "isMultiple":false,
-    "answers":['']
+    "questions": []
 }

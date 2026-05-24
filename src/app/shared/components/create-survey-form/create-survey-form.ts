@@ -1,11 +1,11 @@
 import { Component, ElementRef, HostListener, signal, viewChild } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dummyQuestionObj, NewSurvey } from '../../interfaces/new-survey';
 import { AnswerModel } from '../../models/answermodel';
 
 @Component({
   selector: 'app-create-survey-form',
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './create-survey-form.html',
   styleUrl: './create-survey-form.scss',
 })
@@ -28,9 +28,7 @@ export class CreateSurveyForm {
       "endDate": new Date(),
       "category":'',
       "description":'',
-      "question":'',
-      "isMultiple":false,
-      "answers":['']
+      "questions": []
     }
   ];
   
@@ -102,7 +100,15 @@ export class CreateSurveyForm {
     console.log(this.questions); 
   }
 
-  createAnswerModel(){
-    
+  surveyForm = new FormGroup({
+    surveyName: new FormControl('', {validators:[Validators.required, Validators.minLength(5)]}),
+    surveyEndDate: new FormControl(''),
+    surveyCategory: new FormControl('', {validators:[Validators.required]}),
+    surveyDescription: new FormControl(''),
+
+    surveyQuestions: new FormArray<FormGroup>([])
+  });
+  get questionsArray(): FormArray{
+    return this.surveyForm.get('surveyQuestions') as FormArray;
   }
 }
