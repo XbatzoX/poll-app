@@ -20,11 +20,11 @@
                                 <img [src]="changeDeleteIcon('end-date')" alt="delte icon as trash bin">
                             </button>
                         </div>
-                        <input type="date" #dateInput class="hiddenDateInput">
+                        <input type="date" id="hiddenDate" #dateInput class="hiddenDateInput">
                     </div>
                     <div #dropdownRef class="categoryPair" [class.is-open]="isOpen()" (click)="toggleDropdown()"
                     (mouseenter)="isHoveredArrow = true" (mouseleave)="isHoveredArrow = false">
-                        <label class="surveyForm__label labelPointer">Choose category</label>
+                        <span class="surveyForm__label labelPointer">Choose category</span>
                         <button class="categoryPair__Btn">
                             <img [src]="selectArrowPath()" alt="drop down arrow icon">
                         </button>
@@ -56,7 +56,7 @@
         </section>
         <section class="questionContainer">
            @for(item of questionList; track item; let i = $index){
-             <fieldset class="questionContainer__fieldset">
+            <fieldset class="questionContainer__fieldset">
                 <div class="questionContainer__questionBox">
                     <div class="questionContainer__labelBox">
                         <label [for]="(i + 1) + '_question'" class="surveyForm__label">{{i + 1}}. Question</label>
@@ -96,13 +96,13 @@
                             </div>
                         </div>
                         @if(isNewAnswerAvailable()){
-                            @for (item of actualList; track item; let i = $index){
+                             @for (item of actualList; track item; let j = $index){
                                 <div class="answersContainer__answerRow">
-                                    <label class="surveyForm__label" [for]="(i + 3) + '_answer'">{{item}}.</label>
+                                    <label class="surveyForm__label" [for]="(j + 3) + '_answer'">{{item}}.</label>
                                     <div class="inputBox">
-                                        <input type="text" [id]="(i + 3) + '_answer'" class="surveyForm__inputField">
-                                        <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 3) + '_answer'" (mouseleave)="isHoveredId = ''">
-                                            <img [src]="changeDeleteIcon((i + 3) + '_answer')" alt="delte icon as trash bin">
+                                        <input type="text" [id]="(j + 3) + '_answer'" class="surveyForm__inputField">
+                                        <button class="deleteBtn" (mouseenter)="isHoveredId = (j + 3) + '_answer'" (mouseleave)="isHoveredId = ''">
+                                            <img [src]="changeDeleteIcon((j + 3) + '_answer')" alt="delte icon as trash bin">
                                         </button>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@
             </fieldset>
            }
             <div class="addQuestionBtnContainer">
-                <button class="btn btn--secondary">
+                <button class="btn btn--secondary" (click)="addNewQuestion()">
                     <span class="addQuestionBtnContainer__btnText">Add next question</span>
                     <img src="assets/icons/add_circle_white.svg" alt="add symbol in circle as icon">
                 </button>

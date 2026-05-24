@@ -21,9 +21,10 @@
     &__nameDescriptionContainer{
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
         align-items: stretch;
-        gap: map.get(var.$sizes, xxl);
+        // gap: map.get(var.$sizes, xxl);
+        gap: 10%
     }
 
     &__pair{
@@ -178,15 +179,19 @@ textarea{
 
 .questionContainer{
     display: flex;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: start;
+    gap: 15%;
     flex-wrap: wrap;
     width: 100%;
 
-     &__fieldset{
+    &__fieldset{
         border: none;
         margin: 0;
-        padding: 0;
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: map.get(var.$sizes, xl);
         @include mx.flex-start();
         gap: map.get(var.$sizes, m);
         width: 40%;

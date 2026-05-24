@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NewSurvey } from '../../interfaces/new-survey';
+import { dummyQuestionObj, NewSurvey } from '../../interfaces/new-survey';
 
 @Component({
   selector: 'app-create-survey-form',
@@ -88,5 +88,9 @@ export class CreateSurveyForm {
       this.isNewAnswerAvailable.set(true);
       this.addAnswerInfo = 'you can add up to 6 answer fields'
     }
+  }
+
+  addNewQuestion(){
+    this.questionList.push(dummyQuestionObj);
   }
 }

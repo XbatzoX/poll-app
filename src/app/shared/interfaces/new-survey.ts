@@ -7,3 +7,13 @@ export interface NewSurvey {
     isMultiple:boolean;
     answers:string[];
 }
+
+export const dummyQuestionObj:NewSurvey = {
+    "name":'',
+    "endDate": new Date(),
+    "category":'',
+    "description":'',
+    "question":'',
+    "isMultiple":false,
+    "answers":['']
+}
