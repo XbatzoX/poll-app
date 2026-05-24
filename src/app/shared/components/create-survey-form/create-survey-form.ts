@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { dummyQuestionObj, NewSurvey } from '../../interfaces/new-survey';
+import { AnswerModel } from '../../models/answermodel';
 
 @Component({
   selector: 'app-create-survey-form',
@@ -14,10 +15,13 @@ export class CreateSurveyForm {
   categoryList = ['Team Activities', 'Health & Wellness', 'Gaming & Entertainment',
     'Education & Learning', 'Lifestyle & Preferences', 'Technology & Innovation'
   ];
-  amountAnswers: number;
-  letterList = ['C', 'D', 'E', 'F'];
-  actualList:string[] = [];
-  addAnswerInfo:string;
+  // amountAnswers: number;
+  // letterList = ['C', 'D', 'E', 'F'];
+  // actualList:string[] = [];
+  // addAnswerInfo:string;
+  amountQuestions:number;
+  question_1:AnswerModel = new AnswerModel();
+  questions:AnswerModel[] = [this.question_1];
   questionList:NewSurvey[] = [
     {
       "name":'',
@@ -33,8 +37,9 @@ export class CreateSurveyForm {
   constructor(){
     this.isHoveredId = '';
     this.isHoveredArrow = false;
-    this.amountAnswers = 0;
-    this.addAnswerInfo = '';
+    // this.amountAnswers = 0;
+    // this.addAnswerInfo = '';
+    this.amountQuestions = 1;
   }
 
   selectedCategory = signal('');
@@ -81,16 +86,23 @@ export class CreateSurveyForm {
     }
   }
 
-  addAnswer(){
-    if(this.amountAnswers < 4){
-      this.actualList.push(this.letterList[this.amountAnswers]);
-      this.amountAnswers++;
-      this.isNewAnswerAvailable.set(true);
-      this.addAnswerInfo = 'you can add up to 6 answer fields'
-    }
-  }
+  // addAnswer(){
+  //   if(this.amountAnswers < 4){
+  //     this.actualList.push(this.letterList[this.amountAnswers]);
+  //     this.amountAnswers++;
+  //     this.isNewAnswerAvailable.set(true);
+  //     this.addAnswerInfo = 'you can add up to 6 answer fields'
+  //   }
+  // }
 
   addNewQuestion(){
     this.questionList.push(dummyQuestionObj);
+    this.amountQuestions++; 
+    this.questions.push(new AnswerModel);
+    console.log(this.questions); 
+  }
+
+  createAnswerModel(){
+    
   }
 }

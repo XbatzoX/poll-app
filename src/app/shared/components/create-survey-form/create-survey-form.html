@@ -95,8 +95,8 @@
                                 </button>
                             </div>
                         </div>
-                        @if(isNewAnswerAvailable()){
-                             @for (item of actualList; track item; let j = $index){
+                        @if(questions.length > 0){
+                             @for (item of questions[i].actualList; track j; let j = $index){
                                 <div class="answersContainer__answerRow">
                                     <label class="surveyForm__label" [for]="(i + 1) + 'q_' + (j + 3) + '_answer'">{{item}}.</label>
                                     <div class="inputBox">
@@ -110,14 +110,14 @@
                         }
                     </div>
                     <div class="addAnswerInfoContainer">
-                        <button class="addQuestionBtn" (click)="addAnswer()">
+                        <button class="addQuestionBtn" (click)="questions[i].addAnswer()">
                             <div class="addQuestionBtn__textBox">
                                 <span class="addQuestionBtn__textBox__text">Add answer</span>
                                 <img src="assets/icons/add_circle_white.svg" alt="add symbol in a circle">
                             </div>
                             <div class="addQuestionBtn__line"></div>
                         </button>
-                        <span class="addAnswerInfoContainer__infoText">{{addAnswerInfo}}</span>
+                        <span class="addAnswerInfoContainer__infoText">{{questions[i].showAnswerInfo()}}</span>
                     </div>
                 </div>
             </fieldset>
