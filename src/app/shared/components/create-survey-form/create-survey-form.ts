@@ -45,7 +45,7 @@ export class CreateSurveyForm {
   selectedCategory = signal('');
   isOpen = signal(false);
   dropDownBox = viewChild<ElementRef>('dropdownRef');
-  isNewAnswerAvailable = signal(false);
+  // isNewAnswerAvailable = signal(false);
 
   selectCategory(value:string, event: MouseEvent){
     event.stopPropagation();

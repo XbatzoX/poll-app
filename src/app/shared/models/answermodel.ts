@@ -14,7 +14,6 @@ export class AnswerModel{
         if(this.amountAnswers < 4){
             this.actualList.push(this.letterList[this.amountAnswers]);
             this.amountAnswers++;
-            //   this.isNewAnswerAvailable.set(true);
             this.addAnswerInfo = 'you can add up to 6 answer fields'
         }
     }
