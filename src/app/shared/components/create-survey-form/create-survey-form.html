@@ -55,7 +55,7 @@
             </fieldset>
         </section>
         <section class="questionContainer">
-           @for(item of questionList; track item; let i = $index){
+           @for(item of questionList; track i; let i = $index){
             <fieldset class="questionContainer__fieldset">
                 <div class="questionContainer__questionBox">
                     <div class="questionContainer__labelBox">
@@ -78,31 +78,31 @@
                     </div>
                     <div class="answersContainer">
                         <div class="answersContainer__answerRow">
-                            <label class="surveyForm__label" for="1_answer">A.</label>
+                            <label class="surveyForm__label" [for]="(i + 1) + 'q_' + '1_answer'">A.</label>
                             <div class="inputBox">
-                                <input type="text" id="1_answer" class="surveyForm__inputField">
-                                <button class="deleteBtn" (mouseenter)="isHoveredId = '1_answer'" (mouseleave)="isHoveredId = ''">
-                                    <img [src]="changeDeleteIcon('1_answer')" alt="delte icon as trash bin">
+                                <input type="text" [id]="(i + 1) + 'q_' + '1_answer'" class="surveyForm__inputField">
+                                <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + '1_answer'" (mouseleave)="isHoveredId = ''">
+                                    <img [src]="changeDeleteIcon((i + 1) + 'q_' + '1_answer')" alt="delte icon as trash bin">
                                 </button>
                             </div>
                         </div>
                         <div class="answersContainer__answerRow">
-                            <label class="surveyForm__label" for="2_answer">B.</label>
+                            <label class="surveyForm__label" [for]="(i + 1) + 'q_' + '2_answer'">B.</label>
                             <div class="inputBox">
-                                <input type="text" id="2_answer" class="surveyForm__inputField">
-                                <button class="deleteBtn" (mouseenter)="isHoveredId = '2_answer'" (mouseleave)="isHoveredId = ''">
-                                    <img [src]="changeDeleteIcon('2_answer')" alt="delte icon as trash bin">
+                                <input type="text" [id]="(i + 1) + 'q_' + '2_answer'" class="surveyForm__inputField">
+                                <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + '2_answer'" (mouseleave)="isHoveredId = ''">
+                                    <img [src]="changeDeleteIcon((i + 1) + 'q_' + '2_answer')" alt="delte icon as trash bin">
                                 </button>
                             </div>
                         </div>
                         @if(isNewAnswerAvailable()){
                              @for (item of actualList; track item; let j = $index){
                                 <div class="answersContainer__answerRow">
-                                    <label class="surveyForm__label" [for]="(j + 3) + '_answer'">{{item}}.</label>
+                                    <label class="surveyForm__label" [for]="(i + 1) + 'q_' + (j + 3) + '_answer'">{{item}}.</label>
                                     <div class="inputBox">
-                                        <input type="text" [id]="(j + 3) + '_answer'" class="surveyForm__inputField">
-                                        <button class="deleteBtn" (mouseenter)="isHoveredId = (j + 3) + '_answer'" (mouseleave)="isHoveredId = ''">
-                                            <img [src]="changeDeleteIcon((j + 3) + '_answer')" alt="delte icon as trash bin">
+                                        <input type="text" [id]="(i + 1) + 'q_' + (j + 3) + '_answer'" class="surveyForm__inputField">
+                                        <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + (j + 3) + '_answer'" (mouseleave)="isHoveredId = ''">
+                                            <img [src]="changeDeleteIcon((i + 1) + 'q_' + (j + 3) + '_answer')" alt="delte icon as trash bin">
                                         </button>
                                     </div>
                                 </div>
