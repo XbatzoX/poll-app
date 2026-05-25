@@ -15,10 +15,6 @@ export class CreateSurveyForm {
   categoryList = ['Team Activities', 'Health & Wellness', 'Gaming & Entertainment',
     'Education & Learning', 'Lifestyle & Preferences', 'Technology & Innovation'
   ];
-  // amountAnswers: number;
-  // letterList = ['C', 'D', 'E', 'F'];
-  // actualList:string[] = [];
-  // addAnswerInfo:string;
   amountQuestions:number;
   question_1:AnswerModel = new AnswerModel();
   questions:AnswerModel[] = [this.question_1];
@@ -35,9 +31,8 @@ export class CreateSurveyForm {
   constructor(){
     this.isHoveredId = '';
     this.isHoveredArrow = false;
-    // this.amountAnswers = 0;
-    // this.addAnswerInfo = '';
     this.amountQuestions = 1;
+    this.addNewFormGroup();
   }
 
   selectedCategory = signal('');
@@ -49,6 +44,8 @@ export class CreateSurveyForm {
     event.stopPropagation();
     this.selectedCategory.set(value);
     this.isOpen.set(false);
+    this.surveyForm.get('surveyCategory')?.setValue(this.selectedCategory());
+    // console.log(this.surveyForm.get('surveyCategory')?.value);
   }
 
   toggleDropdown(){
@@ -84,20 +81,13 @@ export class CreateSurveyForm {
     }
   }
 
-  // addAnswer(){
-  //   if(this.amountAnswers < 4){
-  //     this.actualList.push(this.letterList[this.amountAnswers]);
-  //     this.amountAnswers++;
-  //     this.isNewAnswerAvailable.set(true);
-  //     this.addAnswerInfo = 'you can add up to 6 answer fields'
-  //   }
-  // }
-
   addNewQuestion(){
     this.questionList.push(dummyQuestionObj);
     this.amountQuestions++; 
     this.questions.push(new AnswerModel);
     console.log(this.questions); 
+    this.addNewFormGroup();
+    console.log(this.surveyForm.value);
   }
 
   surveyForm = new FormGroup({
@@ -110,5 +100,28 @@ export class CreateSurveyForm {
   });
   get questionsArray(): FormArray{
     return this.surveyForm.get('surveyQuestions') as FormArray;
+  }
+
+  addNewFormGroup(){
+    let questionGroup = new FormGroup({
+      surveyQuestion: new FormControl('', {validators:[Validators.required, Validators.minLength(5)]}),
+      surveyAnswer1: new FormControl('', {validators:[Validators.required, Validators.minLength(2)]}),
+      surveyAnswer2: new FormControl('', {validators:[Validators.required, Validators.minLength(2)]}),
+      surveyAnswer3: new FormControl(''),
+      surveyAnswer4: new FormControl(''),
+      surveyAnswer5: new FormControl(''),
+      surveyAnswer6: new FormControl('')
+    });
+    this.questionsArray.push(questionGroup);
+  }
+
+  transferDate(event: Event){
+    let input = event.target as HTMLInputElement;
+    let choosenDate = input.value;
+    if(choosenDate){
+      let [year, month, day] = choosenDate.split('-');
+      let formattedDate = `${day}.${month}.${year}`;
+      this.surveyForm.get('surveyEndDate')?.setValue(formattedDate);
+    }
   }
 }
