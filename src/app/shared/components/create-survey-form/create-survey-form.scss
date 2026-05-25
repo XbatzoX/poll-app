@@ -73,6 +73,7 @@
         outline: none;
         border: none;
         flex: 1;
+        font-family: 'MyMulish';
         font-size: map.get(var.$sizes, m);
         font-weight: 400;
         color: map.get(var.$colors, dashboard-bg);
@@ -114,6 +115,17 @@
 .dateContainer{
     @include mx.flex-start(row);
     gap: map.get(var.$sizes, m);
+
+    &__categoryBox{
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, ss);
+
+        &__text{
+            font-size: map.get(var.$sizes, sm);
+            font-weight: 400;
+            color: map.get(var.$colors, font-orange);
+        }
+    }
 }
 
 .hiddenDateInput{
@@ -175,6 +187,10 @@
 
 textarea{
     resize: none;
+    font-family: 'MyMulish';
+    font-weight: 400;
+    font-size: map.get(var.$sizes, m);
+    color: map.get(var.$colors, dashboard-bg);
 }
 
 .questionContainer{

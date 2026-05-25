@@ -124,4 +124,13 @@ export class CreateSurveyForm {
       this.surveyForm.get('surveyEndDate')?.setValue(formattedDate);
     }
   }
+
+  clearInput(controlName:string){
+    this.surveyForm.get(controlName)?.setValue('');
+  }
+
+  clearQuestionInput(controlName:string, index:number){
+    let actualFormGroup = this.questionsArray.at(index);
+    actualFormGroup.get(controlName)?.setValue('');
+  }
 }

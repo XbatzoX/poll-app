@@ -6,7 +6,8 @@
                     <label class="surveyForm__label" for="survey-name">Survey name</label>
                     <div class="inputBox">
                         <input type="text" id="survey-name" class="surveyForm__inputField" formControlName="surveyName">
-                        <button class="deleteBtn" (mouseenter)="isHoveredId = 'survey-name'" (mouseleave)="isHoveredId = ''">
+                        <button class="deleteBtn" (mouseenter)="isHoveredId = 'survey-name'" (mouseleave)="isHoveredId = ''"
+                         (click)="clearInput('surveyName')">
                             <img [src]="changeDeleteIcon('survey-name')" alt="delte icon as trash bin">
                         </button>
                     </div>
@@ -16,28 +17,31 @@
                         <label class="surveyForm__label" for="end-date">Set end date <span class="surveyForm__label--optional">(optional)</span></label>
                         <div class="inputBox">
                             <input type="text" id="end-date" class="surveyForm__inputField" (click)="dateInput.showPicker()" formControlName="surveyEndDate">
-                            <button class="deleteBtn" (mouseenter)="isHoveredId = 'end-date'" (mouseleave)="isHoveredId = ''">
+                            <button class="deleteBtn" (mouseenter)="isHoveredId = 'end-date'" (mouseleave)="isHoveredId = ''"
+                             (click)="clearInput('surveyEndDate')">
                                 <img [src]="changeDeleteIcon('end-date')" alt="delte icon as trash bin">
                             </button>
                         </div>
                         <input type="date" id="hiddenDate" #dateInput class="hiddenDateInput" (change)="transferDate($event)">
                     </div>
-                    <div #dropdownRef class="categoryPair" [class.is-open]="isOpen()" (click)="toggleDropdown()"
-                    (mouseenter)="isHoveredArrow = true" (mouseleave)="isHoveredArrow = false">
-                        <span class="surveyForm__label labelPointer">Choose category</span>
-                        <button class="categoryPair__Btn">
-                            <img [src]="selectArrowPath()" alt="drop down arrow icon">
-                        </button>
-                        <span></span>
-                        @if(isOpen()){
-                            <div class="categoryPair__dropdownList padding-s" name="category">  
-                                @for (item of categoryList; track item) {
-                                    <div class="categoryPair__dropdownList__item" (click)="selectCategory(item, $event)">
-                                        {{item}}
-                                    </div> 
-                                }
-                            </div>
-                        }
+                    <div class="dateContainer__categoryBox">
+                        <div #dropdownRef class="categoryPair" [class.is-open]="isOpen()" (click)="toggleDropdown()"
+                        (mouseenter)="isHoveredArrow = true" (mouseleave)="isHoveredArrow = false">
+                            <span class="surveyForm__label labelPointer">Choose category</span>
+                            <button class="categoryPair__Btn">
+                                <img [src]="selectArrowPath()" alt="drop down arrow icon">
+                            </button>
+                            @if(isOpen()){
+                                <div class="categoryPair__dropdownList padding-s" name="category">  
+                                    @for (item of categoryList; track item) {
+                                        <div class="categoryPair__dropdownList__item" (click)="selectCategory(item, $event)">
+                                            {{item}}
+                                        </div> 
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <span class="dateContainer__categoryBox__text padding-left-ss">{{surveyForm.get('surveyCategory')?.value}}</span>
                     </div>
                 </div>  
             </fieldset>
@@ -47,7 +51,8 @@
                     <div class="inputBoxDescription maxHeight">
                         <textarea name="description" id="description-text" class="surveyForm__inputField" formControlName="surveyDescription"></textarea>
                         <div class="inputBoxDescription__btnContainer">
-                            <button class="deleteBtn" (mouseenter)="isHoveredId = 'description-text'" (mouseleave)="isHoveredId = ''">
+                            <button class="deleteBtn" (mouseenter)="isHoveredId = 'description-text'" (mouseleave)="isHoveredId = ''"
+                             (click)="clearInput('surveyDescription')">
                                 <img [src]="changeDeleteIcon('description-text')" alt="delte icon as trash bin">
                             </button>
                         </div>
@@ -61,7 +66,8 @@
                 <div class="questionContainer__questionBox">
                     <div class="questionContainer__labelBox">
                         <label [for]="(i + 1) + '_question'" class="surveyForm__label">{{i + 1}}. Question</label>
-                        <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + '_question'" (mouseleave)="isHoveredId = ''">
+                        <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + '_question'" (mouseleave)="isHoveredId = ''"
+                         (click)="clearQuestionInput('surveyQuestion', i)">
                             <img [src]="changeDeleteIcon((i + 1) + '_question')" alt="delte icon as trash bin">
                         </button>
                     </div>
@@ -82,7 +88,8 @@
                             <label class="surveyForm__label" [for]="(i + 1) + 'q_' + '1_answer'">A.</label>
                             <div class="inputBox">
                                 <input type="text" [id]="(i + 1) + 'q_' + '1_answer'" class="surveyForm__inputField" formControlName="surveyAnswer1">
-                                <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + '1_answer'" (mouseleave)="isHoveredId = ''">
+                                <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + '1_answer'" (mouseleave)="isHoveredId = ''"
+                                 (click)="clearQuestionInput('surveyAnswer1', i)">
                                     <img [src]="changeDeleteIcon((i + 1) + 'q_' + '1_answer')" alt="delte icon as trash bin">
                                 </button>
                             </div>
@@ -91,7 +98,8 @@
                             <label class="surveyForm__label" [for]="(i + 1) + 'q_' + '2_answer'">B.</label>
                             <div class="inputBox">
                                 <input type="text" [id]="(i + 1) + 'q_' + '2_answer'" class="surveyForm__inputField" formControlName="surveyAnswer2">
-                                <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + '2_answer'" (mouseleave)="isHoveredId = ''">
+                                <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + '2_answer'" (mouseleave)="isHoveredId = ''"
+                                 (click)="clearQuestionInput('surveyAnswer2', i)">
                                     <img [src]="changeDeleteIcon((i + 1) + 'q_' + '2_answer')" alt="delte icon as trash bin">
                                 </button>
                             </div>
@@ -102,7 +110,8 @@
                                     <label class="surveyForm__label" [for]="(i + 1) + 'q_' + (j + 3) + '_answer'">{{item}}.</label>
                                     <div class="inputBox">
                                         <input type="text" [id]="(i + 1) + 'q_' + (j + 3) + '_answer'" class="surveyForm__inputField" [formControlName]="`surveyAnswer${j + 3}`">
-                                        <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + (j + 3) + '_answer'" (mouseleave)="isHoveredId = ''">
+                                        <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + (j + 3) + '_answer'" (mouseleave)="isHoveredId = ''"
+                                         (click)="clearQuestionInput('surveyAnswer' + (j + 3), i)">
                                             <img [src]="changeDeleteIcon((i + 1) + 'q_' + (j + 3) + '_answer')" alt="delte icon as trash bin">
                                         </button>
                                     </div>
