@@ -22,6 +22,5 @@ export class CreateSurvey {
     }else{
       this.formInputsValid = false;
     }
-    console.log(this.formInputsValid);
   }
 }

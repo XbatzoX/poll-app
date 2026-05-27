@@ -12,8 +12,8 @@
                 </button>
             </div>
         </header>
-        <app-create-survey-form (isFormValid)="checkForm($event)" class="appForm"></app-create-survey-form>
-        <div class="btnPublishContainer">
+        <app-create-survey-form #myForm (isFormValid)="checkForm($event)" class="appForm"></app-create-survey-form>
+        <div class="btnPublishContainer" (click)="myForm.submitFormFromOutside()">
             <button class="btn btn--primary" [disabled]="!formInputsValid">
                 <span>Publish</span>
                 <img src="assets/icons/check.svg" alt="check icon" class="btn--primary__iconAdd">
