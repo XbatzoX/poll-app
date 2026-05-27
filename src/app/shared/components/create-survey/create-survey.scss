@@ -4,14 +4,14 @@
 
 .newSurveyContainer{
     min-height: 100vh;
-    min-width: 1000px;
+    // min-width: 1000px;
+    max-width: 1440px;
+    margin: 0 auto;
     @include mx.flex-center();
 }
 
 .newSurveyContent{
-    max-width: 1440px;
-    margin: 0 auto;
-    width: 100%;
+    width: calc(100% - 108px);
     @include mx.flex-start();
     gap: map.get(var.$sizes, xxl);
     background-color: map.get(var.$colors, dashboard-bg);
@@ -71,4 +71,9 @@
 
 .maxHeight{
     height: 100%;
+}
+
+.btnPublishContainer{
+    width: 100%;
+    @include mx.flex-end();
 }
