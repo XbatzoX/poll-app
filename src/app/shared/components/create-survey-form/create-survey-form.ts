@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, signal, viewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, output, signal, viewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dummyQuestionObj, NewSurvey } from '../../interfaces/new-survey';
 import { AnswerModel } from '../../models/answermodel';
@@ -39,6 +39,7 @@ export class CreateSurveyForm {
   isOpen = signal(false);
   dropDownBox = viewChild<ElementRef>('dropdownRef');
   // isNewAnswerAvailable = signal(false);
+  isFormValid = output<boolean>();
 
   selectCategory(value:string, event: MouseEvent){
     event.stopPropagation();
@@ -88,6 +89,7 @@ export class CreateSurveyForm {
     console.log(this.questions); 
     this.addNewFormGroup();
     console.log(this.surveyForm.value);
+    this.isFormValid.emit(true);
   }
 
   surveyForm = new FormGroup({

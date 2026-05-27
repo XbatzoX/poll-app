@@ -51,6 +51,21 @@
                 opacity: 1;
             }
         }
+
+        &:disabled{
+            animation: none;
+            padding-right: map.get(var.$sizes, m);
+            background-color: map.get(var.$colors, button-bg-survey);
+            cursor: not-allowed;
+
+            .btn--primary__iconAdd{
+                opacity: 0;
+            }
+
+            .btn--primary__iconCheck{
+                opacity: 0;
+            }
+        }
     }
 
     &--secondary{

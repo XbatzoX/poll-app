@@ -10,8 +10,18 @@ import { CreateSurveyForm } from '../create-survey-form/create-survey-form';
 })
 export class CreateSurvey {
   router = inject(Router);
+  formInputsValid = false;
 
   cancelDraft(){
     this.router.navigate(['']);
+  }
+
+  checkForm(valid:boolean){
+    if(valid){
+      this.formInputsValid = true;
+    }else{
+      this.formInputsValid = false;
+    }
+    console.log(this.formInputsValid);
   }
 }

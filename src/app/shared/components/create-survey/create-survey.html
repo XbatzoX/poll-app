@@ -12,9 +12,9 @@
                 </button>
             </div>
         </header>
-        <app-create-survey-form class="appForm"></app-create-survey-form>
+        <app-create-survey-form (isFormValid)="checkForm($event)" class="appForm"></app-create-survey-form>
         <div class="btnPublishContainer">
-            <button class="btn btn--primary">
+            <button class="btn btn--primary" [disabled]="!formInputsValid">
                 <span>Publish</span>
                 <img src="assets/icons/check.svg" alt="check icon" class="btn--primary__iconAdd">
             </button>
