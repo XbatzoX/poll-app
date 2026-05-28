@@ -1,8 +1,9 @@
-import { Component, ElementRef, HostListener, output, signal, viewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ElementRef, HostListener, output, signal, viewChild, OnInit, OnDestroy, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dummyQuestionObj, NewSurvey, QuestionAnswers } from '../../interfaces/new-survey';
 import { AnswerModel } from '../../models/answermodel';
 import { Subscription } from 'rxjs';
+import { Surveys } from '../../services/surveys';
 
 @Component({
   selector: 'app-create-survey-form',
@@ -32,6 +33,7 @@ export class CreateSurveyForm {
     "questions": [this.actualQuestion]
   };
   choosenDate:string;
+  dbService = inject(Surveys);
   
   constructor(){
     this.isHoveredId = '';
@@ -158,6 +160,8 @@ export class CreateSurveyForm {
     console.log(this.surveyForm.value);
     this.putFormDataInToObj();
     console.log(this.actualSurvey);
+    this.dbService.setSurvey({name:this.actualSurvey.name, end_date:this.actualSurvey.endDate, category:this.actualSurvey.category, description:this.actualSurvey.description});
+    this.setQuestionAnswersFromSurvey();
   }
 
   putFormDataInToObj(){
@@ -187,6 +191,29 @@ export class CreateSurveyForm {
         isMultiple: false,
         answers: []
       }
+    }
+  }
+
+  setQuestionAnswersFromSurvey(){
+    for (let index = 0; index < this.actualSurvey.questions.length; index++) {
+      this.dbService.setQuestions({
+        survey_name:this.actualSurvey.name,
+        question_number:(index + 1),
+        question:this.actualSurvey.questions[index].question,
+        answer1:this.actualSurvey.questions[index].answers[0],
+        counter1:0,
+        answer2:this.actualSurvey.questions[index].answers[1],
+        counter2:0,
+        answer3:this.actualSurvey.questions[index].answers[2],
+        counter3:0,
+        answer4:this.actualSurvey.questions[index].answers[3],
+        counter4:0,
+        answer5:this.actualSurvey.questions[index].answers[4],
+        counter5:0,
+        answer6:this.actualSurvey.questions[index].answers[5],
+        counter6:0,
+        is_multiple:this.actualSurvey.questions[index].isMultiple,
+      });
     }
   }
 
