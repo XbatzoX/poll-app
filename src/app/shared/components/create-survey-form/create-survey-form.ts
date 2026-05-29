@@ -157,6 +157,32 @@ export class CreateSurveyForm {
     actualFormGroup.get(controlName)?.setValue('');
   }
 
+  clearInputsAfterPublish(){
+    this.clearInput('surveyName');
+    this.clearInput('surveyEndDate');
+    this.clearInput('surveyCategory');
+    this.clearInput('surveyDescription');
+    this.clearQuestionInputAfterPublish();
+  }
+
+  clearQuestionInputAfterPublish(){
+    for (let index = 0; index < this.questionsArray.length; index++) {
+      this.clearQuestionInput('surveyQuestion', index);
+      this.clearMultipleInput(index);
+      this.clearQuestionInput('surveyAnswer1', index);
+      this.clearQuestionInput('surveyAnswer2', index);
+      this.clearQuestionInput('surveyAnswer3', index);
+      this.clearQuestionInput('surveyAnswer4', index);
+      this.clearQuestionInput('surveyAnswer5', index);
+      this.clearQuestionInput('surveyAnswer6', index);
+    }
+  }
+
+  clearMultipleInput(arrIndex:number){
+    let actualFormGroup = this.questionsArray.at(arrIndex);
+    actualFormGroup.get('isMultiple')?.setValue(false);
+  }
+
   toggleMultipleAnswer(index:number){
     let actualFormGroup = this.questionsArray.at(index);
     let value = actualFormGroup.get('isMultiple')?.value;
@@ -181,6 +207,7 @@ export class CreateSurveyForm {
     console.log(this.actualSurvey);
     this.dbService.setSurvey({name:this.actualSurvey.name, end_date:this.actualSurvey.endDate, category:this.actualSurvey.category, description:this.actualSurvey.description});
     this.setQuestionAnswersFromSurvey();
+    this.clearInputsAfterPublish();
   }
 
   putFormDataInToObj(){
