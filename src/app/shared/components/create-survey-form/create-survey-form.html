@@ -77,8 +77,8 @@
                     <div class="questionContainer__labelBox">
                         <span class="questionContainer__labelBox__text">Answers</span>
                         <div class="questionContainer__labelBox__checkField">
-                            <div class="checkboxMultiple">
-                                <img src="assets/icons/white_checkbox.svg" alt="checkbox icon">
+                            <div class="checkboxMultiple" (click)="toggleMultipleAnswer(i)">
+                                <img [src]="changeMultipleIcon(i)" alt="checkbox icon">
                             </div>
                             <span class="questionContainer__labelBox__checkField__text">Allow multiple answers.</span>
                         </div>

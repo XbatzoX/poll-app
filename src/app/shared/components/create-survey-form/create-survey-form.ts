@@ -132,7 +132,8 @@ export class CreateSurveyForm {
       surveyAnswer3: new FormControl(''),
       surveyAnswer4: new FormControl(''),
       surveyAnswer5: new FormControl(''),
-      surveyAnswer6: new FormControl('')
+      surveyAnswer6: new FormControl(''),
+      isMultiple: new FormControl(false)
     });
     this.questionsArray.push(questionGroup);
   }
@@ -156,6 +157,24 @@ export class CreateSurveyForm {
     actualFormGroup.get(controlName)?.setValue('');
   }
 
+  toggleMultipleAnswer(index:number){
+    let actualFormGroup = this.questionsArray.at(index);
+    let value = actualFormGroup.get('isMultiple')?.value;
+    actualFormGroup.get('isMultiple')?.setValue(!value);
+  }
+
+  changeMultipleIcon(index:number):string{
+    let path = '';
+    let actualFormGroup = this.questionsArray.at(index);
+    let value = actualFormGroup.get('isMultiple')?.value;
+    if(!value){
+      path = 'assets/icons/white_checkbox.svg';
+    }else{
+      path = 'assets/icons/answer_checked_new.svg';
+    }
+    return path;
+  }
+
   submitFormFromOutside(){
     console.log(this.surveyForm.value);
     this.putFormDataInToObj();
@@ -177,7 +196,7 @@ export class CreateSurveyForm {
       let actualGroup = this.questionsArray.at(index) as FormGroup;
       this.checkIfEntryExists(index);
       this.actualSurvey.questions[index].question = actualGroup.get('surveyQuestion')?.value ?? '';
-      this.actualSurvey.questions[index].isMultiple = false;
+      this.actualSurvey.questions[index].isMultiple = actualGroup.get('isMultiple')?.value ?? false;
       for (let i = 0; i <= 5; i++) {
         this.actualSurvey.questions[index].answers.push(actualGroup.get(`surveyAnswer${i + 1}`)?.value);
       }
