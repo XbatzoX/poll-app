@@ -1,3 +1,33 @@
 @use '../abstracts/variables' as var;
 @use '../abstracts/mixin' as mx;
 @use 'sass:map';
+
+.dlg{
+    width: 350px;
+    background-color: map.get(var.$colors, input-focus);
+    border: none;
+    border-top-left-radius: map.get(var.$normSizes, ss);
+    border-top-right-radius: map.get(var.$normSizes, xlPlus);
+    border-bottom-left-radius: map.get(var.$normSizes, ss);
+    border-bottom-right-radius: map.get(var.$normSizes, ss);
+    padding: map.get(var.$sizes, l);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    opacity: 0;
+    transform: translateY(-900%);
+    transition: all 0.5s ease-in-out;
+
+    &::backdrop{
+        background: transparent;
+    }
+
+    &--slideIn{
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+
+    &--slideOut{
+        opacity: 0;
+        transform: translateY(-900%);
+    }
+}
