@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CreateSurveyForm } from '../create-survey-form/create-survey-form';
 
@@ -11,6 +11,7 @@ import { CreateSurveyForm } from '../create-survey-form/create-survey-form';
 export class CreateSurvey {
   router = inject(Router);
   formInputsValid = false;
+  showDialog = signal<boolean>(false);
 
   cancelDraft(){
     this.router.navigate(['']);

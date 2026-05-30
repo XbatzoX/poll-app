@@ -19,6 +19,6 @@ export class Surveys {
   }){
     const { error } = await this.supabase
     .from('questions')
-    .insert([questionData])
+    .insert([questionData]);
   }
 }

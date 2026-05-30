@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, output, signal, viewChild, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, output, signal, viewChild, OnInit, OnDestroy, inject, model } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dummyQuestionObj, NewSurvey, QuestionAnswers } from '../../interfaces/new-survey';
 import { AnswerModel } from '../../models/answermodel';
@@ -49,6 +49,7 @@ export class CreateSurveyForm {
   // isNewAnswerAvailable = signal(false);
   isFormValid = output<boolean>();
   private statusSubscription?: Subscription;
+  surveyPublished = model<boolean>(false);
 
   ngOnInit(){
     this.statusSubscription = this.surveyForm.statusChanges.subscribe(status => this.isFormValid.emit(status === 'VALID'));
@@ -201,13 +202,14 @@ export class CreateSurveyForm {
     return path;
   }
 
-  submitFormFromOutside(){
+  async submitFormFromOutside(){
     console.log(this.surveyForm.value);
     this.putFormDataInToObj();
     console.log(this.actualSurvey);
     this.dbService.setSurvey({name:this.actualSurvey.name, end_date:this.actualSurvey.endDate, category:this.actualSurvey.category, description:this.actualSurvey.description});
     this.setQuestionAnswersFromSurvey();
     this.clearInputsAfterPublish();
+    this.surveyPublished.set(true);
   }
 
   putFormDataInToObj(){
