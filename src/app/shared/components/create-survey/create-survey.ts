@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CreateSurveyForm } from '../create-survey-form/create-survey-form';
+import { CreateSurveyDialog } from '../create-survey-dialog/create-survey-dialog';
 
 @Component({
   selector: 'app-create-survey',
-  imports: [CreateSurveyForm],
+  imports: [CreateSurveyForm, CreateSurveyDialog],
   templateUrl: './create-survey.html',
   styleUrl: './create-survey.scss',
 })
