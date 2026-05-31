@@ -1,5 +1,6 @@
 import { Injectable,signal } from '@angular/core';
 import { createClient } from '@supabase/supabase-js'
+import { NewSurvey } from '../interfaces/new-survey';
 // import { QuestionAnswers } from '../interfaces/new-survey';
 
 @Injectable({
@@ -7,6 +8,8 @@ import { createClient } from '@supabase/supabase-js'
 })
 export class Surveys {
   supabase = createClient('https://xugobnvbgomjpqrwdchx.supabase.co', 'sb_publishable_fu-RXblBL1Xhe2xs73gFOQ_TSB9BU4q');
+
+  surveyList = signal<NewSurvey[]>([]);
 
   async setSurvey(surveyData:{name:string, end_date:Date, category:string, description:string}){
     const { error } = await this.supabase
@@ -20,5 +23,14 @@ export class Surveys {
     const { error } = await this.supabase
     .from('questions')
     .insert([questionData]);
+  }
+
+  async getAllSurveys(){
+    let response = await this.supabase
+    .from('surveys')
+    .select('*');
+
+    this.surveyList.set((response.data ?? []) as NewSurvey[]);
+    console.log(this.surveyList());
   }
 }
