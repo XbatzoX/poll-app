@@ -111,7 +111,7 @@ export class CreateSurveyForm {
     console.log(this.questions); 
     this.addNewFormGroup();
     console.log(this.surveyForm.value);
-    this.surveyPublished.set(true);
+    // this.surveyPublished.set(true);
   }
 
   surveyForm = new FormGroup({

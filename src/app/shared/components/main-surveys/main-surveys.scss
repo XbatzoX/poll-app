@@ -3,8 +3,9 @@
 @use 'sass:map';
 
 .mainSurveysContainer{
-    width: 1300px;
+    width: 1100px;
     @include mx.flex-center();
+    gap: map.get(var.$sizes, m);
 
     &__caption{
         text-align: center;
@@ -12,5 +13,52 @@
         font-size: map.get(var.$sizes, xUltra);
         font-weight: 400;
         color: map.get(var.$colors, font-orange);
+    }
+}
+
+.surveyListContainer{
+    font-family: 'MyMulish';
+    width: 100%;
+    @include mx.flex-start();
+    gap: map.get(var.$sizes, m);
+
+    &__text{
+        font-size: map.get(var.$sizes, xl);
+        font-weight: 500;
+        color: white;
+    }
+}
+
+.listContainer{
+    display: flex;
+    justify-content: start;
+    gap: map.get(var.$sizes, m);
+
+    &__card{
+        background-color: map.get(var.$colors, card);
+        padding: map.get(var.$normSizes, xxl) map.get(var.$sizes, xm);
+        border-top-right-radius: map.get(var.$normSizes, sUltra);
+        color: map.get(var.$colors, dashboard-bg);
+
+        &__caption{
+            @include mx.flex-start();
+            gap: map.get(var.$sizes, s);
+
+            &__category{
+                font-size: map.get(var.$sizes, sm);
+                font-weight: 600;
+            }
+
+            &__name{
+                font-size: map.get(var.$sizes, ll);
+                font-weight: 700;
+            }
+        }
+
+        &__dateBox{
+            background-color: map.get(var.$colors, button-bg-survey);
+            padding: 3px 6px;
+            border-top-right-radius: map.get(var.$sizes, sm);
+        }
     }
 }
