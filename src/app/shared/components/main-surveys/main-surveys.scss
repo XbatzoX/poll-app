@@ -35,10 +35,20 @@
     gap: map.get(var.$sizes, m);
 
     &__card{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         background-color: map.get(var.$colors, card);
-        padding: map.get(var.$normSizes, xxl) map.get(var.$sizes, xm);
+        padding: map.get(var.$normSizes, xxl) map.get(var.$sizes, xl);
         border-top-right-radius: map.get(var.$normSizes, sUltra);
         color: map.get(var.$colors, dashboard-bg);
+        min-height: 300px;
+        width: 280px;
+
+        &:hover{
+            cursor: pointer;
+            background-color: map.get(var.$colors, list-hover);
+        }
 
         &__caption{
             @include mx.flex-start();
@@ -56,9 +66,15 @@
         }
 
         &__dateBox{
+            width: fit-content;
             background-color: map.get(var.$colors, button-bg-survey);
             padding: 3px 6px;
             border-top-right-radius: map.get(var.$sizes, sm);
+
+            &__text{
+                font-size: map.get(var.$sizes, xs);
+                font-weight: 500;
+            }
         }
     }
 }
