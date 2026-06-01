@@ -1,4 +1,4 @@
-import { Injectable,signal } from '@angular/core';
+import { computed, Injectable,signal } from '@angular/core';
 import { createClient } from '@supabase/supabase-js'
 import { LoadedSurveys, NewSurvey } from '../interfaces/new-survey';
 import { SurveyModel } from '../models/surveymodel';
@@ -12,6 +12,20 @@ export class Surveys {
 
   surveyList = signal<SurveyModel[]>([]);
   fullSurveys:SurveyModel[]= [];
+  sortedSurveys = computed(() => {
+    let today = new Date();
+    let todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+    return [...this.surveyList()]
+      .filter(survey => {
+        let surveyTime = new Date(survey.end_date).getTime();
+        return surveyTime >= todayMidnight;
+      })
+      .sort((a, b) => {
+        let timeA = new Date(a.end_date).getTime();
+        let timeB = new Date(b.end_date).getTime();
+        return (timeA - timeB);
+      })
+  });
   
 
   async setSurvey(surveyData:{name:string, end_date:Date, category:string, description:string}){
@@ -43,8 +57,8 @@ export class Surveys {
         return new SurveyModel(rawData);
     });
     
-    // this.surveyList.set();
-    console.log(this.fullSurveys);
+    this.surveyList.set(this.fullSurveys);
+    console.log(this.surveyList());
   }
 
   async loadSurveysTable(){
@@ -65,10 +79,4 @@ export class Surveys {
     return response;
   }
 
-  cleanDataFromSupabase(){
-    for (let index = 0; index < this.fullSurveys.length; index++) {
-      let dataOfSurvey = new SurveyModel();
-      dataOfSurvey.id = this.fullSurveys[index].id ?? 0;
-    }
-  }
 }

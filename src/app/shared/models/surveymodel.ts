@@ -11,15 +11,31 @@ export class SurveyModel implements LoadedSurveys {
     constructor(data: Partial<LoadedSurveys> = {}){
         this.id = data.id ?? 0;
         this.name = data.name ?? '';
-        this.end_date = data.end_date ?? new Date();
+        this.end_date = data.end_date? new Date(data.end_date) : new Date();
         this.category = data.category ?? '';
         this.description = data.description ?? '';
         this.questions = data.questions ?? [];
     }
 
-    getCleanJson(){
-    return {
-      
-    };
-  }
+    get remainingDays():string {
+        let today = new Date();
+        let start = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+        let end = new Date(this.end_date.getFullYear(), this.end_date.getMonth(), this.end_date.getDate()).getTime();
+        let diffInMs = end - start;
+        let diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+        return this.createMessage(diffInDays);
+    }
+
+    createMessage(diff:number):string{
+        let message = '';
+        if(diff <= 0){
+            message = 'Ends today';
+        }else if(diff == 1){
+            message = 'Ends in 1 day';
+        }else{
+            message = `Ends in ${diff} days`;
+        }
+        return message;
+    }
+  
 }

@@ -3,15 +3,17 @@
     <div class="surveyListContainer">
         <span class="surveyListContainer__text">Ending soon surveys</span>
         <article class="listContainer">
-            <div class="listContainer__card">
-                <div class="listContainer__card__caption">
-                    <span class="listContainer__card__caption__category">category</span>
-                    <span class="listContainer__card__caption__name">survey name</span>
+            @for (survey of dbService.sortedSurveys().slice(0, 3); track survey.id; let i = $index) {
+                <div class="listContainer__card">
+                    <div class="listContainer__card__caption">
+                        <span class="listContainer__card__caption__category">{{survey.category}}</span>
+                        <span class="listContainer__card__caption__name">{{survey.name}}</span>
+                    </div>
+                    <div class="listContainer__card__dateBox">
+                        <span class="listContainer__card__dateBox__text">{{survey.remainingDays}}</span>
+                    </div>
                 </div>
-                <div class="listContainer__card__dateBox">
-                    <span class="listContainer__card__dateBox__text">Ends in 1 day</span>
-                </div>
-            </div>
+            }
         </article>
     </div>
 </article>
