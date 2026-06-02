@@ -25,6 +25,14 @@
             right: map.get(var.$sizes, m);
         }
 
+        &__iconAddRight{
+            opacity: 0;
+            transform: translateX(15px);
+            transition: opacity 0.1s ease, transform 0.3s ease;
+            position: absolute;
+            right: map.get(var.$sizes, xl);
+        }
+
         &__iconCheck{
             opacity: 0;
             position: absolute;
@@ -40,10 +48,19 @@
                 opacity: 1;
                 transform: translateX(0px);
             }
+
+            .btn--primary__iconAddRight{
+                opacity: 1;
+                transform: translateX(10px);
+            }
         }
 
         &:active{
             .btn--primary__iconAdd{
+                opacity: 0;
+            }
+
+            .btn--primary__iconAddRight{
                 opacity: 0;
             }
 

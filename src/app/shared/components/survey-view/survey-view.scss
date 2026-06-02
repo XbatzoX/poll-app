@@ -55,4 +55,11 @@
             color: map.get(var.$colors, dashboard-bg);
         }
     }
+
+    &__caption{
+        font-family: 'MyNerkoOne';
+        font-size: map.get(var.$sizes, sUltra);
+        font-weight: 400;
+        color: map.get(var.$colors, font-orange);
+    }
 }
