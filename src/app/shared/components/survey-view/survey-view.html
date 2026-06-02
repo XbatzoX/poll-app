@@ -1,0 +1,26 @@
+<section class="surveyView">
+    <header class="surveyHeader">
+        <img src="assets/img/logo_purple.svg" alt="poll app logo in purple">
+        <button [routerLink]="['/draft']" class="btn btn--primary">
+            <span>New survey</span>
+            <img class="btn--primary__iconAdd" src="assets/icons/add_circle.svg" alt="add circle icon">
+            <img class="btn--primary__iconCheck" src="assets/icons/check.svg" alt="check icon">
+        </button>
+    </header>
+    <div class="viewContentContainer">
+        <article class="surveyIndication padding-m">
+            <div class="surveyIndication__publishedBox">
+                <span class="surveyIndication__publishedBox__text">Published</span>
+            </div>
+            <div class="surveyIndication__infoBox">
+                <span class="surveyIndication__infoBox__text">Ends on {{createShortDate()}}</span>
+                <span class="surveyIndication__infoBox__text">Category: {{actualSurvey.category}}</span>
+            </div>
+        </article>
+        <aside class="resultIndication">
+
+        </aside>
+    </div>
+</section>
+
+<!-- <p>{{actualSurvey.name}}</p> -->

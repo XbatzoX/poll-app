@@ -4,7 +4,7 @@
         <span class="surveyListContainer__text">Ending soon surveys</span>
         <article class="listContainer">
             @for (survey of dbService.sortedSurveys().slice(0, 3); track survey.id; let i = $index) {
-                <div class="listContainer__card">
+                <div class="listContainer__card" (click)="openSurvey(i)">
                     <div class="listContainer__card__caption">
                         <span class="listContainer__card__caption__category">{{survey.category}}</span>
                         <span class="listContainer__card__caption__name">{{survey.name}}</span>
