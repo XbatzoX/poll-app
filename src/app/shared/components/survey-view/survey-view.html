@@ -30,7 +30,7 @@
                                 <span class="questionAnswer__multiple">More than one answers are possible.</span>
                             }
                             @if(item.answer1 != ''){
-                                <div class="answerContainer">
+                                <div class="answerContainer" (click)="setAnswer($index, 'answer1')">
                                     <div class="answerContainer__row">
                                         <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
                                         <span class="answerContainer__row__letter">A.</span>
