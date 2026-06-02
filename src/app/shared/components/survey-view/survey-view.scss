@@ -26,6 +26,7 @@
     background-color: map.get(var.$colors, list-hover);
     border-top-right-radius: 160px;
     font-family: 'MyMulish';
+    color: map.get(var.$colors, dashboard-bg);
     @include mx.flex-start();
     gap: map.get(var.$sizes, s);
 
@@ -52,7 +53,6 @@
         &__text{
             font-size: map.get(var.$sizes, sm);
             font-weight: 500;
-            color: map.get(var.$colors, dashboard-bg);
         }
     }
 
@@ -61,5 +61,71 @@
         font-size: map.get(var.$sizes, sUltra);
         font-weight: 400;
         color: map.get(var.$colors, font-orange);
+        display: inline-block;
+        line-height: 1.0;
+    }
+
+    &__description{
+        font-size: map.get(var.$sizes, m);
+        font-weight: 500;
+    }
+}
+
+.questionAnswer{
+    width: 100%;
+    display: flex;
+    align-items: start;
+    gap: 10%;
+    flex-wrap: wrap;
+
+    &__container{
+        width: 45%;
+        display: flex;
+        align-items: start;
+        gap: map.get(var.$sizes, s);
+    }
+
+    &__block{
+        // max-width: 50%;
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, s);
+    }
+
+    &__question{
+        font-size: map.get(var.$sizes, xm);
+        font-weight: 700;
+    }
+}
+
+.answerContainer{
+    width: 100%;
+    padding-top: map.get(var.$sizes, s);
+    @include mx.flex-start();
+    gap: map.get(var.$sizes, s);
+
+    &__row{
+        width: 100%;
+        display: flex;
+        align-items: start;
+        gap: map.get(var.$sizes, ss);
+        font-size: map.get(var.$sizes, m);
+
+        &:hover{
+            cursor: pointer;
+            background-color: map.get(var.$colors, button-bg-survey);
+            border-radius: map.get(var.$normSizes, ss);
+        }
+
+        &__image{
+            padding-right: map.get(var.$sizes, s);
+        }
+
+        &__letter{
+            font-weight: 700;
+        }
+
+        &__answer{
+            font-weight: 400;
+        }
     }
 }

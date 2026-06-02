@@ -17,6 +17,76 @@
                 <span class="surveyIndication__infoBox__text">Category: {{actualSurvey.category}}</span>
             </div>
             <span class="surveyIndication__caption">{{actualSurvey.name}}</span>
+            <span class="surveyIndication__description">{{actualSurvey.description}}</span>
+            <div class="questionAnswer padding-top-xl">
+                @for (item of actualSurvey.questions; track $index) {
+                    <div class="questionAnswer__container padding-bottom-xxl">
+                        <div class="questionAnswer__number">
+                            <span class="questionAnswer__question">{{item.question_number}}.</span>
+                        </div>
+                        <div class="questionAnswer__block">
+                            <span class="questionAnswer__question">{{item.question}}</span>
+                            @if(item.is_multiple){
+                                <span class="questionAnswer__multiple">More than one answers are possible.</span>
+                            }
+                            @if(item.answer1 != ''){
+                                <div class="answerContainer">
+                                    <div class="answerContainer__row">
+                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <span class="answerContainer__row__letter">A.</span>
+                                        <span class="answerContainer__row__answer">{{item.answer1}}</span>
+                                    </div>
+                                </div>
+                            }
+                            @if(item.answer2 != ''){
+                                <div class="answerContainer">
+                                    <div class="answerContainer__row">
+                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <span class="answerContainer__row__letter">B.</span>
+                                        <span class="answerContainer__row__answer">{{item.answer2}}</span>
+                                    </div>
+                                </div>
+                            }
+                            @if(item.answer3 != ''){
+                                <div class="answerContainer">
+                                    <div class="answerContainer__row">
+                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <span class="answerContainer__row__letter">C.</span>
+                                        <span class="answerContainer__row__answer">{{item.answer3}}</span>
+                                    </div>
+                                </div>
+                            }
+                            @if(item.answer4 != ''){
+                                <div class="answerContainer">
+                                    <div class="answerContainer__row">
+                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <span class="answerContainer__row__letter">D.</span>
+                                        <span class="answerContainer__row__answer">{{item.answer4}}</span>
+                                    </div>
+                                </div>
+                            }
+                            @if(item.answer5 != ''){
+                                <div class="answerContainer">
+                                    <div class="answerContainer__row">
+                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <span class="answerContainer__row__letter">E.</span>
+                                        <span class="answerContainer__row__answer">{{item.answer5}}</span>
+                                    </div>
+                                </div>
+                            }
+                            @if(item.answer6 != ''){
+                                <div class="answerContainer">
+                                    <div class="answerContainer__row">
+                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <span class="answerContainer__row__letter">F.</span>
+                                        <span class="answerContainer__row__answer">{{item.answer6}}</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
         </article>
         <aside class="resultIndication">
 

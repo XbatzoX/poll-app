@@ -12,11 +12,15 @@ import { SurveyModel } from '../../models/surveymodel';
 export class SurveyView {
   private route = inject(ActivatedRoute);
   dbServive = inject(Surveys);
-  actualSurvey!:SurveyModel;
+  // actualSurvey!:SurveyModel;
+  actualSurvey = new SurveyModel();
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
     this.actualSurvey = this.dbServive.sortedSurveys().find(survey => survey.name === currentName) ?? this.dbServive.sortedSurveys()[0];
+    if(this.actualSurvey && this.actualSurvey.questions){
+      this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);
+    }
     console.log(this.actualSurvey);
   }
 
