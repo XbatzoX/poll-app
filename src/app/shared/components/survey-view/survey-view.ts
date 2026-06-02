@@ -14,6 +14,8 @@ export class SurveyView {
   dbServive = inject(Surveys);
   // actualSurvey!:SurveyModel;
   actualSurvey = new SurveyModel();
+  amountQuestions:number = 0;
+  permissionCheckbox:boolean[] = [];
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
@@ -21,11 +23,25 @@ export class SurveyView {
     if(this.actualSurvey && this.actualSurvey.questions){
       this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);
     }
+    this.amountQuestions = this.actualSurvey.questions.length;
+    this.createArrayOfMultipleAnswers();
     console.log(this.actualSurvey);
+    console.log(this.permissionCheckbox);
   }
 
   createShortDate(){
     let stringDate = `${this.actualSurvey.end_date.getDate()}.${this.actualSurvey.end_date.getMonth()}.${this.actualSurvey.end_date.getFullYear()}`;
     return stringDate;
+  }
+
+  createArrayOfMultipleAnswers(){
+    for (let index = 0; index < this.amountQuestions; index++) {
+      let permission = false;
+      this.permissionCheckbox.push(permission);
+    }
+  }
+
+  setAnswer(index:number, answerNumber:string){
+
   }
 }
