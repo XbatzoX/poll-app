@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Surveys } from '../../services/surveys';
 import { SurveyModel } from '../../models/surveymodel';
+import { PermissionMultiple, dummyPermissionObj } from '../../interfaces/permission-multiple';
 
 @Component({
   selector: 'app-survey-view',
@@ -15,7 +16,8 @@ export class SurveyView {
   // actualSurvey!:SurveyModel;
   actualSurvey = new SurveyModel();
   amountQuestions:number = 0;
-  permissionCheckbox:boolean[] = [];
+  permissionCheckbox:PermissionMultiple[] = [];
+  valueChanged:boolean = false;
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
@@ -36,12 +38,41 @@ export class SurveyView {
 
   createArrayOfMultipleAnswers(){
     for (let index = 0; index < this.amountQuestions; index++) {
-      let permission = false;
-      this.permissionCheckbox.push(permission);
+      let permissionObj = {...dummyPermissionObj};
+      this.permissionCheckbox.push(permissionObj);
     }
   }
 
-  setAnswer(index:number, answerNumber:string){
+  toggleAnswer(index:number, answerNumber:number){
+    this.valueChanged = false;
+    if(this.actualSurvey.questions[index].is_multiple){this.permissionCheckbox[index].permissionMultiple = true;}
+    this.permissionCheckbox[index].anyAnswerChecked = this.isAnswerAlreadyChecked(index, answerNumber);
+    if(!this.permissionCheckbox[index].permissionMultiple && this.permissionCheckbox[index].anyAnswerChecked) return;
+    if(!this.valueChanged){this.checkChoosenAnswer(index, answerNumber);}
+  }
 
+  isAnswerAlreadyChecked(index:number, answerNumber:number){
+    let checked = false;
+    for (let i = 1; i < 7; i++) {
+      if(this.permissionCheckbox[index][`checkedAnswer${i}` as keyof PermissionMultiple] && i == answerNumber){
+        if(i == answerNumber){
+          this.permissionCheckbox[index][`checkedAnswer${i}` as keyof PermissionMultiple] = false;
+          this.valueChanged = true;
+        }else{
+          checked = true;
+        }
+        break;
+      }
+    }
+    return checked;
+  }
+
+  checkChoosenAnswer(index:number, answerNumber:number){
+    for (let i = 1; i < 7; i++) {
+      if(i == answerNumber){
+        this.permissionCheckbox[index][`checkedAnswer${i}` as keyof PermissionMultiple] = true;
+        break;
+      }
+    }
   }
 }

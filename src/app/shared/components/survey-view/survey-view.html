@@ -30,54 +30,54 @@
                                 <span class="questionAnswer__multiple">More than one answers are possible.</span>
                             }
                             @if(item.answer1 != ''){
-                                <div class="answerContainer" (click)="setAnswer($index, 'answer1')">
+                                <div class="answerContainer" (click)="toggleAnswer($index, 1)">
                                     <div class="answerContainer__row">
-                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <img class="answerContainer__row__image" [src]="permissionCheckbox[$index].checkedAnswer1 ? 'assets/icons/answer_checkbox_checked.svg': 'assets/icons/answer_checkbox.svg'" alt="checkbox icon">
                                         <span class="answerContainer__row__letter">A.</span>
                                         <span class="answerContainer__row__answer">{{item.answer1}}</span>
                                     </div>
                                 </div>
                             }
                             @if(item.answer2 != ''){
-                                <div class="answerContainer">
+                                <div class="answerContainer" (click)="toggleAnswer($index, 2)">
                                     <div class="answerContainer__row">
-                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <img class="answerContainer__row__image" [src]="permissionCheckbox[$index].checkedAnswer2 ? 'assets/icons/answer_checkbox_checked.svg': 'assets/icons/answer_checkbox.svg'" alt="checkbox icon">
                                         <span class="answerContainer__row__letter">B.</span>
                                         <span class="answerContainer__row__answer">{{item.answer2}}</span>
                                     </div>
                                 </div>
                             }
                             @if(item.answer3 != ''){
-                                <div class="answerContainer">
+                                <div class="answerContainer" (click)="toggleAnswer($index, 3)">
                                     <div class="answerContainer__row">
-                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <img class="answerContainer__row__image" [src]="permissionCheckbox[$index].checkedAnswer3 ? 'assets/icons/answer_checkbox_checked.svg': 'assets/icons/answer_checkbox.svg'" alt="checkbox icon">
                                         <span class="answerContainer__row__letter">C.</span>
                                         <span class="answerContainer__row__answer">{{item.answer3}}</span>
                                     </div>
                                 </div>
                             }
                             @if(item.answer4 != ''){
-                                <div class="answerContainer">
+                                <div class="answerContainer" (click)="toggleAnswer($index, 4)">
                                     <div class="answerContainer__row">
-                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <img class="answerContainer__row__image" [src]="permissionCheckbox[$index].checkedAnswer4 ? 'assets/icons/answer_checkbox_checked.svg': 'assets/icons/answer_checkbox.svg'" alt="checkbox icon">
                                         <span class="answerContainer__row__letter">D.</span>
                                         <span class="answerContainer__row__answer">{{item.answer4}}</span>
                                     </div>
                                 </div>
                             }
                             @if(item.answer5 != ''){
-                                <div class="answerContainer">
+                                <div class="answerContainer" (click)="toggleAnswer($index, 5)">
                                     <div class="answerContainer__row">
-                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <img class="answerContainer__row__image" [src]="permissionCheckbox[$index].checkedAnswer5 ? 'assets/icons/answer_checkbox_checked.svg': 'assets/icons/answer_checkbox.svg'" alt="checkbox icon">
                                         <span class="answerContainer__row__letter">E.</span>
                                         <span class="answerContainer__row__answer">{{item.answer5}}</span>
                                     </div>
                                 </div>
                             }
                             @if(item.answer6 != ''){
-                                <div class="answerContainer">
+                                <div class="answerContainer" (click)="toggleAnswer($index, 6)">
                                     <div class="answerContainer__row">
-                                        <img class="answerContainer__row__image" src="assets/icons/answer_checkbox.svg" alt="checkbox icon">
+                                        <img class="answerContainer__row__image" [src]="permissionCheckbox[$index].checkedAnswer6 ? 'assets/icons/answer_checkbox_checked.svg': 'assets/icons/answer_checkbox.svg'" alt="checkbox icon">
                                         <span class="answerContainer__row__letter">F.</span>
                                         <span class="answerContainer__row__answer">{{item.answer6}}</span>
                                     </div>
