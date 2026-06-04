@@ -19,6 +19,7 @@
     width: 100%;
     display: flex;
     align-items: end;
+    gap: map.get(var.$sizes, xl);
 }
 
 .surveyIndication{
@@ -131,6 +132,21 @@
 
         &__answer{
             font-weight: 400;
+        }
+    }
+}
+
+.resultIndication{
+    @include mx.flex-start();
+
+    &__caption{
+        font-family: 'MyNerkoOne';
+        font-size: map.get(var.$sizes, xl);
+        font-weight: 400;
+        color: map.get(var.$colors, font-box);
+
+        &--highlight{
+            color: map.get(var.$colors, font-orange);
         }
     }
 }

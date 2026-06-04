@@ -46,25 +46,29 @@ export class SurveyView {
   toggleAnswer(index:number, answerNumber:number){
     this.valueChanged = false;
     if(this.actualSurvey.questions[index].is_multiple){this.permissionCheckbox[index].permissionMultiple = true;}
-    this.permissionCheckbox[index].anyAnswerChecked = this.isAnswerAlreadyChecked(index, answerNumber);
+    this.toggleIfAnswerAlreadyChecked(index, answerNumber);
+    this.permissionCheckbox[index].anyAnswerChecked = this.isAnyAnswerAlreadyChecked(index);
     if(!this.permissionCheckbox[index].permissionMultiple && this.permissionCheckbox[index].anyAnswerChecked) return;
     if(!this.valueChanged){this.checkChoosenAnswer(index, answerNumber);}
   }
 
-  isAnswerAlreadyChecked(index:number, answerNumber:number){
+  isAnyAnswerAlreadyChecked(index:number){
     let checked = false;
     for (let i = 1; i < 7; i++) {
-      if(this.permissionCheckbox[index][`checkedAnswer${i}` as keyof PermissionMultiple] && i == answerNumber){
-        if(i == answerNumber){
-          this.permissionCheckbox[index][`checkedAnswer${i}` as keyof PermissionMultiple] = false;
-          this.valueChanged = true;
-        }else{
-          checked = true;
-        }
+      if(this.permissionCheckbox[index][`checkedAnswer${i}` as keyof PermissionMultiple]){
+        checked = true;
         break;
       }
     }
     return checked;
+  }
+
+  toggleIfAnswerAlreadyChecked(index:number, answerNumber:number){
+    this.valueChanged = false;
+    if(this.permissionCheckbox[index][`checkedAnswer${answerNumber}` as keyof PermissionMultiple]){
+      this.permissionCheckbox[index][`checkedAnswer${answerNumber}` as keyof PermissionMultiple] = false;
+      this.valueChanged = true;
+    }
   }
 
   checkChoosenAnswer(index:number, answerNumber:number){
