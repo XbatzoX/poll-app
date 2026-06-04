@@ -97,5 +97,11 @@
             cursor: pointer;
             background-color: rgba(255, 183, 112, 0.6);
         }
+
+        &:disabled{
+            animation: none;
+            background-color: rgba(255, 183, 112, 0.3);
+            cursor: not-allowed;
+        }
     }
 }

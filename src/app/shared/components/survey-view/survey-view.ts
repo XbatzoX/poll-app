@@ -19,6 +19,7 @@ export class SurveyView {
   permissionCheckbox:PermissionMultiple[] = [];
   valueChanged:boolean = false;
   isAnyResultAvailable:boolean = false;
+  isSurveyValid:boolean = false;
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
@@ -52,6 +53,8 @@ export class SurveyView {
     this.permissionCheckbox[index].anyAnswerChecked = this.isAnyAnswerAlreadyChecked(index);
     if(!this.permissionCheckbox[index].permissionMultiple && this.permissionCheckbox[index].anyAnswerChecked) return;
     if(!this.valueChanged){this.checkChoosenAnswer(index, answerNumber);}
+    console.log(this.actualSurvey);
+    this.isSurveyValid = this.checkUserResults();
   }
 
   isAnyAnswerAlreadyChecked(index:number){
@@ -69,6 +72,9 @@ export class SurveyView {
     this.valueChanged = false;
     if(this.permissionCheckbox[index][`checkedAnswer${answerNumber}` as keyof PermissionMultiple]){
       this.permissionCheckbox[index][`checkedAnswer${answerNumber}` as keyof PermissionMultiple] = false;
+      if((this.actualSurvey.questions[index][`counter${answerNumber}` as keyof LoadedQuestions] as number) > 0){
+        this.actualSurvey.questions[index][`counter${answerNumber}` as keyof LoadedQuestions]--;
+      }
       this.valueChanged = true;
     }
   }
@@ -77,6 +83,8 @@ export class SurveyView {
     for (let i = 1; i < 7; i++) {
       if(i == answerNumber){
         this.permissionCheckbox[index][`checkedAnswer${i}` as keyof PermissionMultiple] = true;
+        this.permissionCheckbox[index].anyAnswerChecked = true;
+        this.actualSurvey.questions[index][`counter${i}` as keyof LoadedQuestions]++;
         break;
       }
     }
@@ -91,5 +99,16 @@ export class SurveyView {
       }
     }
     return resultExist;
+  }
+
+  checkUserResults():boolean{
+    let valid = false;
+    for (let index = 0; index < this.amountQuestions; index++) {
+      if(!this.permissionCheckbox[index].anyAnswerChecked){
+        break;
+      }
+      if(index == (this.amountQuestions - 1)){valid = true;}
+    }
+    return valid;
   }
 }
