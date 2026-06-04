@@ -137,7 +137,10 @@
 }
 
 .resultIndication{
-    @include mx.flex-start();
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    gap: map.get(var.$sizes, m);
 
     &__caption{
         font-family: 'MyNerkoOne';
@@ -148,5 +151,40 @@
         &--highlight{
             color: map.get(var.$colors, font-orange);
         }
+    }
+
+    &__noResults{
+        @include mx.flex-start();
+        gap: map.get(var.$normSizes, ultra);
+        align-self: stretch;
+        font-family: 'MyMulish';
+        font-size: map.get(var.$sizes, xm);
+        font-weight: 700;
+        color: map.get(var.$colors, dashboard-bg);
+
+        &__text{
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
+
+.content-center{
+    justify-content: center;
+}
+
+.content-end{
+    justify-content: end;
+}
+
+.btnControlContainer{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+
+    &__btnText{
+        font-size: map.get(var.$sizes, m);
+        font-weight: 700;
+        color: map.get(var.$colors, dashboard-bg);
     }
 }

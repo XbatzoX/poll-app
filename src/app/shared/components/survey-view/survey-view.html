@@ -87,9 +87,20 @@
                     </div>
                 }
             </div>
+            <div class="btnControlContainer">
+                <button class="btn btn--secondary">
+                    <span class="btnControlContainer__btnText">Complete survey</span>
+                </button>
+            </div>
         </article>
-        <aside class="resultIndication">
+        <aside class="resultIndication" [class.content-center]="!isAnyResultAvailable">
             <span class="resultIndication__caption">Survey results <span class="resultIndication__caption--highlight">LIVE</span></span>
+            @if(!isAnyResultAvailable){
+                <div class="resultIndication__noResults">
+                    <span>Results will be shown here after <br>particpants complete the survey.</span>
+                    <span class="resultIndication__noResults__text">There are no answers yet.</span>
+                </div>
+            }
         </aside>
     </div>
 </section>

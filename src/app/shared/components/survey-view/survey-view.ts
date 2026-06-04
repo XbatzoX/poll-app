@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Surveys } from '../../services/surveys';
 import { SurveyModel } from '../../models/surveymodel';
 import { PermissionMultiple, dummyPermissionObj } from '../../interfaces/permission-multiple';
+import { LoadedQuestions } from '../../interfaces/new-survey';
 
 @Component({
   selector: 'app-survey-view',
@@ -13,11 +14,11 @@ import { PermissionMultiple, dummyPermissionObj } from '../../interfaces/permiss
 export class SurveyView {
   private route = inject(ActivatedRoute);
   dbServive = inject(Surveys);
-  // actualSurvey!:SurveyModel;
   actualSurvey = new SurveyModel();
   amountQuestions:number = 0;
   permissionCheckbox:PermissionMultiple[] = [];
   valueChanged:boolean = false;
+  isAnyResultAvailable:boolean = false;
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
@@ -29,6 +30,7 @@ export class SurveyView {
     this.createArrayOfMultipleAnswers();
     console.log(this.actualSurvey);
     console.log(this.permissionCheckbox);
+    this.isAnyResultAvailable = this.getResult();
   }
 
   createShortDate(){
@@ -78,5 +80,16 @@ export class SurveyView {
         break;
       }
     }
+  }
+
+  getResult(){
+    let resultExist = false;
+    for (let index = 1; index < 7; index++) {
+      if((this.actualSurvey.questions[0][`counter${index}` as keyof LoadedQuestions] as number) > 0){
+        resultExist = true;
+        break;
+      }
+    }
+    return resultExist;
   }
 }
