@@ -93,13 +93,32 @@
                 </button>
             </div>
         </article>
-        <aside class="resultIndication" [class.content-center]="!isAnyResultAvailable">
+        <aside class="resultIndication" [class.content-center]="!isAnyResultAvailable" [class.content-end]="isAnyResultAvailable">
             <span class="resultIndication__caption">Survey results <span class="resultIndication__caption--highlight">LIVE</span></span>
             @if(!isAnyResultAvailable){
                 <div class="resultIndication__noResults">
                     <span>Results will be shown here after <br>particpants complete the survey.</span>
                     <span class="resultIndication__noResults__text">There are no answers yet.</span>
                 </div>
+            }
+            @if(isAnyResultAvailable){
+               @for (item of actualSurvey.questions; track $index){
+                <span class="resultIndication__question">{{item.question_number}}. {{item.question}}</span>
+                <div class="resultIndication__resultContainer">
+                    @if(item.answer1 != ''){
+                        <div class="resultIndication__resultContainer__row">
+                            <label class="progressLabel" [attr.for]="item.question_number + '_answer1'">A</label>
+                            <progress
+                                class="progressBar"
+                                [id]="item.question_number + '_answer1'"
+                                max="100"
+                                [value]="">
+                            </progress>
+                            <span class="progressValuePercent">%</span>
+                        </div>
+                    }
+                </div>
+               } 
             }
         </aside>
     </div>

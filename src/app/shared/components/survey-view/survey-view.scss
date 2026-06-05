@@ -167,6 +167,13 @@
             text-align: center;
         }
     }
+
+    &__question{
+        font-family: 'MyMulish';
+        font-size: map.get(var.$sizes, xm);
+        font-weight: 700;
+        color: map.get(var.$colors, dashboard-bg);
+    }
 }
 
 .content-center{

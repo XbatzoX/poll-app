@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Surveys } from '../../services/surveys';
 import { SurveyModel } from '../../models/surveymodel';
 import { PermissionMultiple, dummyPermissionObj } from '../../interfaces/permission-multiple';
 import { LoadedQuestions } from '../../interfaces/new-survey';
-import { SurveyCounter } from '../../interfaces/survey-counter';
+import { dummyCounterObj, SurveyCounter } from '../../interfaces/survey-counter';
 
 @Component({
   selector: 'app-survey-view',
@@ -21,22 +21,22 @@ export class SurveyView {
   valueChanged:boolean = false;
   isAnyResultAvailable:boolean = false;
   isSurveyValid:boolean = false;
+  resultValues = signal<SurveyCounter[]>([]);
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
     this.actualSurvey = this.dbServive.sortedSurveys().find(survey => survey.name === currentName) ?? this.dbServive.sortedSurveys()[0];
-    if(this.actualSurvey && this.actualSurvey.questions){
-      this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);
-    }
+    if(this.actualSurvey && this.actualSurvey.questions){this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);}
     this.amountQuestions = this.actualSurvey.questions.length;
     this.createArrayOfMultipleAnswers();
     console.log(this.actualSurvey);
     console.log(this.permissionCheckbox);
     this.isAnyResultAvailable = this.getResult();
+    if(this.isAnyResultAvailable){this.prepareDataForProgressIndication(); console.log(this.resultValues());}
   }
 
   createShortDate(){
-    let stringDate = `${this.actualSurvey.end_date.getDate()}.${this.actualSurvey.end_date.getMonth()}.${this.actualSurvey.end_date.getFullYear()}`;
+    let stringDate = `${this.actualSurvey.end_date.getDate()}.${this.actualSurvey.end_date.getMonth() + 1}.${this.actualSurvey.end_date.getFullYear()}`;
     return stringDate;
   }
 
@@ -130,5 +130,16 @@ export class SurveyView {
       "counter6": this.actualSurvey.questions[index].counter6
     }
     return counterData;
+  }
+
+  prepareDataForProgressIndication(){
+    this.fillSignalWithData();
+  }
+
+  fillSignalWithData(){
+     for (let index = 0; index < this.amountQuestions; index++) {
+      let counterData:SurveyCounter = this.prepareDataForQuestion(index);
+      this.resultValues.update(currentList => [...currentList, counterData]);
+    }
   }
 }
