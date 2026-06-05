@@ -4,6 +4,7 @@ import { Surveys } from '../../services/surveys';
 import { SurveyModel } from '../../models/surveymodel';
 import { PermissionMultiple, dummyPermissionObj } from '../../interfaces/permission-multiple';
 import { LoadedQuestions } from '../../interfaces/new-survey';
+import { SurveyCounter } from '../../interfaces/survey-counter';
 
 @Component({
   selector: 'app-survey-view',
@@ -110,5 +111,24 @@ export class SurveyView {
       if(index == (this.amountQuestions - 1)){valid = true;}
     }
     return valid;
+  }
+
+  updateSurvey(){
+    for (let index = 0; index < this.amountQuestions; index++) {
+      let counterData = this.prepareDataForQuestion(index);
+      this.dbServive.updateQuestionsTable(counterData, this.actualSurvey.name, (index + 1));
+    }
+  }
+
+  prepareDataForQuestion(index:number){
+    let counterData:SurveyCounter = {
+      "counter1": this.actualSurvey.questions[index].counter1,
+      "counter2": this.actualSurvey.questions[index].counter2,
+      "counter3": this.actualSurvey.questions[index].counter3,
+      "counter4": this.actualSurvey.questions[index].counter4,
+      "counter5": this.actualSurvey.questions[index].counter5,
+      "counter6": this.actualSurvey.questions[index].counter6
+    }
+    return counterData;
   }
 }

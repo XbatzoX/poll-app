@@ -88,7 +88,7 @@
                 }
             </div>
             <div class="btnControlContainer">
-                <button class="btn btn--secondary" [disabled]="!isSurveyValid">
+                <button class="btn btn--secondary" [disabled]="!isSurveyValid" (click)="updateSurvey()">
                     <span class="btnControlContainer__btnText">Complete survey</span>
                 </button>
             </div>
