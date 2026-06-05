@@ -2,6 +2,7 @@ import { computed, Injectable,signal } from '@angular/core';
 import { createClient } from '@supabase/supabase-js'
 import { LoadedSurveys, NewSurvey } from '../interfaces/new-survey';
 import { SurveyModel } from '../models/surveymodel';
+import { SurveyCounter } from '../interfaces/survey-counter';
 // import { QuestionAnswers } from '../interfaces/new-survey';
 
 @Injectable({
@@ -79,4 +80,12 @@ export class Surveys {
     return response;
   }
 
+  async updateQuestionsTable(data:SurveyCounter, name:string, questionNumber:number){
+    const { error } = await this.supabase
+    .from('questions')
+    .update(data)
+    .eq('survey_name', name)
+    .eq('question_number', questionNumber)
+    .select();
+  }
 }
