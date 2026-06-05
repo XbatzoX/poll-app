@@ -4,7 +4,7 @@ import { Surveys } from '../../services/surveys';
 import { SurveyModel } from '../../models/surveymodel';
 import { PermissionMultiple, dummyPermissionObj } from '../../interfaces/permission-multiple';
 import { LoadedQuestions } from '../../interfaces/new-survey';
-import { dummyCounterObj, SurveyCounter } from '../../interfaces/survey-counter';
+import { dummyResultObj, ResultValues, SurveyCounter } from '../../interfaces/survey-counter';
 
 @Component({
   selector: 'app-survey-view',
@@ -22,6 +22,7 @@ export class SurveyView {
   isAnyResultAvailable:boolean = false;
   isSurveyValid:boolean = false;
   resultValues = signal<SurveyCounter[]>([]);
+  resultsInPercent = signal<ResultValues[]>([]);
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
@@ -140,6 +141,17 @@ export class SurveyView {
      for (let index = 0; index < this.amountQuestions; index++) {
       let counterData:SurveyCounter = this.prepareDataForQuestion(index);
       this.resultValues.update(currentList => [...currentList, counterData]);
+    }
+  }
+
+  calculateResultValues(){
+    for (let index = 0; index < this.amountQuestions; index++) {
+      let counterData:SurveyCounter = this.resultValues()[index];
+      let resultData:ResultValues = dummyResultObj;
+      for (let i = 1; i < 7; i++) {
+        let counterKey = `counter${i}` as keyof SurveyCounter;
+        resultData.resultTotal = resultData.resultTotal + counterData[counterKey];
+      }
     }
   }
 }

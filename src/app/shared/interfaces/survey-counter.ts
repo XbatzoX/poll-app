@@ -15,3 +15,23 @@ export const dummyCounterObj:SurveyCounter = {
     "counter5": 0,
     "counter6": 0
 }
+
+export interface ResultValues {
+    resultInPercent1: number;
+    resultInPercent2: number;
+    resultInPercent3: number;
+    resultInPercent4: number;
+    resultInPercent5: number;
+    resultInPercent6: number;
+    resultTotal:number;
+}
+
+export const dummyResultObj:ResultValues = {
+    "resultInPercent1": 0,
+    "resultInPercent2": 0,
+    "resultInPercent3": 0,
+    "resultInPercent4": 0,
+    "resultInPercent5": 0,
+    "resultInPercent6": 0,
+    "resultTotal":0
+}
