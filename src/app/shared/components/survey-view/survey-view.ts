@@ -135,6 +135,7 @@ export class SurveyView {
 
   prepareDataForProgressIndication(){
     this.fillSignalWithData();
+    this.calculateResultValues();
   }
 
   fillSignalWithData(){
@@ -147,11 +148,19 @@ export class SurveyView {
   calculateResultValues(){
     for (let index = 0; index < this.amountQuestions; index++) {
       let counterData:SurveyCounter = this.resultValues()[index];
-      let resultData:ResultValues = dummyResultObj;
+      let resultData:ResultValues = {...dummyResultObj};
       for (let i = 1; i < 7; i++) {
         let counterKey = `counter${i}` as keyof SurveyCounter;
         resultData.resultTotal = resultData.resultTotal + counterData[counterKey];
       }
+      resultData.resultInPercent1 = Math.round((counterData.counter1 / resultData.resultTotal) * 100);
+      resultData.resultInPercent2 = Math.round((counterData.counter2 / resultData.resultTotal) * 100);
+      resultData.resultInPercent3 = Math.round((counterData.counter3 / resultData.resultTotal) * 100);
+      resultData.resultInPercent4 = Math.round((counterData.counter4 / resultData.resultTotal) * 100);
+      resultData.resultInPercent5 = Math.round((counterData.counter5 / resultData.resultTotal) * 100);
+      resultData.resultInPercent6 = Math.round((counterData.counter6 / resultData.resultTotal) * 100);
+      this.resultsInPercent.update(currentList => [...currentList, resultData]);
     }
+    console.log(this.resultsInPercent());
   }
 }

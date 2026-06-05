@@ -112,7 +112,7 @@
                                 class="progressBar"
                                 [id]="item.question_number + '_answer1'"
                                 max="100"
-                                [value]="">
+                                [value]="resultsInPercent()[$index].resultInPercent1">
                             </progress>
                             <span class="progressValuePercent">%</span>
                         </div>
