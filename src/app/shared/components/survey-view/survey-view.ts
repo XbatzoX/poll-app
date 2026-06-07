@@ -57,6 +57,8 @@ export class SurveyView {
     if(!this.valueChanged){this.checkChoosenAnswer(index, answerNumber);}
     console.log(this.actualSurvey);
     this.isSurveyValid = this.checkUserResults();
+    this.prepareDataForProgressIndication();
+    console.log(this.resultValues());
   }
 
   isAnyAnswerAlreadyChecked(index:number){
@@ -139,6 +141,7 @@ export class SurveyView {
   }
 
   fillSignalWithData(){
+    this.resultValues.set([]);
      for (let index = 0; index < this.amountQuestions; index++) {
       let counterData:SurveyCounter = this.prepareDataForQuestion(index);
       this.resultValues.update(currentList => [...currentList, counterData]);
@@ -146,6 +149,7 @@ export class SurveyView {
   }
 
   calculateResultValues(){
+    this.resultsInPercent.set([]);
     for (let index = 0; index < this.amountQuestions; index++) {
       let counterData:SurveyCounter = this.resultValues()[index];
       let resultData:ResultValues = {...dummyResultObj};
