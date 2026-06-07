@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Surveys } from '../../services/surveys';
 import { SurveyModel } from '../../models/surveymodel';
@@ -23,6 +23,9 @@ export class SurveyView {
   isSurveyValid:boolean = false;
   resultValues = signal<SurveyCounter[]>([]);
   resultsInPercent = signal<ResultValues[]>([]);
+  formattedEndDate = signal<string>('');
+
+  
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
@@ -38,7 +41,8 @@ export class SurveyView {
 
   createShortDate(){
     let stringDate = `${this.actualSurvey.end_date.getDate()}.${this.actualSurvey.end_date.getMonth() + 1}.${this.actualSurvey.end_date.getFullYear()}`;
-    return stringDate;
+    // return stringDate;
+    this.formattedEndDate.set(stringDate);
   }
 
   createArrayOfMultipleAnswers(){
