@@ -1,0 +1,43 @@
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixin' as mx;
+@use 'sass:map';
+
+.progressLabel{
+    font-family: 'MyMulish';
+    font-size: map.get(var.$sizes, xs);;
+    font-weight: 700;
+    color: map.get(var.$colors, dashboard-bg);
+}
+
+.progressBar{
+    background-color: rgba(237, 237, 237, 0.1);
+    width: 250px;
+    height: 14px;
+    border: none;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    &::-webkit-progress-bar {
+        background-color: rgba(237, 237, 237, 0.8);
+        border-top-right-radius: 7px;
+        border-bottom-right-radius: 7px;
+    } 
+
+    &::-webkit-progress-value {
+        background-color: map.get(var.$colors, font-orange);
+        border-top-right-radius: 7px;
+        border-bottom-right-radius: 7px;
+        transition: width 0.4s ease-in-out; 
+    }
+}
+
+.progressValuePercent{
+    font-family: 'MyMulish';
+    font-size: map.get(var.$sizes, xs);
+    font-weight: 800;
+    color: map.get(var.$colors, progress-percent);
+}

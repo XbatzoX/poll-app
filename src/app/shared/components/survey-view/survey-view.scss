@@ -174,6 +174,17 @@
         font-weight: 700;
         color: map.get(var.$colors, dashboard-bg);
     }
+
+    &__resultContainer{
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, xs);
+
+        &__row{
+            display: flex;
+            align-items: center;
+            gap: map.get(var.$sizes, s);
+        }
+    }
 }
 
 .content-center{

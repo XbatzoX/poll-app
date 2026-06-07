@@ -114,7 +114,19 @@
                                 max="100"
                                 [value]="resultsInPercent()[$index].resultInPercent1">
                             </progress>
-                            <span class="progressValuePercent">%</span>
+                            <span class="progressValuePercent">{{resultsInPercent()[$index].resultInPercent1}}%</span>
+                        </div>
+                    }
+                    @if(item.answer2 != ''){
+                        <div class="resultIndication__resultContainer__row">
+                            <label class="progressLabel" [attr.for]="item.question_number + '_answer2'">B</label>
+                            <progress
+                                class="progressBar"
+                                [id]="item.question_number + '_answer2'"
+                                max="100"
+                                [value]="resultsInPercent()[$index].resultInPercent2">
+                            </progress>
+                            <span class="progressValuePercent">{{resultsInPercent()[$index].resultInPercent2}}%</span>
                         </div>
                     }
                 </div>
