@@ -31,6 +31,43 @@
             }
         }
     }
+
+    &__category{
+        @include mx.flex-center(row);
+        gap: map.get(var.$sizes, s);
+        position: relative;
+        font-family: 'MyMulish';
+        font-size: map.get(var.$sizes, xm);
+        font-weight: 700;
+        color: white;
+        border-radius: map.get(var.$sizes, ss);
+
+        &:hover{
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &__dropdownList{
+            width: 100%;
+            position: absolute;
+            top: 100%;
+            background-color: map.get(var.$colors, btn-white);
+            font-size: map.get(var.$sizes, sm);
+            color: map.get(var.$colors, dashboard-bg);
+            border-radius: 6px;
+
+            &__item{
+                padding: map.get(var.$sizes, ss);
+                border-radius: map.get(var.$normSizes, ss);
+
+                &:hover{
+                    background-color: map.get(var.$colors, list-hover);
+                }
+            }
+        }
+    }
+
+   
 }
 
 .isActive{
