@@ -25,11 +25,10 @@ export class SurveyView {
   resultsInPercent = signal<ResultValues[]>([]);
   formattedEndDate = signal<string>('');
 
-  
-
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
     this.actualSurvey = this.dbServive.sortedSurveys().find(survey => survey.name === currentName) ?? this.dbServive.sortedSurveys()[0];
+    this.checkLocalStorage();
     if(this.actualSurvey && this.actualSurvey.questions){this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);}
     this.amountQuestions = this.actualSurvey.questions.length;
     this.createArrayOfMultipleAnswers();
@@ -37,6 +36,23 @@ export class SurveyView {
     console.log(this.permissionCheckbox);
     this.isAnyResultAvailable = this.getResult();
     if(this.isAnyResultAvailable){this.prepareDataForProgressIndication(); console.log(this.resultValues());}
+  }
+
+  checkLocalStorage(){
+    if(this.actualSurvey == undefined){
+      this.getDataFromLocalStorage();
+      console.log(this.actualSurvey);
+    }else{
+      this.saveToLocalStorage();
+    }
+  }
+
+  saveToLocalStorage(){
+    localStorage.setItem('mySurvey', JSON.stringify(this.actualSurvey));
+  }
+
+  getDataFromLocalStorage(){
+    this.actualSurvey = JSON.parse(localStorage.getItem('mySurvey') || '{}');
   }
 
   createShortDate(){
