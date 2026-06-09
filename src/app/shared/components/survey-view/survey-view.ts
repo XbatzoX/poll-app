@@ -40,11 +40,12 @@ export class SurveyView {
 
   checkLocalStorage(){
     if(this.actualSurvey == undefined){
-      this.getDataFromLocalStorage();
-      console.log(this.actualSurvey);
+      this.actualSurvey = this.getDataFromLocalStorage();
+      this.actualSurvey.end_date = new Date(this.actualSurvey.end_date);
     }else{
       this.saveToLocalStorage();
     }
+    this.createShortDate();
   }
 
   saveToLocalStorage(){
@@ -52,7 +53,8 @@ export class SurveyView {
   }
 
   getDataFromLocalStorage(){
-    this.actualSurvey = JSON.parse(localStorage.getItem('mySurvey') || '{}');
+    let outputObj = JSON.parse(localStorage.getItem('mySurvey') || '{}');
+    return outputObj;
   }
 
   createShortDate(){
