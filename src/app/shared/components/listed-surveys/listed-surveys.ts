@@ -1,4 +1,6 @@
-import { Component, signal, ElementRef, viewChild, HostListener } from '@angular/core';
+import { Component, signal, ElementRef, viewChild, HostListener, inject, computed } from '@angular/core';
+import { Surveys } from '../../services/surveys';
+import { SurveyModel } from '../../models/surveymodel';
 
 @Component({
   selector: 'app-listed-surveys',
@@ -15,11 +17,22 @@ export class ListedSurveys {
   isPastSurvey = signal<boolean>(false);
   isListOpen = signal<boolean>(false);
   dropDownBox = viewChild<ElementRef>('dropdownRef');
+  dbService = inject(Surveys);
+  today:Date = new Date();
+  activeSurveys = computed(() => {
+    let allSurveys = this.dbService.surveyList();
+    return allSurveys.filter(survey => new Date(survey.end_date) >= this.today);
+  });
 
   constructor(){
     this.isHoveredArrow = false;
     this.isActiveSurvey.set(true);
-    
+    // this.dbService.getAllSurveys();
+  }
+
+  ngOnInit(){
+    // console.log(this.dbService.surveyList());
+    // console.log(this.activeSurveys());
   }
 
   toggleListedSurveys(name:string){

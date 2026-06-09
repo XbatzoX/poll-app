@@ -51,7 +51,7 @@
         &__dropdownList{
             width: 100%;
             position: absolute;
-            top: 100%;
+            top: 120%;
             background-color: map.get(var.$colors, btn-white);
             font-size: map.get(var.$sizes, sm);
             color: map.get(var.$colors, dashboard-bg);
