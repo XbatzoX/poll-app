@@ -30,9 +30,9 @@
 }
 
 .listContainer{
-    display: flex;
-    justify-content: start;
-    gap: map.get(var.$sizes, m);
+    width: 100%;
+    @include mx.flex-spaceBetween();
+    // gap: map.get(var.$sizes, m);
 
     &__card{
         display: flex;

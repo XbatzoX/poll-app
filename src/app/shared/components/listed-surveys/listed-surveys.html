@@ -1,0 +1,12 @@
+<section class="listedSurveys">
+    <header class="listedHeader">
+        <div class="listedHeader__btnContainer">
+            <button class="listedHeader__btnContainer__btn" [class.isActive]="isActiveSurvey()" (click)="toggleListedSurveys('active')">Active survey</button>
+            <button class="listedHeader__btnContainer__btn" [class.isActive]="isPastSurvey()" (click)="toggleListedSurveys('past')">Past survey</button>
+        </div>
+        <div class="listedHeader__category" (mouseenter)="isHoveredArrow = true" (mouseleave)="isHoveredArrow = false">
+            <span>Sort by categories</span>
+            <img src="" alt="drop down arrow icon">
+        </div>
+    </header>
+</section>

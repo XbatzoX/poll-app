@@ -1,0 +1,38 @@
+@use 'abstracts/variables' as var;
+@use 'abstracts/mixin' as mx;
+@use 'sass:map';
+
+.listedSurveys{
+    width:  1100px;
+    @include mx.flex-start();
+}
+
+.listedHeader{
+    width: 100%;
+    @include mx.flex-spaceBetween();
+
+    &__btnContainer{
+        display: flex;
+        gap: map.get(var.$sizes, m);
+
+        &__btn{
+            font-family: 'MyNokora';
+            font-size: map.get(var.$sizes, m);
+            font-weight: 400;
+            color: map.get(var.$colors, dashboard-bg);
+            border: none;
+            padding: 2px 10px;
+            border-radius: map.get(var.$normSizes, l);
+            background-color: map.get(var.$colors, input-focus);
+
+            &:hover{
+                cursor: pointer;
+                background-color: map.get(var.$colors, button-bg-survey);
+            }
+        }
+    }
+}
+
+.isActive{
+    background-color: map.get(var.$colors, font-orange);
+}
