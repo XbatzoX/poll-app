@@ -1,4 +1,5 @@
 <section class="surveyView">
+    <app-survey-completed-dialog [(isDialogOpen)]="showDialog"></app-survey-completed-dialog>
     <header class="surveyHeader">
         <img src="assets/img/logo_purple.svg" alt="poll app logo in purple">
         <button [routerLink]="['/draft']" class="btn btn--primary">

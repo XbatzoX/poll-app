@@ -5,10 +5,11 @@ import { SurveyModel } from '../../models/surveymodel';
 import { PermissionMultiple, dummyPermissionObj } from '../../interfaces/permission-multiple';
 import { LoadedQuestions } from '../../interfaces/new-survey';
 import { dummyResultObj, ResultValues, SurveyCounter } from '../../interfaces/survey-counter';
+import { SurveyCompletedDialog } from '../survey-completed-dialog/survey-completed-dialog';
 
 @Component({
   selector: 'app-survey-view',
-  imports: [RouterLink],
+  imports: [RouterLink, SurveyCompletedDialog],
   templateUrl: './survey-view.html',
   styleUrl: './survey-view.scss',
 })
@@ -24,6 +25,7 @@ export class SurveyView {
   resultValues = signal<SurveyCounter[]>([]);
   resultsInPercent = signal<ResultValues[]>([]);
   formattedEndDate = signal<string>('');
+  showDialog = signal<boolean>(false);
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
@@ -142,6 +144,7 @@ export class SurveyView {
     for (let index = 0; index < this.amountQuestions; index++) {
       let counterData = this.prepareDataForQuestion(index);
       this.dbServive.updateQuestionsTable(counterData, this.actualSurvey.name, (index + 1));
+      this.showDialog.set(true);
     }
   }
 

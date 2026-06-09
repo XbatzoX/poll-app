@@ -1,0 +1,10 @@
+@use 'abstracts/variables' as var;
+@use 'abstracts/mixin' as mx;
+@use 'sass:map';
+
+.dialogText{
+    font-family: 'MyNerkoOne';
+    font-size: map.get(var.$sizes, l);
+    font-weight: 400;
+    color: map.get(var.$colors, dashboard-bg);
+}

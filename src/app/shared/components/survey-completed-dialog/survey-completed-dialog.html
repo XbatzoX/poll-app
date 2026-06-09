@@ -1,0 +1,6 @@
+<dialog #publishedDialog
+    (cancel)="$event.preventDefault()" class="dlg"
+    [class.dlg--slideIn]="isDialogOpen()"
+    [class.dlg--slideOut]="!isDialogOpen()">
+    <span class="dialogText">Survey completed!</span>
+</dialog>
