@@ -1,4 +1,4 @@
-<section class="listedSurveys">
+<section class="listedSurveys padding-bottom-xxl">
     <header class="listedHeader">
         <div class="listedHeader__btnContainer">
             <button class="listedHeader__btnContainer__btn" [class.isActive]="isActiveSurvey()" (click)="toggleListedSurveys('active')">Active survey</button>
@@ -35,7 +35,7 @@
        }
        @if(isPastSurvey()){
         @for (item of pastSurveys(); track $index) {
-            <div class="surveyGrid__card" (click)="showActive()">
+            <div class="surveyGrid__card" (click)="openPastSurvey($index)">
                 <span class="surveyGrid__card__category">{{item.category}}</span>
                 <span class="surveyGrid__card__name">{{item.name}}</span>
                 <div class="surveyGrid__card__endContainer">

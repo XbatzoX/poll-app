@@ -14,3 +14,29 @@ html, body{
 .maxWidth{
     width: 95%;
 }
+
+html{
+    scrollbar-color: rgb(54, 157, 195);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 0px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #FFCFA1; 
+  border-radius: 0px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #FFB770; 
+}

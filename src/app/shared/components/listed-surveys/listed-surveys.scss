@@ -80,6 +80,11 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: map.get(var.$sizes, m);
+
+    grid-auto-rows: 132px;
+    max-height: calc((3 * 132px) + (2 * 16px));
+    overflow-y: auto;
+    padding-right: map.get(var.$sizes, m);
     
     &__card{
         background-color: rgba(255, 255, 255, 0.1);

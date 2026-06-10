@@ -41,6 +41,7 @@ export class SurveyView {
   }
 
   checkLocalStorage(){
+    this.actualSurvey = this.dbServive.surveyList().find(survey => survey.name === this.route.snapshot.paramMap.get('name')) ?? this.dbServive.sortedSurveys()[0];
     if(this.actualSurvey == undefined){
       this.actualSurvey = this.getDataFromLocalStorage();
       this.actualSurvey.end_date = new Date(this.actualSurvey.end_date);

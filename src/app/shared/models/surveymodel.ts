@@ -28,8 +28,10 @@ export class SurveyModel implements LoadedSurveys {
 
     createMessage(diff:number):string{
         let message = '';
-        if(diff <= 0){
+        if(diff == 0){
             message = 'Ends today';
+        }else if(diff < 0){
+            message = 'Survey expired';
         }else if(diff == 1){
             message = 'Ends in 1 day';
         }else{
