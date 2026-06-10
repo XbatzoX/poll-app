@@ -1,6 +1,7 @@
 import { Component, signal, ElementRef, viewChild, HostListener, inject, computed } from '@angular/core';
 import { Surveys } from '../../services/surveys';
 import { SurveyModel } from '../../models/surveymodel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listed-surveys',
@@ -21,18 +22,35 @@ export class ListedSurveys {
   today:Date = new Date();
   activeSurveys = computed(() => {
     let allSurveys = this.dbService.surveyList();
-    return allSurveys.filter(survey => new Date(survey.end_date) >= this.today);
+    let todayMidnight = new Date(this.today.getTime());
+    todayMidnight.setHours(0, 0, 0, 0);
+    return allSurveys.filter(survey => {
+      let surveyEndDate = new Date(survey.end_date);
+      surveyEndDate.setHours(0, 0, 0, 0);
+      return surveyEndDate >= todayMidnight;
+    });
   });
+  pastSurveys = computed(() => {
+    let allSurveys = this.dbService.surveyList();
+    let todayMidnight = new Date(this.today.getTime());
+    todayMidnight.setHours(0, 0, 0, 0);
+    return allSurveys.filter(survey => {
+      let surveyEndDate = new Date(survey.end_date);
+      surveyEndDate.setHours(0, 0, 0, 0);
+      return surveyEndDate < todayMidnight;
+    });
+  });
+  router = inject(Router);
+  
 
   constructor(){
     this.isHoveredArrow = false;
     this.isActiveSurvey.set(true);
-    // this.dbService.getAllSurveys();
+   
   }
 
   ngOnInit(){
-    // console.log(this.dbService.surveyList());
-    // console.log(this.activeSurveys());
+     this.dbService.getAllSurveys();
   }
 
   toggleListedSurveys(name:string){
@@ -73,5 +91,15 @@ export class ListedSurveys {
       const clickedInsideDropdown = dropDownEl.contains(event.target);
       if(!clickedInsideDropdown){this.isListOpen.set(false);}
     }
+  }
+
+  showActive(){
+    // console.log(this.activeSurveys());
+    console.log(this.pastSurveys());
+  }
+
+  openActiveSurvey(index:number){
+    let name = this.activeSurveys()[index].name;
+    this.router.navigate(['/survey', name]);
   }
 }

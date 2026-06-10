@@ -20,14 +20,31 @@
         </div>
     </header>
     <article class="surveyGrid">
-        <div class="surveyGrid__card">
-            <span class="surveyGrid__card__category">category</span>
-            <span class="surveyGrid__card__name">survey name</span>
-            <div class="surveyGrid__card__endContainer">
-                <div class="surveyGrid__card__endContainer__textBox">
-                    <span class="surveyGrid__card__endContainer__textBox__text">Ends in 1 Day</span>
+       @if(isActiveSurvey()){
+        @for (item of activeSurveys(); track $index) {
+            <div class="surveyGrid__card" (click)="openActiveSurvey($index)">
+                <span class="surveyGrid__card__category">{{item.category}}</span>
+                <span class="surveyGrid__card__name">{{item.name}}</span>
+                <div class="surveyGrid__card__endContainer">
+                    <div class="surveyGrid__card__endContainer__textBox">
+                        <span class="surveyGrid__card__endContainer__textBox__text">{{item.remainingDays}}</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+       }
+       @if(isPastSurvey()){
+        @for (item of pastSurveys(); track $index) {
+            <div class="surveyGrid__card" (click)="showActive()">
+                <span class="surveyGrid__card__category">{{item.category}}</span>
+                <span class="surveyGrid__card__name">{{item.name}}</span>
+                <div class="surveyGrid__card__endContainer">
+                    <div class="surveyGrid__card__endContainer__textBox">
+                        <span class="surveyGrid__card__endContainer__textBox__text">{{item.remainingDays}}</span>
+                    </div>
+                </div>
+            </div>
+        }
+       }
     </article>
 </section>
