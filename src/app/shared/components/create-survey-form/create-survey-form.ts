@@ -155,8 +155,12 @@ export class CreateSurveyForm {
   }
 
   clearQuestionInput(controlName:string, index:number){
-    let actualFormGroup = this.questionsArray.at(index);
-    actualFormGroup.get(controlName)?.setValue('');
+    if(index > 0){
+      this.questionsArray.removeAt(index);
+    }else{
+      let actualFormGroup = this.questionsArray.at(index);
+      actualFormGroup.get(controlName)?.setValue('');
+    }
   }
 
   clearInputsAfterPublish(){

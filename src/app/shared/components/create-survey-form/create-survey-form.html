@@ -61,7 +61,7 @@
             </fieldset>
         </section>
         <section class="questionContainer" formArrayName="surveyQuestions">
-           @for(item of questionsArray.controls; track i; let i = $index){
+           @for(item of questionsArray.controls; track item; let i = $index){
             <fieldset class="questionContainer__fieldset" [formGroupName]="i">
                 <div class="questionContainer__questionBox">
                     <div class="questionContainer__labelBox">
