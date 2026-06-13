@@ -11,15 +11,18 @@ import { Router } from '@angular/router';
 })
 export class ListedSurveys {
   isHoveredArrow: boolean;
-  categoryList = ['Team Activities', 'Health & Wellness', 'Gaming & Entertainment',
+  categoryList = ['All Surveys', 'Team Activities', 'Health & Wellness', 'Gaming & Entertainment',
     'Education & Learning', 'Lifestyle & Preferences', 'Technology & Innovation'
   ];
   isActiveSurvey = signal<boolean>(false);
   isPastSurvey = signal<boolean>(false);
   isListOpen = signal<boolean>(false);
+  selectedCategory = signal<string>('All Surveys');
   dropDownBox = viewChild<ElementRef>('dropdownRef');
   dbService = inject(Surveys);
+  router = inject(Router);
   today:Date = new Date();
+
   activeSurveys = computed(() => {
     let allSurveys = this.dbService.surveyList();
     let todayMidnight = new Date(this.today.getTime());
@@ -30,6 +33,7 @@ export class ListedSurveys {
       return surveyEndDate >= todayMidnight;
     });
   });
+
   pastSurveys = computed(() => {
     let allSurveys = this.dbService.surveyList();
     let todayMidnight = new Date(this.today.getTime());
@@ -40,8 +44,21 @@ export class ListedSurveys {
       return surveyEndDate < todayMidnight;
     });
   });
-  router = inject(Router);
-  
+
+  filteredSurveys = computed(() => {
+    let surveys;
+    if(this.isActiveSurvey()){
+      surveys = this.activeSurveys();
+    }else{
+      surveys = this.pastSurveys();
+    }
+    let category = this.selectedCategory();
+    if(category == 'All Surveys'){
+      return surveys;
+    }else{
+      return surveys.filter(survey => (survey.category == category));
+    }
+  });
 
   constructor(){
     this.isHoveredArrow = false;
@@ -82,6 +99,7 @@ export class ListedSurveys {
   selectCategory(value:string, event: MouseEvent){
     event.stopPropagation();
     this.isListOpen.set(false);
+    this.selectedCategory.set(value);
   }
 
   @HostListener('document:click', ['$event'])

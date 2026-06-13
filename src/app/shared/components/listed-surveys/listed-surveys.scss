@@ -33,6 +33,19 @@
         }
     }
 
+    &__categoryBox{
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, ss);
+
+        &__selectedText{
+            font-family: 'MyMulish';
+            font-size: map.get(var.$sizes, m);
+            font-weight: 700;
+            color: map.get(var.$colors, font-orange);
+            padding-left: map.get(var.$sizes, ss);
+        }
+    }
+
     &__category{
         @include mx.flex-center(row);
         gap: map.get(var.$sizes, s);
@@ -130,6 +143,13 @@
                     color: map.get(var.$colors, font-box);
                 }
             }
+        }
+
+        &__empty{
+            font-family: 'MyMulish';
+            font-size: map.get(var.$sizes, l);
+            font-weight: 700;
+            color: white;
         }
     }
 }
