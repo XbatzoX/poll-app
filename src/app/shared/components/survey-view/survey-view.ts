@@ -26,10 +26,12 @@ export class SurveyView {
   resultsInPercent = signal<ResultValues[]>([]);
   formattedEndDate = signal<string>('');
   showDialog = signal<boolean>(false);
+  isSurveyEditable = signal<boolean>(true);
+  arrCompletedSurveys:string[] = [];
 
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
-    this.actualSurvey = this.dbServive.sortedSurveys().find(survey => survey.name === currentName) ?? this.dbServive.sortedSurveys()[0];
+    // this.actualSurvey = this.dbServive.sortedSurveys().find(survey => survey.name === currentName) ?? this.dbServive.sortedSurveys()[0];
     this.checkLocalStorage();
     if(this.actualSurvey && this.actualSurvey.questions){this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);}
     this.amountQuestions = this.actualSurvey.questions.length;
@@ -49,15 +51,38 @@ export class SurveyView {
       this.saveToLocalStorage();
     }
     this.createShortDate();
+    this.arrCompletedSurveys = this.checkIfSurveyCompleted();
+    console.log(this.arrCompletedSurveys);
   }
 
   saveToLocalStorage(){
     localStorage.setItem('mySurvey', JSON.stringify(this.actualSurvey));
   }
 
+  saveSurveyCompletedToLocalStorage(){
+    this.arrCompletedSurveys.push(this.actualSurvey.name);
+    localStorage.setItem('completedSurveys', JSON.stringify(this.arrCompletedSurveys));
+  }
+
   getDataFromLocalStorage(){
     let outputObj = JSON.parse(localStorage.getItem('mySurvey') || '{}');
     return outputObj;
+  }
+
+  getCompletedSurveysFromLocalStorage(){
+    let outputObj = JSON.parse(localStorage.getItem('completedSurveys') || '[]');
+    return outputObj;
+  }
+
+  checkIfSurveyCompleted(){
+    let storageArr = this.getCompletedSurveysFromLocalStorage();
+    for (let index = 0; index < storageArr.length; index++) {
+      if((storageArr[index] == this.actualSurvey.name) || (this.actualSurvey.remainingDays == 'Survey expired')){
+        this.isSurveyEditable.set(false);
+        break;
+      }
+    }
+    return storageArr;
   }
 
   createShortDate(){
@@ -147,6 +172,7 @@ export class SurveyView {
       this.dbServive.updateQuestionsTable(counterData, this.actualSurvey.name, (index + 1));
       this.showDialog.set(true);
     }
+    this.saveSurveyCompletedToLocalStorage();
   }
 
   prepareDataForQuestion(index:number){

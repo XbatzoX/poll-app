@@ -104,10 +104,31 @@
 }
 
 .answerContainer{
+    background: none;
+    border: none;
+    margin: 0;
+    padding-left: 0;
+    font: inherit;
+    color: inherit;
+
     width: 100%;
     padding-top: map.get(var.$sizes, s);
     @include mx.flex-start();
     gap: map.get(var.$sizes, s);
+
+    &:not(:disabled){
+        cursor: pointer;
+
+        &:hover{
+            .answerContainer__row{
+                background-color: map.get(var.$colors, button-bg-survey);
+            }
+        }
+    }
+
+    &:disabled {
+        opacity: 0.4;
+    }
 
     &__row{
         width: 100%;
@@ -115,12 +136,8 @@
         align-items: start;
         gap: map.get(var.$sizes, ss);
         font-size: map.get(var.$sizes, m);
-
-        &:hover{
-            cursor: pointer;
-            background-color: map.get(var.$colors, button-bg-survey);
-            border-radius: map.get(var.$normSizes, ss);
-        }
+        border-radius: map.get(var.$normSizes, ss);
+        transition: background-color 0.2s ease;
 
         &__image{
             padding-right: map.get(var.$sizes, s);
