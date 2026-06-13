@@ -1,5 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Surveys } from '../../services/surveys';
 import { SurveyModel } from '../../models/surveymodel';
 import { PermissionMultiple, dummyPermissionObj } from '../../interfaces/permission-multiple';
@@ -15,6 +15,7 @@ import { SurveyCompletedDialog } from '../survey-completed-dialog/survey-complet
 })
 export class SurveyView {
   private route = inject(ActivatedRoute);
+  router = inject(Router);
   dbServive = inject(Surveys);
   actualSurvey = new SurveyModel();
   amountQuestions:number = 0;
@@ -167,12 +168,16 @@ export class SurveyView {
   }
 
   updateSurvey(){
-    for (let index = 0; index < this.amountQuestions; index++) {
-      let counterData = this.prepareDataForQuestion(index);
-      this.dbServive.updateQuestionsTable(counterData, this.actualSurvey.name, (index + 1));
-      this.showDialog.set(true);
+    if(this.isSurveyValid){
+      for (let index = 0; index < this.amountQuestions; index++) {
+        let counterData = this.prepareDataForQuestion(index);
+        this.dbServive.updateQuestionsTable(counterData, this.actualSurvey.name, (index + 1));
+        this.showDialog.set(true);
+      }
+      this.saveSurveyCompletedToLocalStorage();
+    }else{
+      this.router.navigate(['']);
     }
-    this.saveSurveyCompletedToLocalStorage();
   }
 
   prepareDataForQuestion(index:number){
