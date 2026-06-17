@@ -171,10 +171,14 @@ export class CreateSurveyForm {
         actualFormGroup.get(controlName)?.setValue('');
         break;
       case 'surveyAnswer3':
+      case 'surveyAnswer4':
+      case 'surveyAnswer5':
+      case 'surveyAnswer6':
         actualFormGroup.get(controlName)?.setValue('');
         this.questions[index].actualList.pop();
         this.questions[index].amountAnswers--;
-        // console.log(this.questions[index].actualList);
+        console.log(this.questions[index].actualList);
+        console.log(actualFormGroup.value);
         break;
       default:
         actualFormGroup.get(controlName)?.setValue('');
