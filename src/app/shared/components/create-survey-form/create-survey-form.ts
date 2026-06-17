@@ -163,6 +163,25 @@ export class CreateSurveyForm {
     }
   }
 
+  clearAnswerInput(controlName:string, index:number, listNumber:number = 0){
+    let actualFormGroup = this.questionsArray.at(index);
+    switch(controlName){
+      case 'surveyAnswer1':
+      case 'surveyAnswer2':
+        actualFormGroup.get(controlName)?.setValue('');
+        break;
+      case 'surveyAnswer3':
+        actualFormGroup.get(controlName)?.setValue('');
+        this.questions[index].actualList.pop();
+        this.questions[index].amountAnswers--;
+        // console.log(this.questions[index].actualList);
+        break;
+      default:
+        actualFormGroup.get(controlName)?.setValue('');
+        break;
+    }
+  }
+
   clearInputsAfterPublish(){
     this.clearInput('surveyName');
     this.clearInput('surveyEndDate');

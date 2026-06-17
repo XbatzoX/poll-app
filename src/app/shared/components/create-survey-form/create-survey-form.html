@@ -89,7 +89,7 @@
                             <div class="inputBox">
                                 <input type="text" [id]="(i + 1) + 'q_' + '1_answer'" class="surveyForm__inputField" formControlName="surveyAnswer1">
                                 <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + '1_answer'" (mouseleave)="isHoveredId = ''"
-                                 (click)="clearQuestionInput('surveyAnswer1', i)">
+                                 (click)="clearAnswerInput('surveyAnswer1', i)">
                                     <img [src]="changeDeleteIcon((i + 1) + 'q_' + '1_answer')" alt="delte icon as trash bin">
                                 </button>
                             </div>
@@ -99,19 +99,19 @@
                             <div class="inputBox">
                                 <input type="text" [id]="(i + 1) + 'q_' + '2_answer'" class="surveyForm__inputField" formControlName="surveyAnswer2">
                                 <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + '2_answer'" (mouseleave)="isHoveredId = ''"
-                                 (click)="clearQuestionInput('surveyAnswer2', i)">
+                                 (click)="clearAnswerInput('surveyAnswer2', i)">
                                     <img [src]="changeDeleteIcon((i + 1) + 'q_' + '2_answer')" alt="delte icon as trash bin">
                                 </button>
                             </div>
                         </div>
                         @if(questions.length > 0){
-                             @for (item of questions[i].actualList; track j; let j = $index){
+                             @for (item of questions[i].actualList; track item; let j = $index){
                                 <div class="answersContainer__answerRow">
                                     <label class="surveyForm__label" [for]="(i + 1) + 'q_' + (j + 3) + '_answer'">{{item}}.</label>
                                     <div class="inputBox">
                                         <input type="text" [id]="(i + 1) + 'q_' + (j + 3) + '_answer'" class="surveyForm__inputField" [formControlName]="`surveyAnswer${j + 3}`">
                                         <button class="deleteBtn" (mouseenter)="isHoveredId = (i + 1) + 'q_' + (j + 3) + '_answer'" (mouseleave)="isHoveredId = ''"
-                                         (click)="clearQuestionInput('surveyAnswer' + (j + 3), i)">
+                                         (click)="clearAnswerInput('surveyAnswer' + (j + 3), i, j)">
                                             <img [src]="changeDeleteIcon((i + 1) + 'q_' + (j + 3) + '_answer')" alt="delte icon as trash bin">
                                         </button>
                                     </div>
