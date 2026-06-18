@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, output, signal, viewChild, OnInit, OnDestroy, inject, model } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { dummyQuestionObj, NewSurvey, QuestionAnswers } from '../../interfaces/new-survey';
 import { AnswerModel } from '../../models/answermodel';
 import { Subscription } from 'rxjs';
@@ -169,20 +169,38 @@ export class CreateSurveyForm {
       case 'surveyAnswer1':
       case 'surveyAnswer2':
         actualFormGroup.get(controlName)?.setValue('');
+        if(this.questions[index].amountAnswers > 0){this.customizeAnswerArr(listNumber, actualFormGroup, controlName, index);}
         break;
       case 'surveyAnswer3':
       case 'surveyAnswer4':
       case 'surveyAnswer5':
       case 'surveyAnswer6':
         actualFormGroup.get(controlName)?.setValue('');
-        this.questions[index].actualList.pop();
-        this.questions[index].amountAnswers--;
+        this.customizeAnswerArr(listNumber, actualFormGroup, controlName, index);
         console.log(this.questions[index].actualList);
         console.log(actualFormGroup.value);
+        console.log(listNumber);
         break;
       default:
         actualFormGroup.get(controlName)?.setValue('');
         break;
+    }
+  }
+
+  customizeAnswerArr(listNumber:number, formGroup:AbstractControl, controlName: string, index:number){
+    this.questions[index].actualList.pop();
+    this.questions[index].amountAnswers--;
+    let arrPos = 0;
+    if(controlName == 'surveyAnswer1'){
+      arrPos = 1;
+    }else if(controlName == 'surveyAnswer2'){
+      arrPos = 2;
+    }else{
+      arrPos = listNumber + 3;
+    }
+    for (let index = arrPos; index < 6; index++) {
+      let newValue = formGroup.get(`surveyAnswer${index + 1}`)?.value;
+      formGroup.get(`surveyAnswer${index}`)?.setValue(newValue);
     }
   }
 
