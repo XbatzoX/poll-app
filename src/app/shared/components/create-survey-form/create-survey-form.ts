@@ -190,17 +190,16 @@ export class CreateSurveyForm {
   customizeAnswerArr(listNumber:number, formGroup:AbstractControl, controlName: string, index:number){
     this.questions[index].actualList.pop();
     this.questions[index].amountAnswers--;
-    let arrPos = 0;
-    if(controlName == 'surveyAnswer1'){
-      arrPos = 1;
-    }else if(controlName == 'surveyAnswer2'){
-      arrPos = 2;
-    }else{
-      arrPos = listNumber + 3;
-    }
-    for (let index = arrPos; index < 6; index++) {
-      let newValue = formGroup.get(`surveyAnswer${index + 1}`)?.value;
-      formGroup.get(`surveyAnswer${index}`)?.setValue(newValue);
+    let arrPos = controlName === 'surveyAnswer1' ? 1
+               : controlName === 'surveyAnswer2' ? 2
+               : listNumber + 3;
+    for (let index = arrPos; index <= 6; index++) {
+      if(index < 6){
+        let newValue = formGroup.get(`surveyAnswer${index + 1}`)?.value;
+        formGroup.get(`surveyAnswer${index}`)?.setValue(newValue);
+      }else{
+        formGroup.get(`surveyAnswer${index}`)?.setValue('');
+      }
     }
   }
 
