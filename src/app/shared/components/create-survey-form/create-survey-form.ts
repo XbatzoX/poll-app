@@ -261,9 +261,12 @@ export class CreateSurveyForm {
     this.dbService.setSurvey({name:this.actualSurvey.name, end_date:this.actualSurvey.endDate, category:this.actualSurvey.category, description:this.actualSurvey.description});
     this.setQuestionAnswersFromSurvey();
     let surveyName = this.actualSurvey.name;
+    console.log(surveyName);
     this.clearInputsAfterPublish();
     this.surveyPublished.set(true);
-    this.router.navigate(['/survey', surveyName]);
+    setTimeout(() => {
+      this.router.navigate(['/survey', surveyName]);
+    }, 3000);
   }
 
   putFormDataInToObj(){

@@ -30,17 +30,23 @@ export class SurveyView {
   isSurveyEditable = signal<boolean>(true);
   arrCompletedSurveys:string[] = [];
 
+  constructor(){
+    // this.dbServive.getAllSurveys();
+  }
+
   ngOnInit(){
     let currentName = this.route.snapshot.paramMap.get('name');
-    // this.actualSurvey = this.dbServive.sortedSurveys().find(survey => survey.name === currentName) ?? this.dbServive.sortedSurveys()[0];
-    this.checkLocalStorage();
-    if(this.actualSurvey && this.actualSurvey.questions){this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);}
-    this.amountQuestions = this.actualSurvey.questions.length;
-    this.createArrayOfMultipleAnswers();
-    console.log(this.actualSurvey);
-    console.log(this.permissionCheckbox);
-    this.isAnyResultAvailable = this.getResult();
-    if(this.isAnyResultAvailable){this.prepareDataForProgressIndication(); console.log(this.resultValues());}
+    
+    this.dbServive.getAllSurveys().then(() => {
+      this.checkLocalStorage();
+      if(this.actualSurvey && this.actualSurvey.questions){this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);}
+      this.amountQuestions = this.actualSurvey.questions.length;
+      this.createArrayOfMultipleAnswers();
+      console.log(this.actualSurvey);
+      console.log(this.permissionCheckbox);
+      this.isAnyResultAvailable = this.getResult();
+      if(this.isAnyResultAvailable){this.prepareDataForProgressIndication(); console.log(this.resultValues());}
+      });
   }
 
   checkLocalStorage(){
