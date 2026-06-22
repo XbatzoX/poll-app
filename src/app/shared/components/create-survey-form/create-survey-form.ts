@@ -258,8 +258,8 @@ export class CreateSurveyForm {
     console.log(this.surveyForm.value);
     this.putFormDataInToObj();
     console.log(this.actualSurvey);
-    this.dbService.setSurvey({name:this.actualSurvey.name, end_date:this.actualSurvey.endDate, category:this.actualSurvey.category, description:this.actualSurvey.description});
-    this.setQuestionAnswersFromSurvey();
+    this.writeDataToSupabase();
+    // this.setQuestionAnswersFromSurvey();
     let surveyName = this.actualSurvey.name;
     console.log(surveyName);
     this.clearInputsAfterPublish();
@@ -267,6 +267,34 @@ export class CreateSurveyForm {
     setTimeout(() => {
       this.router.navigate(['/survey', surveyName]);
     }, 3000);
+  }
+
+  writeDataToSupabase(){
+    let surveyPromise = this.dbService.setSurvey({name:this.actualSurvey.name, end_date:this.actualSurvey.endDate, category:this.actualSurvey.category, description:this.actualSurvey.description});
+    surveyPromise.then((surveyData) => {
+      for (let index = 0; index < this.actualSurvey.questions.length; index++) {
+      // let surveyTable = this.dbService.loadSurveysTable();
+      this.dbService.setQuestions({
+        survey_name:this.actualSurvey.name,
+        survey_id: surveyData.id,
+        question_number:(index + 1),
+        question:this.actualSurvey.questions[index].question,
+        answer1:this.actualSurvey.questions[index].answers[0],
+        counter1:0,
+        answer2:this.actualSurvey.questions[index].answers[1],
+        counter2:0,
+        answer3:this.actualSurvey.questions[index].answers[2],
+        counter3:0,
+        answer4:this.actualSurvey.questions[index].answers[3],
+        counter4:0,
+        answer5:this.actualSurvey.questions[index].answers[4],
+        counter5:0,
+        answer6:this.actualSurvey.questions[index].answers[5],
+        counter6:0,
+        is_multiple:this.actualSurvey.questions[index].isMultiple,
+        });
+      }
+    });
   }
 
   putFormDataInToObj(){
@@ -299,27 +327,29 @@ export class CreateSurveyForm {
     }
   }
 
-  setQuestionAnswersFromSurvey(){
-    for (let index = 0; index < this.actualSurvey.questions.length; index++) {
-      this.dbService.setQuestions({
-        survey_name:this.actualSurvey.name,
-        question_number:(index + 1),
-        question:this.actualSurvey.questions[index].question,
-        answer1:this.actualSurvey.questions[index].answers[0],
-        counter1:0,
-        answer2:this.actualSurvey.questions[index].answers[1],
-        counter2:0,
-        answer3:this.actualSurvey.questions[index].answers[2],
-        counter3:0,
-        answer4:this.actualSurvey.questions[index].answers[3],
-        counter4:0,
-        answer5:this.actualSurvey.questions[index].answers[4],
-        counter5:0,
-        answer6:this.actualSurvey.questions[index].answers[5],
-        counter6:0,
-        is_multiple:this.actualSurvey.questions[index].isMultiple,
-      });
-    }
-  }
+  // setQuestionAnswersFromSurvey(){
+  //   for (let index = 0; index < this.actualSurvey.questions.length; index++) {
+  //     // let surveyTable = this.dbService.loadSurveysTable();
+  //     this.dbService.setQuestions({
+  //       survey_name:this.actualSurvey.name,
+  //       survey_id: surveyTable.id;
+  //       question_number:(index + 1),
+  //       question:this.actualSurvey.questions[index].question,
+  //       answer1:this.actualSurvey.questions[index].answers[0],
+  //       counter1:0,
+  //       answer2:this.actualSurvey.questions[index].answers[1],
+  //       counter2:0,
+  //       answer3:this.actualSurvey.questions[index].answers[2],
+  //       counter3:0,
+  //       answer4:this.actualSurvey.questions[index].answers[3],
+  //       counter4:0,
+  //       answer5:this.actualSurvey.questions[index].answers[4],
+  //       counter5:0,
+  //       answer6:this.actualSurvey.questions[index].answers[5],
+  //       counter6:0,
+  //       is_multiple:this.actualSurvey.questions[index].isMultiple,
+  //     });
+  //   }
+  // }
 
 }

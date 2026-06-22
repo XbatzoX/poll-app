@@ -30,17 +30,22 @@ export class Surveys {
   
 
   async setSurvey(surveyData:{name:string, end_date:Date, category:string, description:string}){
-    const { error } = await this.supabase
+    const { data, error } = await this.supabase
     .from('surveys')
     .insert([surveyData])
+    .select()
+    .single();
+
+    if(error) throw error;
+    return data;
   }
 
-  async setQuestions(questionData:{survey_name:string, question_number:number, question:string, answer1:string, counter1:number, answer2:string, counter2:number,
+  async setQuestions(questionData:{survey_name:string, survey_id:number, question_number:number, question:string, answer1:string, counter1:number, answer2:string, counter2:number,
     answer3:string, counter3:number, answer4:string, counter4:number, answer5:string, counter5:number, answer6:string, counter6:number, is_multiple:boolean
   }){
     const { error } = await this.supabase
     .from('questions')
-    .insert([questionData]);
+    .insert([questionData])
   }
 
   async getAllSurveys(){
