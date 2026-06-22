@@ -4,6 +4,7 @@ import { dummyQuestionObj, NewSurvey, QuestionAnswers } from '../../interfaces/n
 import { AnswerModel } from '../../models/answermodel';
 import { Subscription } from 'rxjs';
 import { Surveys } from '../../services/surveys';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-survey-form',
@@ -34,6 +35,7 @@ export class CreateSurveyForm {
   };
   choosenDate:string;
   dbService = inject(Surveys);
+  router = inject(Router);
   
   constructor(){
     this.isHoveredId = '';
@@ -213,15 +215,20 @@ export class CreateSurveyForm {
 
   clearQuestionInputAfterPublish(){
     for (let index = 0; index < this.questionsArray.length; index++) {
-      this.clearQuestionInput('surveyQuestion', index);
+      this.clearPublishedInputs('surveyQuestion', index);
       this.clearMultipleInput(index);
-      this.clearQuestionInput('surveyAnswer1', index);
-      this.clearQuestionInput('surveyAnswer2', index);
-      this.clearQuestionInput('surveyAnswer3', index);
-      this.clearQuestionInput('surveyAnswer4', index);
-      this.clearQuestionInput('surveyAnswer5', index);
-      this.clearQuestionInput('surveyAnswer6', index);
+      this.clearPublishedInputs('surveyAnswer1', index);
+      this.clearPublishedInputs('surveyAnswer2', index);
+      this.clearPublishedInputs('surveyAnswer3', index);
+      this.clearPublishedInputs('surveyAnswer4', index);
+      this.clearPublishedInputs('surveyAnswer5', index);
+      this.clearPublishedInputs('surveyAnswer6', index);
     }
+  }
+
+  clearPublishedInputs(controlName:string, index:number){
+    let actualFormGroup = this.questionsArray.at(index);
+    actualFormGroup.get(controlName)?.setValue('');
   }
 
   clearMultipleInput(arrIndex:number){
@@ -253,8 +260,10 @@ export class CreateSurveyForm {
     console.log(this.actualSurvey);
     this.dbService.setSurvey({name:this.actualSurvey.name, end_date:this.actualSurvey.endDate, category:this.actualSurvey.category, description:this.actualSurvey.description});
     this.setQuestionAnswersFromSurvey();
+    let surveyName = this.actualSurvey.name;
     this.clearInputsAfterPublish();
     this.surveyPublished.set(true);
+    this.router.navigate(['/survey', surveyName]);
   }
 
   putFormDataInToObj(){

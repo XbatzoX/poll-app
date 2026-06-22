@@ -23,14 +23,16 @@ export class SurveyModel implements LoadedSurveys {
         let end = new Date(this.end_date.getFullYear(), this.end_date.getMonth(), this.end_date.getDate()).getTime();
         let diffInMs = end - start;
         let diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-        return this.createMessage(diffInDays);
+        return this.createMessage(diffInDays, this.end_date.getFullYear());
     }
 
-    createMessage(diff:number):string{
+    createMessage(diff:number, year:number):string{
         let message = '';
         if(diff == 0){
             message = 'Ends today';
-        }else if(diff < 0){
+        }else if(diff < 0 && year == 1989){
+            message = 'No end date';
+        }else if( diff < 0 && year != 1989){
             message = 'Survey expired';
         }else if(diff == 1){
             message = 'Ends in 1 day';

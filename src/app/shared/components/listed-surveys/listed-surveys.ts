@@ -30,7 +30,7 @@ export class ListedSurveys {
     return allSurveys.filter(survey => {
       let surveyEndDate = new Date(survey.end_date);
       surveyEndDate.setHours(0, 0, 0, 0);
-      return surveyEndDate >= todayMidnight;
+      return ((surveyEndDate >= todayMidnight) || (survey.end_date.getFullYear() == 1989));
     });
   });
 
@@ -41,7 +41,7 @@ export class ListedSurveys {
     return allSurveys.filter(survey => {
       let surveyEndDate = new Date(survey.end_date);
       surveyEndDate.setHours(0, 0, 0, 0);
-      return surveyEndDate < todayMidnight;
+      return ((surveyEndDate < todayMidnight) && (survey.end_date.getFullYear() != 1989));
     });
   });
 
