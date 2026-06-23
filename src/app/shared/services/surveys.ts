@@ -57,7 +57,7 @@ export class Surveys {
     this.fullSurveys = responseData.map(survey => {
       let rawData = {
         ...survey, 
-        questions: questionsResponseData.filter(q => q.survey_name === survey.name)
+        questions: questionsResponseData.filter(q => (q.survey_name === survey.name) && (q.survey_id === survey.id))
       };
 
         return new SurveyModel(rawData);
@@ -78,18 +78,19 @@ export class Surveys {
   async loadQuestionsTable(){
     let response = await this.supabase
     .from('questions')
-    .select(`id, survey_name, question_number, question, answer1, counter1,
+    .select(`id, survey_name, survey_id, question_number, question, answer1, counter1,
       answer2, counter2, answer3, counter3, answer4, counter4, answer5, counter5,
       answer6, counter6, is_multiple`);
 
     return response;
   }
 
-  async updateQuestionsTable(data:SurveyCounter, name:string, questionNumber:number){
+  async updateQuestionsTable(data:SurveyCounter, name:string, surveyId:number, questionNumber:number){
     const { error } = await this.supabase
     .from('questions')
     .update(data)
     .eq('survey_name', name)
+    .eq('survey_id', surveyId)
     .eq('question_number', questionNumber)
     .select();
   }

@@ -6,5 +6,5 @@ import { SurveyView } from './shared/components/survey-view/survey-view';
 export const routes: Routes = [
     {path:'', component:MainPage},
     {path:'draft', component:CreateSurvey},
-    {path:'survey/:name', component:SurveyView,}
+    {path:'survey/:id', component:SurveyView,}
 ];

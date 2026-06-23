@@ -117,12 +117,12 @@ export class ListedSurveys {
   }
 
   openActiveSurvey(index:number){
-    let name = this.activeSurveys()[index].name;
-    this.router.navigate(['/survey', name]);
+    let surveyId = this.activeSurveys()[index].id;
+    this.router.navigate(['/survey', surveyId]);
   }
 
    openPastSurvey(index:number){
-    let name = this.pastSurveys()[index].name;
-    this.router.navigate(['/survey', name]);
+    let surveyId = this.pastSurveys()[index].id;
+    this.router.navigate(['/survey', surveyId]);
   }
 }

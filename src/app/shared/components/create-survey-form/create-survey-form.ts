@@ -258,20 +258,20 @@ export class CreateSurveyForm {
     console.log(this.surveyForm.value);
     this.putFormDataInToObj();
     console.log(this.actualSurvey);
-    this.writeDataToSupabase();
-    // this.setQuestionAnswersFromSurvey();
-    let surveyName = this.actualSurvey.name;
-    console.log(surveyName);
-    this.clearInputsAfterPublish();
-    this.surveyPublished.set(true);
-    setTimeout(() => {
-      this.router.navigate(['/survey', surveyName]);
-    }, 3000);
+    this.writeDataToSupabase().then((surveyData) => {
+      let surveyId = surveyData.id;
+      console.log(surveyData);
+      this.clearInputsAfterPublish();
+      this.surveyPublished.set(true);
+      setTimeout(() => {
+        this.router.navigate(['/survey', surveyId]);
+      }, 3000);
+    });
   }
 
-  writeDataToSupabase(){
+  async writeDataToSupabase(){
     let surveyPromise = this.dbService.setSurvey({name:this.actualSurvey.name, end_date:this.actualSurvey.endDate, category:this.actualSurvey.category, description:this.actualSurvey.description});
-    surveyPromise.then((surveyData) => {
+    return surveyPromise.then((surveyData) => {
       for (let index = 0; index < this.actualSurvey.questions.length; index++) {
       // let surveyTable = this.dbService.loadSurveysTable();
       this.dbService.setQuestions({
@@ -294,6 +294,7 @@ export class CreateSurveyForm {
         is_multiple:this.actualSurvey.questions[index].isMultiple,
         });
       }
+      return surveyData;
     });
   }
 

@@ -17,7 +17,7 @@ export class MainSurveys {
   }
 
   openSurvey(index:number){
-    let name = this.dbService.sortedSurveys()[index].name;
-    this.router.navigate(['/survey', name]);
+    let surveyId = this.dbService.sortedSurveys()[index].id;
+    this.router.navigate(['/survey', surveyId]);
   }
 }

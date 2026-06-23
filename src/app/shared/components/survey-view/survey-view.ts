@@ -50,7 +50,7 @@ export class SurveyView {
   }
 
   checkLocalStorage(){
-    this.actualSurvey = this.dbServive.surveyList().find(survey => survey.name === this.route.snapshot.paramMap.get('name')) ?? this.dbServive.sortedSurveys()[0];
+    this.actualSurvey = this.dbServive.surveyList().find(survey => survey.id === Number(this.route.snapshot.paramMap.get('id'))) ?? this.dbServive.sortedSurveys()[0];
     if(this.actualSurvey == undefined){
       this.actualSurvey = this.getDataFromLocalStorage();
       this.actualSurvey.end_date = new Date(this.actualSurvey.end_date);
@@ -67,7 +67,7 @@ export class SurveyView {
   }
 
   saveSurveyCompletedToLocalStorage(){
-    this.arrCompletedSurveys.push(this.actualSurvey.name);
+    this.arrCompletedSurveys.push(String(this.actualSurvey.id));
     localStorage.setItem('completedSurveys', JSON.stringify(this.arrCompletedSurveys));
   }
 
@@ -84,7 +84,7 @@ export class SurveyView {
   checkIfSurveyCompleted(){
     let storageArr = this.getCompletedSurveysFromLocalStorage();
     for (let index = 0; index < storageArr.length; index++) {
-      if((storageArr[index] == this.actualSurvey.name) || (this.actualSurvey.remainingDays == 'Survey expired')){
+      if((Number(storageArr[index]) == this.actualSurvey.id) || (this.actualSurvey.remainingDays == 'Survey expired')){
         this.isSurveyEditable.set(false);
         break;
       }
@@ -177,7 +177,7 @@ export class SurveyView {
     if(this.isSurveyValid){
       for (let index = 0; index < this.amountQuestions; index++) {
         let counterData = this.prepareDataForQuestion(index);
-        this.dbServive.updateQuestionsTable(counterData, this.actualSurvey.name, (index + 1));
+        this.dbServive.updateQuestionsTable(counterData, this.actualSurvey.name, this.actualSurvey.id, (index + 1));
         this.showDialog.set(true);
       }
       this.saveSurveyCompletedToLocalStorage();
