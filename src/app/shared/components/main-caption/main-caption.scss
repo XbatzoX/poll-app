@@ -24,6 +24,10 @@
             font-size: map.get(var.$normSizes, ultra);
             color: map.get(var.$colors, font-orange);
             line-height: 0.9;
+
+            @include mx.respond-to("desktop-start"){
+                font-size: map.get(var.$normSizes, xxlPlus);
+            }
         }
     }
 
@@ -32,6 +36,10 @@
         font-size: map.get(var.$sizes, l);
         font-weight: 600;
         color: white;
+
+        @include mx.respond-to("desktop-start"){
+            font-size: map.get(var.$sizes, xm);
+        }
     }
 
     &__rightContent{

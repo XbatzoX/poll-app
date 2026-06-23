@@ -2,10 +2,23 @@
 @use 'abstracts/mixin' as mx;
 @use 'sass:map';
 
+:host {
+    display: block;
+    width: auto;
+
+    @include mx.respond-to("desktop-start"){
+        width: 100%;
+    }
+}
+
 .mainSurveysContainer{
     width: 1100px;
     @include mx.flex-center();
     gap: map.get(var.$sizes, m);
+
+    @include mx.respond-to("desktop-start"){
+        width: 100%;
+    }
 
     &__caption{
         text-align: center;
@@ -45,6 +58,11 @@
         min-height: 300px;
         width: 280px;
 
+        @include mx.respond-to("desktop-start"){
+            min-height: 250px;
+            width: 200px;
+        }
+
         &:hover{
             cursor: pointer;
             background-color: map.get(var.$colors, list-hover);
@@ -62,6 +80,10 @@
             &__name{
                 font-size: map.get(var.$sizes, ll);
                 font-weight: 700;
+
+                @include mx.respond-to("desktop-start"){
+                    font-size: map.get(var.$sizes, l);
+                }
             }
         }
 

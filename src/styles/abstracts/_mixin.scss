@@ -1,3 +1,5 @@
+@use '../abstracts/breakpoints' as bp;
+
 @mixin flex-center($direction: column){
     display: flex;
     flex-direction: $direction;
@@ -24,4 +26,10 @@
     flex-direction: $direction;
     justify-content: space-between;
     align-items: center;
+}
+
+@mixin respond-to($breakpoint){
+    @if $breakpoint == "desktop-start" {
+        @media(max-width: bp.$breakpoint-desktop-start){ @content; }
+    }
 }
