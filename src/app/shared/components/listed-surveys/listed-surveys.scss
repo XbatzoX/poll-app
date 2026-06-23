@@ -2,10 +2,23 @@
 @use 'abstracts/mixin' as mx;
 @use 'sass:map';
 
+:host {
+    display: block;
+    width: auto;
+
+    @include mx.respond-to("desktop-start"){
+        width: 100%;
+    }
+}
+
 .listedSurveys{
     width:  1100px;
     @include mx.flex-start();
     gap: map.get(var.$sizes, xl);
+
+    @include mx.respond-to("desktop-start"){
+        width: 100%;
+    }
 }
 
 .listedHeader{
@@ -110,6 +123,14 @@
         gap: map.get(var.$sizes, m);
         font-family: 'MyMulish';
 
+        @include mx.respond-to("desktop-start"){
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+            gap: unset;
+        }
+
         &:hover{
             cursor: pointer;
             background-color: rgba(255, 255, 255, 0.2);
@@ -125,6 +146,10 @@
             font-size: map.get(var.$sizes, l);
             font-weight: 700;
             color: white;
+
+            @include mx.respond-to("desktop-start"){
+                font-size: map.get(var.$normSizes, l);
+            }
         }
 
         &__endContainer{
