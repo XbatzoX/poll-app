@@ -1,5 +1,5 @@
 <section class="createSurveyForm">
-    <form class="surveyForm" [formGroup]="surveyForm">
+    <form class="surveyForm" [formGroup]="surveyForm" autocomplete="off">
         <section class="surveyForm__nameDescriptionContainer">
             <fieldset class="surveyForm__fieldset">
                 <div class="surveyForm__pair">
@@ -22,7 +22,7 @@
                                 <img [src]="changeDeleteIcon('end-date')" alt="delte icon as trash bin">
                             </button>
                         </div>
-                        <input type="date" id="hiddenDate" #dateInput class="hiddenDateInput" (change)="transferDate($event)">
+                        <input type="date" id="hiddenDate" [min]="todayString" #dateInput class="hiddenDateInput" (change)="transferDate($event)">
                     </div>
                     <div class="dateContainer__categoryBox">
                         <div #dropdownRef class="categoryPair" [class.is-open]="isOpen()" (click)="toggleDropdown()"

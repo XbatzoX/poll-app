@@ -34,6 +34,7 @@ export class CreateSurveyForm {
     "questions": [this.actualQuestion]
   };
   choosenDate:string;
+  todayString:string = new Date().toISOString().split('T')[0];
   dbService = inject(Surveys);
   router = inject(Router);
   
