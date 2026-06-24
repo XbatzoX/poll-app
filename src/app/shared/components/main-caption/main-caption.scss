@@ -2,11 +2,25 @@
 @use 'abstracts/mixin' as mx;
 @use 'sass:map';
 
+:host {
+    display: block;
+    width: auto;
+
+    @include mx.respond-to("mobile-start"){
+        width: 100%;
+    }
+}
+
 .captionSection{
     width: 100%;
     height: 520px;
     @include mx.flex-start(row);
     gap: map.get(var.$sizes, xl);
+
+    @include mx.respond-to("mobile-start") {
+        height: auto;
+        @include mx.flex-center();
+    }
 
     &__leftContent{
         height: 90%;
@@ -14,6 +28,10 @@
         flex-direction: column;
         justify-content: space-between;
         align-items: start;
+
+        @include mx.respond-to("mobile-start"){
+            display: none;
+        }
     }
 
     &__captionBox{
@@ -48,11 +66,21 @@
         position: relative;
         z-index: 10;
 
+        @include mx.respond-to("mobile-start"){
+            min-width: 400px;
+            height: 400px;
+        }
+
         &__imgIndexPhone{
             z-index: 2;
             position: absolute;
             top: 0;
             left: 0;
+
+            @include mx.respond-to("mobile-start") {
+                width: 400px;
+                height: 400px;
+            }
         }
 
         &__imgIndexCheck{
@@ -105,6 +133,31 @@
 
         &:hover &__imgIndexBubble{
             transform: scale(1) translateX(-5px) rotate(-5deg);
+        }
+    }
+
+    &__mobileContent{
+        display: none;
+
+        @include mx.respond-to("mobile-start") {
+            width: 100%;
+            @include mx.flex-start();
+        }
+    }
+
+    &__mobileDescriptionContainer {
+        display: none;
+
+        @include mx.respond-to("mobile-start") {
+            display: block;
+        }
+    }
+
+    &__btnContainerMobile {
+        display: none;
+
+        @include mx.respond-to("mobile-start") {
+            display: block;
         }
     }
 }
