@@ -71,6 +71,12 @@
             height: 400px;
         }
 
+        @include mx.respond-to("mobile-end") {
+            min-width: 0;
+            width: 315px;
+            height: 315px;
+        }
+
         &__imgIndexPhone{
             z-index: 2;
             position: absolute;
@@ -81,6 +87,12 @@
                 width: 400px;
                 height: 400px;
             }
+
+            @include mx.respond-to("mobile-end") {
+                min-width: 0;
+                width: 315px;
+                height: 315px;
+            }
         }
 
         &__imgIndexCheck{
@@ -90,6 +102,11 @@
             right: 15%;
             transform: scale(0.7);
             transition: transform 0.3s ease;
+
+            @include mx.respond-to("mobile-end"){
+                transform: scale(0.4);
+                right: 10%;
+            }
         }
 
         &__imgIndexQuestion{
@@ -99,6 +116,12 @@
             right: 10%;
             transform: scale(0.9);
             transition: transform 0.3s ease;
+
+            @include mx.respond-to("mobile-end"){
+                transform: scale(0.7);
+                top: -5%;
+                right: 5%;
+            }
         }
 
         &__imgIndexStar{
@@ -117,14 +140,28 @@
             left: 15%;
             transform: scale(0.7);
             transition: transform 0.3s ease;
+
+            @include mx.respond-to("mobile-end"){
+                transform: scale(0.5);
+                top: 10%;
+                left: 5%;
+            }
         }
 
         &:hover &__imgIndexCheck{
             transform: scale(1) translateX(55px) translateY(20px);
+
+            @include mx.respond-to("mobile-end"){
+                transform: scale(0.7) translateX(55px) translateY(20px);
+            }
         }
 
         &:hover &__imgIndexQuestion{
             transform: translateX(-5px) translateY(-5px) rotate(-8deg);
+
+            @include mx.respond-to("mobile-end"){
+                transform: scale(0.7) translateX(-5px) translateY(-5px) rotate(-8deg);
+            }
         }
 
         &:hover &__imgIndexStar{
@@ -132,7 +169,7 @@
         }
 
         &:hover &__imgIndexBubble{
-            transform: scale(1) translateX(-5px) rotate(-5deg);
+            transform: scale(0.7) translateX(-5px) rotate(-5deg);
         }
     }
 

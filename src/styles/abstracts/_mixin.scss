@@ -33,5 +33,7 @@
         @media(max-width: bp.$breakpoint-desktop-start){ @content; }
     }@else if $breakpoint == "mobile-start" {
         @media(max-width: bp.$breakpoint-mobile-start) { @content; }
+    }@else if $breakpoint == "mobile-end" {
+        @media(max-width: bp.$breakpoint-mobile-end) { @content }
     }
 }

@@ -26,6 +26,10 @@
         font-size: map.get(var.$sizes, xUltra);
         font-weight: 400;
         color: map.get(var.$colors, font-orange);
+
+        @include mx.respond-to("mobile-start") {
+            font-size: map.get(var.$normSizes, xxlPlus);
+        }
     }
 }
 
@@ -39,13 +43,26 @@
         font-size: map.get(var.$sizes, xl);
         font-weight: 500;
         color: white;
+
+        @include mx.respond-to("mobile-start") {
+            font-size: map.get(var.$sizes, l);
+        }
     }
 }
 
 .listContainer{
     width: 100%;
     @include mx.flex-spaceBetween();
-    // gap: map.get(var.$sizes, m);
+
+    @include mx.respond-to("mobile-start") {
+        display: flex;
+        gap: map.get(var.$sizes, m);
+        overflow-x: auto;
+        // white-space: nowrap;
+        padding-bottom: map.get(var.$sizes, xs);
+
+        // scrollbar-width: thin;
+    }
 
     &__card{
         display: flex;
@@ -61,6 +78,12 @@
         @include mx.respond-to("desktop-start"){
             min-height: 250px;
             width: 200px;
+        }
+
+        @include mx.respond-to("mobile-start"){
+            flex-shrink: 0;
+            min-height: unset;
+            height: 200px;
         }
 
         &:hover{

@@ -25,6 +25,11 @@
     width: 100%;
     @include mx.flex-spaceBetween();
 
+    @include mx.respond-to("mobile-end"){
+        @include mx.flex-start();
+        gap: map.get(var.$sizes, xl)
+    }
+
     &__btnContainer{
         display: flex;
         gap: map.get(var.$sizes, m);
@@ -111,6 +116,13 @@
     max-height: calc((3 * 132px) + (2 * 16px));
     overflow-y: auto;
     padding-right: map.get(var.$sizes, m);
+
+    @include mx.respond-to("mobile-start") {
+        @include mx.flex-start();
+        grid-template-columns: none;
+        max-height: none;
+        padding-right: 0;
+    }
     
     &__card{
         background-color: rgba(255, 255, 255, 0.1);
@@ -129,6 +141,11 @@
             justify-content: space-between;
             align-items: start;
             gap: unset;
+        }
+
+        @include mx.respond-to("mobile-start"){
+            width: calc(100% - 40px);
+            height: 150px;
         }
 
         &:hover{
