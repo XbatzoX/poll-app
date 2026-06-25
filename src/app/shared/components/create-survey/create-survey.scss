@@ -4,10 +4,20 @@
 
 .newSurveyContainer{
     min-height: 100vh;
-    // min-width: 1000px;
     max-width: 1440px;
     margin: 0 auto;
     @include mx.flex-center();
+    gap: map.get(var.$sizes, m);
+
+    &__mobileLogoContainer{
+        display: none;
+
+        @include mx.respond-to("mobile-start") {
+            width: 100%;
+            display: flex;
+            justify-content: start;
+        }
+    }
 }
 
 .newSurveyContent{
@@ -20,12 +30,30 @@
     border-top-right-radius: map.get(var.$normSizes, ultra);
     border-bottom-left-radius: map.get(var.$normSizes, ss);
     border-bottom-right-radius: map.get(var.$normSizes, ss);
+
+    @include mx.respond-to("create-mobile") {
+        padding: map.get(var.$normSizes, xxl) map.get(var.$sizes, m);
+        width: calc(100% - 32px);
+    }
 }
 
 .newSurveyHeader{
     width: 100%;
     @include mx.flex-start();
     gap: map.get(var.$sizes, m);
+
+    &__draftContainer{
+        width: 100%;
+        @include mx.flex-spaceBetween();
+
+        &__mobileBtn{
+            display: none;
+
+            @include mx.respond-to("create-mobile") {
+                display: block;
+            }
+        }
+    }
 
     &__draftBox{
         @include mx.flex-center(row);
@@ -50,6 +78,14 @@
     justify-content: space-between;
     align-items: center;
 
+    &__mobileContainer{
+        display: block;
+
+        @include mx.respond-to("create-mobile") {
+            display: none;
+        }
+    }
+
     &__text{
         font-family: 'MyNerkoOne';
         font-weight: 400;
@@ -67,6 +103,10 @@
 
 .appForm{
     width: calc(100% - 64px);
+
+    @include mx.respond-to("create-mobile"){
+        width: calc(100% - 32px);
+    }
 }
 
 .maxHeight{
@@ -76,4 +116,8 @@
 .btnPublishContainer{
     width: 100%;
     @include mx.flex-end();
+
+    @include mx.respond-to("mobile-start"){
+        @include mx.flex-center();
+    }
 }

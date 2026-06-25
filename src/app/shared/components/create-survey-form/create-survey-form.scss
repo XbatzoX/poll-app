@@ -10,6 +10,10 @@
     border-top-right-radius: map.get(var.$normSizes, sUltra);
     border-bottom-left-radius: map.get(var.$sizes, ss);
     border-bottom-right-radius: map.get(var.$sizes, ss);
+
+    @include mx.respond-to("create-mobile") {
+        padding: map.get(var.$normSizes, xxl) map.get(var.$sizes, m);
+    }
 }
 
 .surveyForm{
@@ -21,10 +25,13 @@
     &__nameDescriptionContainer{
         width: 100%;
         display: flex;
-        // justify-content: space-between;
         align-items: stretch;
-        // gap: map.get(var.$sizes, xxl);
-        gap: 10%
+        gap: 10%;
+
+        @include mx.respond-to("mobile-start") {
+            @include mx.flex-start();
+            gap: map.get(var.$sizes, l)
+        }
     }
 
     &__pair{
@@ -37,6 +44,10 @@
         flex-direction: column;
         width: 100%;
         height: 100%;
+
+        @include mx.respond-to("mobile-start") {
+            flex: 1 1 0px;
+        }
     }
 
     &__label{
@@ -61,6 +72,10 @@
         @include mx.respond-to("create-start") {
             gap: map.get(var.$sizes, m);
         }
+
+        @include mx.respond-to("mobile-start") {
+            width: 100%;
+        }
     }
 
     &__fieldsetDescription{
@@ -71,6 +86,12 @@
         flex-direction: column;
         gap: map.get(var.$sizes, s);
         width: 45%;
+
+        @include mx.respond-to("mobile-start") {
+            width: 100%;
+            height: 150px;
+            min-height: 0;
+        }
     }
 
     &__inputField{
@@ -87,6 +108,11 @@
         border-top-right-radius: map.get(var.$normSizes, l);
         border-bottom-left-radius: map.get(var.$normSizes, ss);
         border-bottom-right-radius: map.get(var.$normSizes, ss);
+
+        @include mx.respond-to("create-mobile"){
+            min-width: 0;
+            width: calc(100% - 50px);
+        }
 
         &:focus{
             background-color: map.get(var.$colors, input-focus);
@@ -108,6 +134,10 @@
     justify-content: start;
     align-items: stretch;
     gap: map.get(var.$sizes, s);
+
+    @include mx.respond-to("mobile-start"){
+        flex: 1;
+    }
 }
 
 .deleteBtn{
@@ -121,13 +151,17 @@
     gap: map.get(var.$sizes, m);
 
     @include mx.respond-to("create-start") {
-        height: 130px;
+        height: 120px;
         display: flex;
         flex-direction: column-reverse;
         gap: map.get(var.$sizes, zero);
         align-items: start;
         justify-content: space-between;
 
+    }
+
+    @include mx.respond-to("mobile-start") {
+        width: 100%;
     }
 
     &__categoryBox{
@@ -209,11 +243,14 @@ textarea{
 
 .questionContainer{
     display: flex;
-    // justify-content: space-between;
     align-items: start;
     gap: 15%;
     flex-wrap: wrap;
     width: 100%;
+
+    @include mx.respond-to("mobile-start") {
+        @include mx.flex-start();
+    }
 
     &__fieldset{
         border: none;
@@ -225,6 +262,12 @@ textarea{
         @include mx.flex-start();
         gap: map.get(var.$sizes, m);
         width: 40%;
+
+        @include mx.respond-to("mobile-start") {
+            min-width: 0;
+            width: 100%;
+        }
+
     }
 
     &__questionBox{
@@ -335,6 +378,11 @@ textarea{
     display: flex;
     justify-content: start;
 
+    @include mx.respond-to("mobile-start") {
+        width: 100%;
+        justify-content: center;
+    }
+
     &__btnText{
         font-size: map.get(var.$sizes, m);
         font-weight: 700;
@@ -342,3 +390,10 @@ textarea{
     }
 }
 
+.maxWidth{
+    width: 95%;
+
+    @include mx.respond-to("create-mobile"){
+        width: calc(100% - 32px);
+    }
+}

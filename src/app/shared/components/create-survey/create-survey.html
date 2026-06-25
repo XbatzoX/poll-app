@@ -1,16 +1,28 @@
 <article class="newSurveyContainer">
+    <div class="newSurveyContainer__mobileLogoContainer padding-top-xl">
+        <img class="padding-left-m" src="assets/img/logo_purple.svg" alt="purple pollapp logo">
+    </div>
     <app-create-survey-dialog [(isDialogOpen)]="showDialog"></app-create-survey-dialog>
     <div class="newSurveyContent">
         <header class="newSurveyHeader">
-            <div class="newSurveyHeader__draftBox">
-                <span class="newSurveyHeader__draftText">Draft</span>
+            <div class="newSurveyHeader__draftContainer">
+                <div class="newSurveyHeader__draftBox">
+                    <span class="newSurveyHeader__draftText">Draft</span>
+                </div>
+                <div class="newSurveyHeader__draftContainer__mobileBtn padding-right-xs">
+                    <button class="btn btn--secondary" (click)="cancelDraft()">
+                        <img src="assets/icons/close_icon.svg" alt="a cross icon for cancel indication">
+                    </button>
+                </div>
             </div>
             <div class="newSurveyCaption">
                 <span class="newSurveyCaption__text">Create new survey</span>
-                <button class="btn btn--secondary" (click)="cancelDraft()">
-                    <span class="newSurveyCaption__btnText">Cancel</span>
-                    <img src="assets/icons/close_icon.svg" alt="a cross icon for cancel indication">
+                <div class="newSurveyCaption__mobileContainer">
+                    <button class="btn btn--secondary" (click)="cancelDraft()">
+                        <span class="newSurveyCaption__btnText">Cancel</span>
+                        <img src="assets/icons/close_icon.svg" alt="a cross icon for cancel indication">
                 </button>
+                </div>
             </div>
         </header>
         <app-create-survey-form #myForm [(surveyPublished)]="showDialog" (isFormValid)="checkForm($event)" class="appForm"></app-create-survey-form>
