@@ -14,10 +14,12 @@ export class CreateSurvey {
   formInputsValid = false;
   showDialog = signal<boolean>(false);
 
+  /*** This function is used to navigate to main page*/
   cancelDraft(){
     this.router.navigate(['']);
   }
 
+  /** This function checks if the input values of form are valid */
   checkForm(valid:boolean){
     if(valid){
       this.formInputsValid = true;

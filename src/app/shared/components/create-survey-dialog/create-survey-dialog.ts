@@ -10,6 +10,7 @@ export class CreateSurveyDialog {
   isDialogOpen = model<boolean>(false);
   dialogRef = viewChild<ElementRef<HTMLDialogElement>>('publishedDialog');
 
+  /** This constructor is used to open a dialog after creating a survey */
   constructor(){
     effect((onCleanup) => {
       let dialog = this.dialogRef()?.nativeElement;
