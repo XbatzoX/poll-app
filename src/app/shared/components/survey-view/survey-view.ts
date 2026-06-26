@@ -37,21 +37,19 @@ export class SurveyView {
     this.chooseResultBtnValue();
   }
 
+  /** This function is used to load the choosen or last choosen survey from database or local storage */
   ngOnInit(){
-    let currentName = this.route.snapshot.paramMap.get('name');
-    
     this.dbServive.getAllSurveys().then(() => {
       this.checkLocalStorage();
       if(this.actualSurvey && this.actualSurvey.questions){this.actualSurvey.questions = [...this.actualSurvey.questions].sort((a, b) => a.question_number - b.question_number);}
       this.amountQuestions = this.actualSurvey.questions.length;
       this.createArrayOfMultipleAnswers();
-      console.log(this.actualSurvey);
-      console.log(this.permissionCheckbox);
       this.isAnyResultAvailable = this.getResult();
       if(this.isAnyResultAvailable){this.prepareDataForProgressIndication(); console.log(this.resultValues());}
       });
   }
 
+  /** This function read and write choosen survey from and to local storage */
   checkLocalStorage(){
     this.actualSurvey = this.dbServive.surveyList().find(survey => survey.id === Number(this.route.snapshot.paramMap.get('id'))) ?? this.dbServive.sortedSurveys()[0];
     if(this.actualSurvey == undefined){
@@ -62,28 +60,32 @@ export class SurveyView {
     }
     this.createShortDate();
     this.arrCompletedSurveys = this.checkIfSurveyCompleted();
-    console.log(this.arrCompletedSurveys);
   }
 
+  /** This function writes the actual choosen survey to local storage */
   saveToLocalStorage(){
     localStorage.setItem('mySurvey', JSON.stringify(this.actualSurvey));
   }
 
+  /** This function is used to save the information to local storage that the actual survey is completed */
   saveSurveyCompletedToLocalStorage(){
     this.arrCompletedSurveys.push(String(this.actualSurvey.id));
     localStorage.setItem('completedSurveys', JSON.stringify(this.arrCompletedSurveys));
   }
 
+  /** This function loads the last choosen survey from local storage */
   getDataFromLocalStorage(){
     let outputObj = JSON.parse(localStorage.getItem('mySurvey') || '{}');
     return outputObj;
   }
 
+  /** Tis function loads the completed surveys list from local storage */
   getCompletedSurveysFromLocalStorage(){
     let outputObj = JSON.parse(localStorage.getItem('completedSurveys') || '[]');
     return outputObj;
   }
 
+  /** This function checks if survey already completed */
   checkIfSurveyCompleted(){
     let storageArr = this.getCompletedSurveysFromLocalStorage();
     for (let index = 0; index < storageArr.length; index++) {
@@ -95,12 +97,13 @@ export class SurveyView {
     return storageArr;
   }
 
+  /** This function is used to format the date type into string */
   createShortDate(){
     let stringDate = `${this.actualSurvey.end_date.getDate()}.${this.actualSurvey.end_date.getMonth() + 1}.${this.actualSurvey.end_date.getFullYear()}`;
-    // return stringDate;
     this.formattedEndDate.set(stringDate);
   }
 
+  /** This function creates an array filled with permission object */
   createArrayOfMultipleAnswers(){
     for (let index = 0; index < this.amountQuestions; index++) {
       let permissionObj = {...dummyPermissionObj};
@@ -115,10 +118,8 @@ export class SurveyView {
     this.permissionCheckbox[index].anyAnswerChecked = this.isAnyAnswerAlreadyChecked(index);
     if(!this.permissionCheckbox[index].permissionMultiple && this.permissionCheckbox[index].anyAnswerChecked) return;
     if(!this.valueChanged){this.checkChoosenAnswer(index, answerNumber);}
-    console.log(this.actualSurvey);
     this.isSurveyValid = this.checkUserResults();
     this.prepareDataForProgressIndication();
-    console.log(this.resultValues());
   }
 
   isAnyAnswerAlreadyChecked(index:number){

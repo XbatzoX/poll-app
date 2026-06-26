@@ -1,6 +1,5 @@
 import { Component, signal, ElementRef, viewChild, HostListener, inject, computed } from '@angular/core';
 import { Surveys } from '../../services/surveys';
-import { SurveyModel } from '../../models/surveymodel';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,6 +22,7 @@ export class ListedSurveys {
   router = inject(Router);
   today:Date = new Date();
 
+  /** This computed signal sorts the active surveys into an array of SurveyModel */
   activeSurveys = computed(() => {
     let allSurveys = this.dbService.surveyList();
     let todayMidnight = new Date(this.today.getTime());
@@ -34,6 +34,7 @@ export class ListedSurveys {
     });
   });
 
+  /**  This computed signal sorts the past surveys into an array of SurveyModel */
   pastSurveys = computed(() => {
     let allSurveys = this.dbService.surveyList();
     let todayMidnight = new Date(this.today.getTime());
@@ -45,6 +46,7 @@ export class ListedSurveys {
     });
   });
 
+  /** This computed signal sorts the surveys corresponding of choosen category */
   filteredSurveys = computed(() => {
     let surveys;
     if(this.isActiveSurvey()){
@@ -66,10 +68,15 @@ export class ListedSurveys {
    
   }
 
+  /** This function is used to load all surveys from database */
   ngOnInit(){
      this.dbService.getAllSurveys();
   }
 
+  /**
+   * This function is used to toggle the value of signal
+   * @param name - includes the value of clicked button
+   */
   toggleListedSurveys(name:string){
     if(name == 'active'){
       this.isActiveSurvey.set(true);
@@ -80,6 +87,7 @@ export class ListedSurveys {
     }
   }
 
+  /** This function is used to choose the correct arrow image of category arrow button */
   selectArrowPath():string{
     let path = '';
     if(this.isHoveredArrow && !this.isListOpen()){path = 'assets/icons/arrow_drop_down_orange.svg';}
@@ -88,6 +96,7 @@ export class ListedSurveys {
     return path;
   }
 
+  /** This function is used to to open and close the drop down list of categories */
   toggleDropdown(){
     if(this.isListOpen()){
       this.isListOpen.set(false);
@@ -96,12 +105,18 @@ export class ListedSurveys {
     }
   }
 
+  /**
+   * This function select the choosen category
+   * @param value -includes the name of category
+   * @param event - includes mouse event (event bubbling)
+   */
   selectCategory(value:string, event: MouseEvent){
     event.stopPropagation();
     this.isListOpen.set(false);
     this.selectedCategory.set(value);
   }
 
+  /** This host listener ist used to close the drop down list if the user clicks somewhere on page */
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent){
     const dropDownEl = this.dropDownBox()?.nativeElement;
@@ -111,16 +126,19 @@ export class ListedSurveys {
     }
   }
 
-  showActive(){
-    // console.log(this.activeSurveys());
-    console.log(this.pastSurveys());
-  }
-
+  /**
+   * This function is used to navigate to choosen active survey
+   * @param index - includes the index number of array
+   */
   openActiveSurvey(index:number){
     let surveyId = this.activeSurveys()[index].id;
     this.router.navigate(['/survey', surveyId]);
   }
 
+  /**
+   * This function is used to navigate to choosen past survey
+   * @param index - includes the index number of array
+   */
    openPastSurvey(index:number){
     let surveyId = this.pastSurveys()[index].id;
     this.router.navigate(['/survey', surveyId]);

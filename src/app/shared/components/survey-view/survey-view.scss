@@ -142,7 +142,6 @@
     }
 
     &__block{
-        // max-width: 50%;
         @include mx.flex-start();
         gap: map.get(var.$sizes, ss);
     }

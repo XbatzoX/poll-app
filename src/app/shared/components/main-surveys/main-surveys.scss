@@ -58,10 +58,7 @@
         display: flex;
         gap: map.get(var.$sizes, m);
         overflow-x: auto;
-        // white-space: nowrap;
         padding-bottom: map.get(var.$sizes, xs);
-
-        // scrollbar-width: thin;
     }
 
     &__card{

@@ -13,6 +13,7 @@ export class SurveyCompletedDialog {
   router = inject(Router);
   navigate:boolean = false;
 
+  /** This function is used to open the dialog if the survey is completed */
   constructor(){
     effect((onCleanup) => {
       let dialog = this.dialogRef()?.nativeElement;
