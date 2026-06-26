@@ -20,6 +20,10 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+
+    @include mx.respond-to("mobile-start") {
+        flex: 1;
+    }
     
     &::-webkit-progress-bar {
         background-color: rgba(237, 237, 237, 0.8);
@@ -40,4 +44,8 @@
     font-size: map.get(var.$sizes, xs);
     font-weight: 800;
     color: map.get(var.$colors, progress-percent);
+
+    @include mx.respond-to("mobile-start") {
+        width: 30px;
+    }
 }

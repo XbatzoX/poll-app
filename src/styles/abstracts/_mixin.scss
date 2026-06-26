@@ -39,5 +39,7 @@
         @media(max-width: bp.$breakpoint-create-start) { @content; }
     }@else if $breakpoint == "create-mobile" {
         @media(max-width: bp.$breakpoint-create-mobile) { @content; }
+    }@else if $breakpoint == "max-width" {
+        @media(max-width: bp.$breakpoint-max-width) { @content; }
     }
 }

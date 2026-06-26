@@ -104,4 +104,20 @@
             cursor: not-allowed;
         }
     }
+
+    &--teritiary{
+        @include mx.flex-center(row);
+        gap: map.get(var.$sizes, xs);
+        font-size: map.get(var.$sizes, xm);
+        font-weight: 700;
+        padding: map.get(var.$sizes, s) map.get(var.$sizes, xs);
+        background-color: map.get(var.$colors, button-bg-survey);
+        border: none;
+        border-radius: map.get(var.$normSizes, s);
+
+        &:hover{
+            cursor: pointer;
+            background-color: map.get(var.$colors, font-orange);
+        }
+    }
 }

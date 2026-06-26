@@ -8,11 +8,22 @@
     padding:  map.get(var.$sizes, xl) 0;
     @include mx.flex-start();
     gap: map.get(var.$sizes, xxl);
+
+    @include mx.respond-to("max-width") {
+        padding:  map.get(var.$sizes, xl) map.get(var.$sizes, m);
+    }
 }
 
 .surveyHeader{
     width: 100%;
     @include mx.flex-spaceBetween();
+
+    &__mobileView{
+        display: block;
+        @include mx.respond-to("mobile-start") {
+            display: none;
+        }
+    }
 }
 
 .viewContentContainer{
@@ -20,6 +31,10 @@
     display: flex;
     align-items: end;
     gap: map.get(var.$sizes, xl);
+
+    @include mx.respond-to("mobile-start") {
+        @include mx.flex-center();
+    }
 }
 
 .surveyIndication{
@@ -30,6 +45,25 @@
     color: map.get(var.$colors, dashboard-bg);
     @include mx.flex-start();
     gap: map.get(var.$sizes, s);
+    padding: map.get(var.$sizes, xxl);
+
+    @include mx.respond-to("mobile-start") {
+        width: calc(100% - 96px);
+    }
+
+    &__publishedContainer{
+        width: 100%;
+        @include mx.flex-spaceBetween();
+
+        &__cancelContainer{
+            display: none;
+
+            @include mx.respond-to("mobile-start") {
+                display: block;
+                padding-right: map.get(var.$sizes, s);
+            }
+        }
+    }
 
     &__publishedBox{
         width: fit-content;
@@ -51,6 +85,11 @@
         width: 100%;
         @include mx.flex-spaceBetween();
 
+        @include mx.respond-to("mobile-end") {
+            @include mx.flex-start();
+            gap: map.get(var.$sizes, s);
+        }
+
         &__text{
             font-size: map.get(var.$sizes, sm);
             font-weight: 500;
@@ -64,6 +103,14 @@
         color: map.get(var.$colors, font-orange);
         display: inline-block;
         line-height: 1.0;
+
+        @include mx.respond-to("mobile-start") {
+            font-size: map.get(var.$sizes, xxl);
+        }
+
+        @include mx.respond-to("mobile-end") {
+            font-size: map.get(var.$normSizes, xxl);
+        }
     }
 
     &__description{
@@ -79,11 +126,19 @@
     gap: 10%;
     flex-wrap: wrap;
 
+    @include mx.respond-to("desktop-start"){
+        @include mx.flex-center();
+    }
+
     &__container{
         width: 45%;
         display: flex;
         align-items: start;
         gap: map.get(var.$sizes, s);
+
+        @include mx.respond-to("desktop-start") {
+            width: 100%;
+        }
     }
 
     &__block{
@@ -201,6 +256,10 @@
             display: flex;
             align-items: center;
             gap: map.get(var.$sizes, s);
+
+            @include mx.respond-to("mobile-start") {
+                width: 100%;
+            }
         }
     }
 }
