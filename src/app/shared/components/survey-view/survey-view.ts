@@ -29,9 +29,12 @@ export class SurveyView {
   showDialog = signal<boolean>(false);
   isSurveyEditable = signal<boolean>(true);
   arrCompletedSurveys:string[] = [];
+  isHovered = signal<boolean>(false);
+  resultsShown = signal<boolean>(true);
+  showResultBtnValue:string = '';
 
   constructor(){
-    // this.dbServive.getAllSurveys();
+    this.chooseResultBtnValue();
   }
 
   ngOnInit(){
@@ -229,5 +232,36 @@ export class SurveyView {
       this.resultsInPercent.update(currentList => [...currentList, resultData]);
     }
     console.log(this.resultsInPercent());
+  }
+
+  selectPath():string{
+    let path = '';
+    if(this.isHovered() && this.resultsShown()){
+      path = 'assets/icons/arrow_up_orange_height.svg';
+    }else if(!this.isHovered() && this.resultsShown()){
+      path = 'assets/icons/arrow_up_purple.svg';
+    }else if(this.isHovered() && !this.resultsShown()){
+      path = 'assets/icons/arrow_drop_down_orange_height.svg';
+    }else {
+      path = 'assets/icons/arrow_drop_down_purple.svg';
+    }
+    return path;
+  }
+
+  chooseResultBtnValue(){
+    if(this.resultsShown()){
+      this.showResultBtnValue = 'Close results';
+    }else{
+      this.showResultBtnValue = 'See results';
+    }
+  }
+
+  toggleShownResultsMobile(){
+    if(this.resultsShown()){
+      this.resultsShown.set(false);
+    }else{
+      this.resultsShown.set(true);
+    }
+    this.chooseResultBtnValue();
   }
 }

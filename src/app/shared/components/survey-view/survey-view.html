@@ -108,6 +108,13 @@
                     </button>
                 </div>
             </article>
+            <div class="showResultMobile">
+                <button class="showResultMobile__controlButton" (mouseenter)="isHovered.set(true)" (mouseleave)="isHovered.set(false)"
+                (click)="toggleShownResultsMobile()">
+                    <span class="showResultMobile__controlButton__text">{{showResultBtnValue}}</span>
+                    <img [src]="selectPath()" class="showResultMobile__controlButton__image" alt="drop down arrow icon">
+                </button>
+            </div>
             <aside class="resultIndication" [class.content-center]="!isAnyResultAvailable" [class.content-end]="isAnyResultAvailable">
                 <span class="resultIndication__caption">Survey results <span class="resultIndication__caption--highlight">LIVE</span></span>
                 @if(!isAnyResultAvailable){

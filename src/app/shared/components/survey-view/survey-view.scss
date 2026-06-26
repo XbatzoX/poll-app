@@ -283,3 +283,38 @@
         color: map.get(var.$colors, dashboard-bg);
     }
 }
+
+.showResultMobile{
+    display: none;
+
+    @include mx.respond-to("mobile-start") {
+        width: 100%;
+        @include mx.flex-start();
+    }
+
+    &__controlButton{
+        all: unset;
+        padding: map.get(var.$sizes, ss) map.get(var.$sizes, s);
+        display: flex;
+        align-items: center;
+        gap: map.get(var.$sizes, m);
+        border-radius: map.get(var.$normSizes, ss);
+
+        &:hover{
+            cursor: pointer;
+            background-color: map.get(var.$colors, card);
+        }
+
+        &__text{
+            font-family: 'MyMulish';
+            font-size: map.get(var.$sizes, xm);
+            font-weight: 700;
+            color: map.get(var.$colors, dashboard-bg);
+        }
+
+        &__image{
+            width: 15px;
+            height: 8px;
+        }
+    }
+}
