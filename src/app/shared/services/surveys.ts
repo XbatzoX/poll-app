@@ -13,6 +13,8 @@ export class Surveys {
 
   surveyList = signal<SurveyModel[]>([]);
   fullSurveys:SurveyModel[]= [];
+
+  /** This computed signal filters the surveys which are not expired and sort them in ending soon list*/
   sortedSurveys = computed(() => {
     let today = new Date();
     let todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
@@ -28,7 +30,11 @@ export class Surveys {
       })
   });
   
-
+  /**
+   * This function is used to put the survey  main data into supabase
+   * @param surveyData - includes the survey main data 
+   * @returns - the actual hosted data on supabase
+   */
   async setSurvey(surveyData:{name:string, end_date:Date, category:string, description:string}){
     const { data, error } = await this.supabase
     .from('surveys')
@@ -40,6 +46,10 @@ export class Surveys {
     return data;
   }
 
+  /**
+   * This function is used to put the survey  question data into supabase
+   * @param questionData - includes the survey question data 
+   */
   async setQuestions(questionData:{survey_name:string, survey_id:number, question_number:number, question:string, answer1:string, counter1:number, answer2:string, counter2:number,
     answer3:string, counter3:number, answer4:string, counter4:number, answer5:string, counter5:number, answer6:string, counter6:number, is_multiple:boolean
   }){
@@ -53,20 +63,17 @@ export class Surveys {
     let responseData = response.data ?? [];
     let questionsResponse = await this.loadQuestionsTable();
     let questionsResponseData = questionsResponse.data ?? [];
-
     this.fullSurveys = responseData.map(survey => {
       let rawData = {
         ...survey, 
         questions: questionsResponseData.filter(q => (q.survey_name === survey.name) && (q.survey_id === survey.id))
       };
-
         return new SurveyModel(rawData);
     });
-    
     this.surveyList.set(this.fullSurveys);
-    console.log(this.surveyList());
   }
 
+  /** This function is used to load the survey table from supabase */
   async loadSurveysTable(){
     let response = await this.supabase
     .from('surveys')
@@ -75,6 +82,7 @@ export class Surveys {
     return response;
   }
 
+  /** This function is used to load the questions table from supabase */
   async loadQuestionsTable(){
     let response = await this.supabase
     .from('questions')
@@ -85,6 +93,13 @@ export class Surveys {
     return response;
   }
 
+  /**
+   * This function is used to update the questions table on supabase
+   * @param data - includes the survey counter data
+   * @param name - includes the survey name
+   * @param surveyId - includes the survey id
+   * @param questionNumber - includes the question number
+   */
   async updateQuestionsTable(data:SurveyCounter, name:string, surveyId:number, questionNumber:number){
     const { error } = await this.supabase
     .from('questions')

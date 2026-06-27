@@ -17,6 +17,7 @@ export class SurveyModel implements LoadedSurveys {
         this.questions = data.questions ?? [];
     }
 
+    /** This getter function is used to calculate the remaining days text information of survey */
     get remainingDays():string {
         let today = new Date();
         let start = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
@@ -26,6 +27,12 @@ export class SurveyModel implements LoadedSurveys {
         return this.createMessage(diffInDays, this.end_date.getFullYear());
     }
 
+    /**
+     * This function creates a message with remaining days or expired info of survey
+     * @param diff - includes remaining days in number
+     * @param year - includes the year as number
+     * @returns - a message for indication
+     */
     createMessage(diff:number, year:number):string{
         let message = '';
         if(diff == 0){

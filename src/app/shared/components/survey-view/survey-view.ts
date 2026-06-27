@@ -111,6 +111,12 @@ export class SurveyView {
     }
   }
 
+  /**
+   * 
+   * @param index - includes the question number
+   * @param answerNumber - includes the answer number of question
+   * @returns 
+   */
   toggleAnswer(index:number, answerNumber:number){
     this.valueChanged = false;
     if(this.actualSurvey.questions[index].is_multiple){this.permissionCheckbox[index].permissionMultiple = true;}
@@ -122,6 +128,11 @@ export class SurveyView {
     this.prepareDataForProgressIndication();
   }
 
+  /**
+   * This function checks if any answer of question is already checked
+   * @param index - includes the array index number of permission checkbox
+   * @returns - a boolean feedback
+   */
   isAnyAnswerAlreadyChecked(index:number){
     let checked = false;
     for (let i = 1; i < 7; i++) {
@@ -133,6 +144,11 @@ export class SurveyView {
     return checked;
   }
 
+  /**
+   * This function is used to toggle the answer checkbox
+   * @param index - includes the array index number of permission checkbox
+   * @param answerNumber - includes the answer number
+   */
   toggleIfAnswerAlreadyChecked(index:number, answerNumber:number){
     this.valueChanged = false;
     if(this.permissionCheckbox[index][`checkedAnswer${answerNumber}` as keyof PermissionMultiple]){
@@ -144,6 +160,11 @@ export class SurveyView {
     }
   }
 
+  /**
+   * This function check the unchecked checkbox and increases the counter of answer
+   * @param index - includes the array index number of permission checkbox
+   * @param answerNumber - includes the answer number
+   */
   checkChoosenAnswer(index:number, answerNumber:number){
     for (let i = 1; i < 7; i++) {
       if(i == answerNumber){
@@ -155,6 +176,7 @@ export class SurveyView {
     }
   }
 
+  /** This function is used to check if any result of survey exist */
   getResult(){
     let resultExist = false;
     for (let index = 1; index < 7; index++) {
@@ -166,6 +188,7 @@ export class SurveyView {
     return resultExist;
   }
 
+  /** This function is used to check if any answer of every question is checked */
   checkUserResults():boolean{
     let valid = false;
     for (let index = 0; index < this.amountQuestions; index++) {
@@ -177,6 +200,7 @@ export class SurveyView {
     return valid;
   }
 
+  /** This function updates the counter values of surveys in supabase and put the survey completed info to local storage */
   updateSurvey(){
     if(this.isSurveyValid){
       for (let index = 0; index < this.amountQuestions; index++) {
@@ -190,6 +214,11 @@ export class SurveyView {
     }
   }
 
+  /**
+   * This function prepares the counter values of actual surveys into object
+   * @param index - includes the question number
+   * @returns - an object filled with counter data
+   */
   prepareDataForQuestion(index:number){
     let counterData:SurveyCounter = {
       "counter1": this.actualSurvey.questions[index].counter1,
@@ -202,11 +231,13 @@ export class SurveyView {
     return counterData;
   }
 
+  /** This function prepares the counter values for the progress bar in result indication */
   prepareDataForProgressIndication(){
     this.fillSignalWithData();
     this.calculateResultValues();
   }
 
+  /** This function is used to update the signal data for current result indication */
   fillSignalWithData(){
     this.resultValues.set([]);
      for (let index = 0; index < this.amountQuestions; index++) {
@@ -215,6 +246,7 @@ export class SurveyView {
     }
   }
 
+  /** This function calculates the counter result data for result indication in percent*/
   calculateResultValues(){
     this.resultsInPercent.set([]);
     for (let index = 0; index < this.amountQuestions; index++) {
@@ -224,17 +256,14 @@ export class SurveyView {
         let counterKey = `counter${i}` as keyof SurveyCounter;
         resultData.resultTotal = resultData.resultTotal + counterData[counterKey];
       }
-      resultData.resultInPercent1 = Math.round((counterData.counter1 / resultData.resultTotal) * 100);
-      resultData.resultInPercent2 = Math.round((counterData.counter2 / resultData.resultTotal) * 100);
-      resultData.resultInPercent3 = Math.round((counterData.counter3 / resultData.resultTotal) * 100);
-      resultData.resultInPercent4 = Math.round((counterData.counter4 / resultData.resultTotal) * 100);
-      resultData.resultInPercent5 = Math.round((counterData.counter5 / resultData.resultTotal) * 100);
-      resultData.resultInPercent6 = Math.round((counterData.counter6 / resultData.resultTotal) * 100);
+      for (let j = 1; j <= 6; j++) {
+        (resultData)[`resultInPercent${j}` as keyof ResultValues] = Math.round((counterData[`counter${j}` as keyof SurveyCounter] / resultData.resultTotal) * 100);
+      }
       this.resultsInPercent.update(currentList => [...currentList, resultData]);
     }
-    console.log(this.resultsInPercent());
   }
 
+  /** This function is used to return the correct image path of arrow from show result button in mobile view */
   selectPath():string{
     let path = '';
     if(this.isHovered() && this.resultsShown()){
@@ -249,6 +278,7 @@ export class SurveyView {
     return path;
   }
 
+  /** This function is used to customize the correct indication text on show result button */
   chooseResultBtnValue(){
     if(this.resultsShown()){
       this.showResultBtnValue = 'Close results';
@@ -257,6 +287,7 @@ export class SurveyView {
     }
   }
 
+  /** This function toggles the state of signal results are shown */
   toggleShownResultsMobile(){
     if(this.resultsShown()){
       this.resultsShown.set(false);

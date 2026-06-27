@@ -10,6 +10,7 @@ export class AnswerModel{
         this.addAnswerInfo = '';
     }
 
+    /** This function is used to add an answer of question */
     addAnswer(){
         if(this.amountAnswers < 4){
             this.actualList.push(this.letterList[this.amountAnswers]);
@@ -18,6 +19,7 @@ export class AnswerModel{
         }
     }
 
+    /** This function is used to show the max amount of answers info */
     showAnswerInfo():string{
         return this.addAnswerInfo;
     }
