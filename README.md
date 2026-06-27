@@ -59,11 +59,7 @@ Beyond the Angular framework core, the following advanced software engineering p
    npm install
    ```
 
-3. **Boot the Local Angular Development Server**
-   ```bash
-   ng serve
-   ```
-   Open your browser and navigate to `http://localhost:4200/`.
+ Open your browser and navigate to `http://localhost:4200/`.
 
 ---
 
