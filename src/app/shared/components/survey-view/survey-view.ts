@@ -45,7 +45,7 @@ export class SurveyView {
       this.amountQuestions = this.actualSurvey.questions.length;
       this.createArrayOfMultipleAnswers();
       this.isAnyResultAvailable = this.getResult();
-      if(this.isAnyResultAvailable){this.prepareDataForProgressIndication(); console.log(this.resultValues());}
+      if(this.isAnyResultAvailable){this.prepareDataForProgressIndication();}
       });
   }
 
